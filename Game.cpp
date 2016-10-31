@@ -18,15 +18,20 @@ Game::Game()
 	std::cout << "Inicializando Game" << std::endl;
 	iScreenWidth = 1280;
 	iScreenHeight = 720;
-    pGameWindow.create(sf::VideoMode(this->iScreenWidth, this->iScreenHeight), "Tower Defense");
+
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 8;
+
+    pGameWindow.create(sf::VideoMode(this->iScreenWidth, this->iScreenHeight), "Tower Defense", sf::Style::Default, settings);
     pGameWindow.setFramerateLimit(60);
     pGameWindow.clear();
 
 	pTextureManager = new TextureManager();
     pGameManager = new GameManager();
 
+	// NO HAY MANERA...
 	//pGameStatesManager = new GameStatesManager();
-	//pGameManager = pGameStatesManager->getEstadoActual();
+	//pGameStatesManager->setEstadoActual(new GameManager());
 }
 
 
