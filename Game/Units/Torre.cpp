@@ -30,10 +30,11 @@ bool Torre::checkMouseOver()
 void Torre::initRangeCircle()
 {
 	this->rangeCircle.setPointCount(50);
-	this->rangeCircle.setRadius(150);
+	this->rangeCircle.setRadius(this->range);
 	this->rangeCircle.setFillColor(sf::Color(50, 192, 240, 75));
 	this->rangeCircle.setOutlineColor(sf::Color(50, 192, 240, 150));
 	this->rangeCircle.setOutlineThickness(1);
-	this->rangeCircle.setPosition(getPosition());
-	this->rangeCircle.setOrigin(getOrigin());
+	//this->rangeCircle.setPosition(getPosition());
+	this->rangeCircle.setPosition(sf::Vector2f((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y));
+	this->rangeCircle.setOrigin(this->range / 2, this->range / 2);
 }

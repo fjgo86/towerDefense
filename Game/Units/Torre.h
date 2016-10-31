@@ -12,6 +12,8 @@ private:
 	sf::CircleShape rangeCircle;
 	void initRangeCircle();
 
+	int range = 150;
+
 public:
 
 	bool checkMouseOver();
