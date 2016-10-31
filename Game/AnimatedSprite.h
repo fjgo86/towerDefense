@@ -1,6 +1,17 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 
+enum eDir {
+    DIR_N,
+    DIR_NE,
+    DIR_E,
+    DIR_SE,
+    DIR_S,
+    DIR_SW,
+    DIR_W,
+    DIR_NW
+};
+
 class AnimatedSprite
 {
 private:
@@ -13,7 +24,12 @@ private:
 	int frameActual = 0;					///< Contador de frames.
 	int direccion = 0;						///< Direccion 0-4: 0 = SUR, 1 = OESTE, 2 = ESTE, 3 = NORTE.
 	float lastTick = 0.0f;					///< Ticks desde la última vez que se actualizó la animación.
+
+
+    bool _isStopped;            ///< True = no se mueve, false = se mueve normalmente.
+    eDir _dir;                  ///< Dirección en la que se moverá.
 public:
+    float _speed;               ///< Cuantos pixeles se mueve por cada tick de la unidad.
 	AnimatedSprite(std::string nombre, const char * rutaImagen);
 	AnimatedSprite();
 	~AnimatedSprite();
@@ -22,6 +38,10 @@ public:
 	void setPosition(float x, float y);		///< Cambia la posición del objeto
 	void setOrigin(bool centered = true);	///< Método que mueve el origen de la esquina top-left al center del sprite
 	void setOrigin(float x, float y);		///< Método sobrecargado para mover el origen a las coordenadas especificadas
-	void setDireccion(int dir);				///< Método para cambiar la dirección, solo acepta enteros de 0 a 4
+	void setDireccion(int dir);				///< Método para cambiar la dirección.
+    bool canWalk();                         ///< Devuelve true si puede caminar, false si no.
+    void walk();                            ///< Camina '_speed' en la dirección '_dir'.
+    void init(int x, int y);                ///< Inicializa la unidad en la posicion x,y.
+    void setDireccion(eDir dir);            ///< Método que define la dirección de la animación del objeto
 };
 

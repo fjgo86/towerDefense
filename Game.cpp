@@ -32,4 +32,6 @@ Game::Game()
 
 Game::~Game()
 {
+    delete pTextureManager;
+    delete pGameManager;
 }

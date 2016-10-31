@@ -18,24 +18,24 @@ void Unit::draw(const float elapsed)
 
 const char * Unit::getNombre()
 {
-	return nombre;
+	return _nombre;
 }
 
 void Unit::setNombre(const char * nombreNuevo)
 {
 	std::cout << "setNombre(" << nombreNuevo << ")" << std::endl;
-	nombre = nombreNuevo;
+	_nombre = nombreNuevo;
 }
 
 void Unit::setRutaImagen(const char * ruta)
 {
-	rutaImagen = ruta;
-	if ((rutaImagen == NULL))
+	_rutaImagen = ruta;
+	if ((_rutaImagen == NULL))
 	{
 		std::cout << "Ruta de imagen inexistente para " << getNombre() << "." << std::endl;
 		return;
 	}
-	animatedSprite = AnimatedSprite(getNombre(), rutaImagen);
+	animatedSprite = AnimatedSprite(getNombre(), _rutaImagen);
 }
 
 void Unit::setPosition(float x, float y)
@@ -51,9 +51,4 @@ void Unit::setOrigin(bool centered)
 void Unit::setOrigin(float x, float y)
 {
 	animatedSprite.setOrigin((float)x, (float)y);
-}
-
-void Unit::setDireccion(int dir)
-{
-	animatedSprite.setDireccion(dir);
 }
