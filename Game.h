@@ -9,6 +9,8 @@ extern class Game
 {
 private:
 	GameManager* pGameManager;
+	
+	// NO HAY MANERA...
 	//GameState* pGameManager;
 	//GameStatesManager* pGameStatesManager;
 public:

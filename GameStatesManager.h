@@ -1,16 +1,16 @@
 #pragma once
 #include "GameState.h"
-#include <map>
+#include <stack>
 
 class GameStatesManager
 {
 private:
-	typedef std::map<std::string, GameState*> estados;
-	GameState* estadoActual;
+	std::stack<GameState*> estados;
 
 public:
 
 	GameState* getEstadoActual();
+	void setEstadoActual(GameState* estado);
 
 	GameStatesManager();
 	~GameStatesManager();

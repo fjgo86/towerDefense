@@ -19,9 +19,17 @@ public:
 	~AnimatedSprite();
 	void draw();							///< Dibuja el objeto en pantalla.
 	void update(const float elapsed);		///< Actualiza la animación del objeto.
+
+	// SETTERS
 	void setPosition(float x, float y);		///< Cambia la posición del objeto
 	void setOrigin(bool centered = true);	///< Método que mueve el origen de la esquina top-left al center del sprite
 	void setOrigin(float x, float y);		///< Método sobrecargado para mover el origen a las coordenadas especificadas
 	void setDireccion(int dir);				///< Método para cambiar la dirección, solo acepta enteros de 0 a 4
+
+	// GETTERS
+	sf::FloatRect getFloatRect();
+	sf::Vector2f getPosition();
+	sf::Vector2f getOrigin();
+	int getDireccion();
 };
 
