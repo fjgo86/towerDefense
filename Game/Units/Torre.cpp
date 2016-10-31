@@ -36,5 +36,5 @@ void Torre::initRangeCircle()
 	this->rangeCircle.setOutlineThickness(1);
 	//this->rangeCircle.setPosition(getPosition());
 	this->rangeCircle.setPosition(sf::Vector2f((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y));
-	this->rangeCircle.setOrigin(this->range / 2, this->range / 2);
+	this->rangeCircle.setOrigin(this->range, this->range);
 }
