@@ -8,7 +8,7 @@ Dragon::Dragon()
 	setNombre("Dragon prueba");
 	setRutaImagen("media/unit_dragon.png");
 	animatedSprite.setDireccion(randomNumber);
-    animatedSprite._speed = 1.0f;
+    animatedSprite._speed = 2.0f;
 }
 
 

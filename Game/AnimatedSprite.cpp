@@ -35,7 +35,6 @@ void AnimatedSprite::update(const float elapsed)
 	lastTick += elapsed;	// Actualización del contador de tick.
 	if (lastTick < 0.2f)	// Si la animación lleva menos de 0.2 ticks (segundos) sin actualizarse se detiene el código.
 		return;
-	//std::cout << "Animando " << frameActual << "("<< frameList[frameActual] <<")"<< std::endl;
 	frameActual++;
 	if (frameActual >= 4)	// Cada ciclo de animación tiene 4 frames (del 0 al 3), cuando se pasa del cuarto se resetea.
 		frameActual = 0;
@@ -61,15 +60,14 @@ void AnimatedSprite::setOrigin(float x, float y)		// Este método (con el dragón)
 }
 
 void AnimatedSprite::draw() {
-	int frame = frameList[frameActual];
-	sf::IntRect rectSourceSprite(frame * sizeX,	// Multiplicando el frame actual por el tamaño de cada frame tenemos la posicion del primer pixel del frame a mostrar.
-		direccion * sizeY,	// Multiplicando la dirección (que también representa cada fila de frames) actual por el tamaño de cada frame tenemos la posicion del primer pixel del frame a mostrar.
-		sizeX,	// tamaño maximo del frame.
-		sizeY);
-	//sf::Sprite sprite(sfTexture, rectSourceSprite);		// He comentado esta línea para utilizar sfSprite, y poder acceder a él desde el resto de la clase
-	sfSprite.setTexture(sfTexture);
-	sfSprite.setTextureRect(rectSourceSprite);
-	gGame.pGameWindow.draw(sfSprite);
+    int frame = frameList[frameActual];
+    sf::IntRect rectSourceSprite(frame * sizeX,	// Multiplicando el frame actual por el tamaño de cada frame tenemos la posicion del primer pixel del frame a mostrar.
+        getFacingDir() * sizeY,	// Multiplicando la dirección (que también representa cada fila de frames) actual por el tamaño de cada frame tenemos la posicion del primer pixel del frame a mostrar.
+        sizeX,	// tamaño maximo del frame.
+        sizeY);
+    sfSprite.setTexture(sfTexture);
+    sfSprite.setTextureRect(rectSourceSprite);
+    gGame.pGameWindow.draw(sfSprite);
 }
 
 bool AnimatedSprite::canWalk() {
@@ -83,42 +81,34 @@ bool AnimatedSprite::canWalk() {
 
     switch (_dir) {
         case DIR_N:
-            std::cout << "WalkCheck1" << std::endl;
             if (sfSprite.getPosition().y - _speed <= MAPBOUND_Y_MIN)
                 return false;
             return true;
         case DIR_NE:
-            std::cout << "WalkCheck2" << std::endl;
             if ((sfSprite.getPosition().y - _speed <= MAPBOUND_Y_MIN) || (sfSprite.getPosition().x + _speed >= MAPBOUND_X_MAX))
                 return false;
             return true;
         case DIR_E:
-            std::cout << "WalkCheck2" << std::endl;
             if (sfSprite.getPosition().x + _speed >= MAPBOUND_X_MAX)
                 return false;
             return true;
         case DIR_SE:
-            std::cout << "WalkCheck5" << std::endl;
             if ((sfSprite.getPosition().y + _speed >= MAPBOUND_Y_MAX) || (sfSprite.getPosition().x + _speed >= MAPBOUND_X_MAX))
                 return false;
             return true;
         case DIR_S:
-            std::cout << "WalkCheck4" << std::endl;
             if (sfSprite.getPosition().y + _speed >= MAPBOUND_Y_MAX)
                 return false;
             return true;
         case DIR_SW:
-            std::cout << "WalkCheck6" << std::endl;
             if ((sfSprite.getPosition().y + _speed >= MAPBOUND_Y_MAX) || (sfSprite.getPosition().x - _speed <= MAPBOUND_X_MIN))
                 return false;
             return true;
         case DIR_W:
-            std::cout << "WalkCheck2" << std::endl;
             if (sfSprite.getPosition().x - _speed <= MAPBOUND_X_MIN)
                 return false;
             return true;
         case DIR_NW:
-            std::cout << "WalkCheck3" << std::endl;
             if ((sfSprite.getPosition().y - _speed <= MAPBOUND_Y_MIN) || (sfSprite.getPosition().x - _speed <= MAPBOUND_X_MIN))
                 return false;
             return true;
@@ -131,7 +121,7 @@ void AnimatedSprite::setDireccion(eDir dir) {
 }
 
 void AnimatedSprite::setDireccion(int dir) {
-    if (dir < DIR_N || dir > DIR_NW) {
+    if (dir < DIR_S || dir > DIR_NE) {
         std::cout << "setDirection(" << dir << ") fuera de rango" << std::endl;
         return;
     }
@@ -139,11 +129,9 @@ void AnimatedSprite::setDireccion(int dir) {
 }
 
 void AnimatedSprite::walk() {
-    std::cout << "Walk1" << std::endl;
     if (canWalk()) {
-        std::cout << "Walk2" << std::endl;
-        float _posY = sfSprite.getPosition().y;
-        float _posX = sfSprite.getPosition().x;
+        float _posY = 0;
+        float _posX = 0;
         switch (_dir) {
             case DIR_N:
                 _posY -= _speed;
@@ -174,8 +162,7 @@ void AnimatedSprite::walk() {
                 _posX -= _speed;
                 break;
         }
-        std::cout << "Walk3 = " << _posX << ", " << _posY << std::endl;
-        setPosition(_posX, _posY);
+        sfSprite.move(_posX, _posY);
     }
 }
 
@@ -196,5 +183,9 @@ sf::Vector2f AnimatedSprite::getOrigin()
 
 int AnimatedSprite::getDireccion()
 {
-	return this->direccion;
+	return this->_dir;
+}
+
+int AnimatedSprite::getFacingDir() {
+    return this->_dir % 4;
 }

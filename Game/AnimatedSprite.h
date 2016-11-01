@@ -2,14 +2,14 @@
 #include "SFML/Graphics.hpp"
 
 enum eDir {
-    DIR_N,
-    DIR_NE,
-    DIR_E,
-    DIR_SE,
     DIR_S,
     DIR_SW,
     DIR_W,
-    DIR_NW
+    DIR_NW,
+    DIR_E,
+    DIR_SE,
+    DIR_N,
+    DIR_NE
 };
 
 class AnimatedSprite
@@ -22,7 +22,7 @@ private:
 	sf::Clock clock;						///< Reloj del juego.
 	int frameList[4] = { 0, 1, 2, 1};		///< La animación completa se compone de un ciclo entero de las animaciones: inicio - final - inicio.
 	int frameActual = 0;					///< Contador de frames.
-	int direccion = 0;						///< Direccion 0-4: 0 = SUR, 1 = OESTE, 2 = ESTE, 3 = NORTE.
+	int direccion = 0;						///< Direccion 0-8: 0 = SUR, 1 = OESTE, 2 = ESTE, 3 = NORTE.
 	float lastTick = 0.0f;					///< Ticks desde la última vez que se actualizó la animación.
 
 
@@ -43,7 +43,6 @@ public:
 	void setDireccion(int dir);				///< Método para cambiar la dirección.
     bool canWalk();                         ///< Devuelve true si puede caminar, false si no.
     void walk();                            ///< Camina '_speed' en la dirección '_dir'.
-    void init(int x, int y);                ///< Inicializa la unidad en la posicion x,y.
     void setDireccion(eDir dir);            ///< Método que define la dirección de la animación del objeto
 
 	// GETTERS
@@ -51,5 +50,6 @@ public:
 	sf::Vector2f getPosition();
 	sf::Vector2f getOrigin();
 	int getDireccion();
+    int getFacingDir();
 };
 

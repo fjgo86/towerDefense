@@ -12,7 +12,7 @@ private:
 	sf::CircleShape rangeCircle;
 	void initRangeCircle();
 
-	int range = 150;
+	float range = 150.0f;
 
 public:
 
