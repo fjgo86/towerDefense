@@ -178,3 +178,23 @@ void AnimatedSprite::walk() {
         setPosition(_posX, _posY);
     }
 }
+
+sf::FloatRect AnimatedSprite::getFloatRect()
+{
+	return sfSprite.getGlobalBounds();
+}
+
+sf::Vector2f AnimatedSprite::getPosition()
+{
+	return sfSprite.getPosition();
+}
+
+sf::Vector2f AnimatedSprite::getOrigin()
+{
+	return sfSprite.getOrigin();
+}
+
+int AnimatedSprite::getDireccion()
+{
+	return this->direccion;
+}

@@ -16,7 +16,7 @@ void Unit::draw(const float elapsed)
 	animatedSprite.update(elapsed);
 }
 
-const char * Unit::getNombre()
+const char* Unit::getNombre()
 {
 	return _nombre;
 }
