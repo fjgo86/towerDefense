@@ -53,11 +53,6 @@ void Unit::setOrigin(float x, float y)
 	animatedSprite.setOrigin((float)x, (float)y);
 }
 
-const char * Unit::getNombre()
-{
-	return nombre;
-}
-
 sf::FloatRect Unit::getFloatRect()
 {
 	return animatedSprite.getFloatRect();

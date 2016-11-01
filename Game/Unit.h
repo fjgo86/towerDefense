@@ -30,4 +30,3 @@ public:
 	sf::Vector2f getOrigin();
 	int getDireccion();
 };
-
