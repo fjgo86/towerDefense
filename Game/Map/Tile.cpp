@@ -15,7 +15,7 @@ void Tile::attatchToGrid(Grid* grid, bool isBorderTile){
     sfSprite.setTexture(sfTexture);
 
     if (isBorderTile)
-        sfSprite.setColor(sf::Color::Red);    // TODO cambiar esto para que muestre otro tile en vez de colorearlo (cosa que no hace).
+        sfSprite.setColor(sf::Color::Black);    // TODO cambiar esto para que muestre otro tile en vez de colorearlo (cosa que no hace).
 
     sfSprite.setPosition(_grid->_posX * 32, _grid->_posY * 32);
 }
