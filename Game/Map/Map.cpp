@@ -9,7 +9,7 @@ Map::Map() {
     // Rellenado del map de la clase
     for (unsigned int x = 0; x < _maxX; x++) {
         for (unsigned int y = 0; y < _maxY; y++) {
-            (*this)[COORD(x,y)] = new Grid(x, y, (x == _maxX || y == _maxY) ? true : false);
+            (*this)[COORD(x,y)] = new Grid(x, y, (x == (_maxX -1) || y == (_maxY -1) || x == 0 || y == 0) ? true : false);
         }
     }
 }
