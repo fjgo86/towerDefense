@@ -3,13 +3,11 @@
 #include <iostream>
 
 
-AnimatedSprite::AnimatedSprite(std::string nombre, const char * rutaImagen)
-{
+AnimatedSprite::AnimatedSprite(std::string nombre, const char * rutaImagen){
 	try {
 		sfTexture = gGame.pTextureManager->loadFromFile(nombre, rutaImagen);	// Si hay cualquier error con la animación, se borra la Unit y se bloquea todo el código.
 	}
-	catch (...)
-	{
+	catch (...){
 		std::cout << "Error cargando fichero '" << rutaImagen << "'" << std::endl;
 		delete this;
 		return;
@@ -22,16 +20,13 @@ AnimatedSprite::AnimatedSprite(std::string nombre, const char * rutaImagen)
     _dir = DIR_N;
 }
 
-AnimatedSprite::AnimatedSprite()
-{
+AnimatedSprite::AnimatedSprite(){
 }
 
-AnimatedSprite::~AnimatedSprite()
-{
+AnimatedSprite::~AnimatedSprite(){
 }
 
-void AnimatedSprite::update(const float elapsed)
-{
+void AnimatedSprite::update(const float elapsed){
 	lastTick += elapsed;	// Actualización del contador de tick.
 	if (lastTick < 0.2f)	// Si la animación lleva menos de 0.2 ticks (segundos) sin actualizarse se detiene el código.
 		return;
@@ -42,20 +37,18 @@ void AnimatedSprite::update(const float elapsed)
     walk();
 }
 
-void AnimatedSprite::setPosition(float x, float y)
-{
+void AnimatedSprite::setPosition(float x, float y){
 	sfSprite.setPosition(x, y);
 }
 
-void AnimatedSprite::setOrigin(bool centered)
-{
+void AnimatedSprite::setOrigin(bool centered){
 	if (centered) {
 		setOrigin(sfSprite.getGlobalBounds().width / 2, sfSprite.getGlobalBounds().height / 2);
 	}
 }
 
-void AnimatedSprite::setOrigin(float x, float y)		// Este método (con el dragón) pasando x=100, y=100 lo centra correctamente.
-{
+void AnimatedSprite::setOrigin(float x, float y){		// Este método (con el dragón) pasando x=100, y=100 lo centra correctamente.
+
 	sfSprite.setOrigin(sf::Vector2f(x, y));
 }
 
@@ -166,23 +159,19 @@ void AnimatedSprite::walk() {
     }
 }
 
-sf::FloatRect AnimatedSprite::getFloatRect()
-{
+sf::FloatRect AnimatedSprite::getFloatRect(){
 	return sfSprite.getGlobalBounds();
 }
 
-sf::Vector2f AnimatedSprite::getPosition()
-{
+sf::Vector2f AnimatedSprite::getPosition(){
 	return sfSprite.getPosition();
 }
 
-sf::Vector2f AnimatedSprite::getOrigin()
-{
+sf::Vector2f AnimatedSprite::getOrigin(){
 	return sfSprite.getOrigin();
 }
 
-int AnimatedSprite::getDireccion()
-{
+int AnimatedSprite::getDireccion(){
 	return this->_dir;
 }
 

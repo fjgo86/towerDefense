@@ -1,4 +1,5 @@
 #pragma once
+#include "SFML/Graphics.hpp"
 
 // Referencia externa.
 class Grid;
@@ -8,13 +9,16 @@ class Grid;
 */
 class Tile {
     Grid* _grid;
+    sf::Texture sfTexture;
+    sf::Sprite sfSprite;
 //TODO: Expandir para añadir posibles costes en el pathfinding.
 public:
     Tile();
     ~Tile();
 
     // Grid
-    void attatchToGrid(Grid* grid);
+    void attatchToGrid(Grid* grid, bool isBorderTile);
     void detatchFromGrid();
+    sf::Sprite getSprite();
 };
 

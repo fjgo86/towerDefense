@@ -5,27 +5,21 @@
 #include <SFML/Window/Event.hpp>
 #include <iostream>
 
-
-void GameManager::handleInput()
-{
+void GameManager::handleInput(){
 	sf::Event event;
 	while (gGame.pGameWindow.pollEvent(event))
 	{
-		switch (event.type)
-		{
+		switch (event.type){
 			case sf::Event::Closed:
 				gGame.pGameWindow.close();
 				break;
-			case sf::Event::KeyReleased:
-			{
-				switch (event.key.code)
-				{
+			case sf::Event::KeyReleased:{
+				switch (event.key.code){
 					case sf::Keyboard::Escape:
 						gGame.pGameWindow.close();
 						break;
 						
-					case sf::Keyboard::D:		// pulsar D para crear y posicionar un dragon
-					{
+					case sf::Keyboard::D:{		// pulsar D para crear y posicionar un dragon
 						Dragon* dragon = new Dragon();
 						//dragon->setPosition((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y);
 						dragon->setPosition((float)gGame.iScreenWidth / 2, 0.f);
@@ -66,21 +60,20 @@ void GameManager::handleInput()
 	}
 }
 
-GameManager::GameManager()
-{
+GameManager::GameManager(){
 	frameCount = 0;
 	averageFPS = 60;	// lo mismo que window.setFrameLimit();
 	listadoEnemigos = new UnitManager();
 	listadoTorres = new UnitManager();
 	gbcEnemigos = new ColectorBasura();
 	gbcTorres = new ColectorBasura();
+    mapa = new Map();
 	
 	//listadoEnemigos->push_back(new Dragon());
 }
 
 
-GameManager::~GameManager()
-{
+GameManager::~GameManager(){
 	delete listadoEnemigos;
 	delete listadoTorres;
 	delete gbcEnemigos;
@@ -98,6 +91,7 @@ void GameManager::onTick() {
 		frameCount = 0;
 		timeCount = 0.0f;
 	}
+    mapa->onTick();
 	listadoEnemigos->onTick(gbcEnemigos, tick);
 	listadoTorres->onTick(gbcTorres, tick);
 
@@ -107,8 +101,7 @@ void GameManager::onTick() {
 	addTextoMousePos();
 }
 
-void GameManager::addTextoFPS()
-{
+void GameManager::addTextoFPS(){
 	sf::Font font;
 
 	// Carga fichero de fuentes.
@@ -132,8 +125,7 @@ void GameManager::addTextoFPS()
 	gGame.pGameWindow.draw(textFPS);
 }
 
-void GameManager::addTextoMousePos()
-{
+void GameManager::addTextoMousePos(){
 	sf::Font font;
 
 	// Carga fichero de fuentes.

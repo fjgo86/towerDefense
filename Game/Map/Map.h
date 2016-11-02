@@ -11,7 +11,7 @@ class Map : public std::map<std::pair<unsigned int, unsigned int>, Grid*> {
 private:
     unsigned int _maxX; ///< Cantidad máxima de casillas X.
     unsigned int _maxY; ///< Cantidad máxima de casillas Y.
-    unsigned int _tileSize = 16;    ///< Tamaño de los tiles: 16x16 pixeles
+    unsigned int _tileSize = 32;    ///< Tamaño de los tiles: 32x32 pixeles
     void generaMapa();
 
 public:
@@ -31,5 +31,6 @@ public:
     Devuelve el Grid que se situa en los pixeles especificados ( El Grid que está bajo el ratón ).
     */
     Grid* getGridFromPixel(unsigned int x, unsigned int y);
+    void onTick();
 };
 

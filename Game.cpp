@@ -7,14 +7,12 @@
 #include <iostream>
 
 
-void Game::onTick()
-{
+void Game::onTick(){
 	pGameManager->handleInput();
     pGameManager->onTick();
 }
 
-Game::Game()
-{
+Game::Game(){
 	std::cout << "Inicializando Game" << std::endl;
 	iScreenWidth = 1280;
 	iScreenHeight = 720;
@@ -29,14 +27,12 @@ Game::Game()
 	pTextureManager = new TextureManager();
     pGameManager = new GameManager();
 
-	// NO HAY MANERA...
-	//pGameStatesManager = new GameStatesManager();
-	//pGameStatesManager->setEstadoActual(new GameManager());
+	pGameStatesManager = new GameStatesManager();
+	pGameStatesManager->setEstadoActual(pGameManager);
 }
 
 
-Game::~Game()
-{
+Game::~Game(){
     delete pTextureManager;
     delete pGameManager;
 }

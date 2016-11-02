@@ -2,6 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "Game\Unit.h"
 #include "Game\TextureManager.h"
+#include "GameStatesManager.h"
 
 class GameManager;
 
@@ -9,10 +10,7 @@ extern class Game
 {
 private:
 	GameManager* pGameManager;
-	
-	// NO HAY MANERA...
-	//GameState* pGameManager;
-	//GameStatesManager* pGameStatesManager;
+	GameStatesManager* pGameStatesManager;
 public:
 	TextureManager* pTextureManager;
 	int iScreenWidth;	///< Tamaño en pixeles del ancho de la pantalla.

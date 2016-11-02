@@ -1,9 +1,14 @@
 #include "Grid.h"
+#include "../../Game.h"
+#include "Map.h"
 #include <iostream>
 
-Grid::Grid() {
+Grid::Grid(unsigned int x, unsigned int y, bool isBorderGrid) {
+    _posX = x;
+    _posY = y;
     _unit = nullptr;
-    _tile = nullptr;
+    _tile = new Tile();
+    _tile->attatchToGrid(this, isBorderGrid);
 }
 
 Grid::~Grid() {
@@ -16,7 +21,6 @@ void Grid::addTile(Tile * tile) {
         return;
     }
     _tile = tile;
-    tile->attatchToGrid(this);
 }
 
 void Grid::removeTile(Tile * tile) {
@@ -51,4 +55,9 @@ int Grid::getWalkCost() {
     }
  
    return -1;
+}
+
+void Grid::onTick() {
+    if (_tile != nullptr)
+        gGame.pGameWindow.draw(_tile->getSprite());
 }

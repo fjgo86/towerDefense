@@ -2,6 +2,7 @@
 #include "GameState.h"
 #include "Game\UnitManager.h"
 #include "Game\ColectorBasura.h"
+#include "Game\Map\Map.h"
 
 /*
 	Clase que se encarga de manejar el tiempo de juego, el flujo de objetos, su interacción...
@@ -14,6 +15,7 @@ private:
 	UnitManager* listadoTorres;		///< Lista (std::vector) de las torres.
 	ColectorBasura* gbcEnemigos;	///< Recolector de basura para los enemigos.
 	ColectorBasura* gbcTorres;		///< Recolector de basura para las torres.
+    Map* mapa;                      ///< 
 	void addTextoFPS();				///< Muestra en pantalla los FPS actuales.
 	void addTextoMousePos();		///< Muestra en pantalla la posición del ratón.
 	unsigned int	frameCount,		///< Contador de frames desde el último segundo.

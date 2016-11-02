@@ -5,8 +5,7 @@ class UnitManager;
 /*
 	Clase vectoriana que se ocupa de almacenar los objetos que se van a eliminar y borrarlos de sus respectivos listados.
 */
-class ColectorBasura : public std::vector<Unit*>
-{
+class ColectorBasura : public std::vector<Unit*>{
 public:
 	ColectorBasura();
 	~ColectorBasura();

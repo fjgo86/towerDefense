@@ -6,10 +6,10 @@ class Grid {
 private:
     Tile* _tile;    ///< Tile de terreno que hay en este Grid.
     Unit* _unit;    ///< Unit que hay en este Grid.
+public:
     unsigned int _posX; ///< Posición X de este Grid.
     unsigned int _posY; ///< Posición Y de este Grid.
-public:
-    Grid();
+    Grid(unsigned int x, unsigned int y, bool isBorderGrid);
     ~Grid();
 
     void addTile(Tile* tile);   ///< Añade un Tile al Grid.
@@ -21,5 +21,7 @@ public:
     std::pair<unsigned int, unsigned int> getPosition();    ///< Devuelve un std::pair con la posicion del Grid.
 
     int getWalkCost();      ///< Devuelve el coste del Grid para el PathFinder.
+
+    void onTick();
 };
 
