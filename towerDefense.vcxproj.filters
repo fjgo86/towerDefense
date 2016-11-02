@@ -14,6 +14,9 @@
     <ClInclude Include="Game\TextureManager.h" />
     <ClInclude Include="GameStatesManager.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Game\Map\Map.h" />
+    <ClInclude Include="Game\Map\Tile.h" />
+    <ClInclude Include="Game\Map\Grid.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -30,5 +33,8 @@
     <ClCompile Include="Game\TextureManager.cpp" />
     <ClCompile Include="GameStatesManager.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Game\Map\Map.cpp" />
+    <ClCompile Include="Game\Map\Tile.cpp" />
+    <ClCompile Include="Game\Map\Grid.cpp" />
   </ItemGroup>
 </Project>

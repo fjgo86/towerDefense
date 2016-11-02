@@ -32,6 +32,9 @@
     <ClInclude Include="Game\Units\Torre.h" />
     <ClInclude Include="Game\Units\Torres\Torre1.h" />
     <ClInclude Include="Game\TextureManager.h" />
+    <ClInclude Include="Game\Map\Map.h" />
+    <ClInclude Include="Game\Map\Tile.h" />
+    <ClInclude Include="Game\Map\Grid.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameState.cpp" />
@@ -43,11 +46,14 @@
     <ClCompile Include="Game\AnimatedSprite.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Game\Unit.cpp" />
+    <ClCompile Include="Game\Map\Grid.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Game\UnitManager.cpp" />
     <ClCompile Include="Game\Units\Torre.cpp" />
     <ClCompile Include="Game\Units\Torres\Torre1.cpp" />
     <ClCompile Include="Game\TextureManager.cpp" />
+    <ClCompile Include="Game\Map\Map.cpp" />
+    <ClCompile Include="Game\Map\Tile.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5E1DA751-D877-4DF3-A85E-29BBC4894EFB}</ProjectGuid>

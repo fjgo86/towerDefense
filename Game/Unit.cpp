@@ -72,3 +72,11 @@ int Unit::getDireccion()
 {
 	return animatedSprite.getDireccion();
 }
+
+void Unit::attatchToGrid(Grid* grid) {
+    _grid = grid;
+}
+
+void Unit::detatchFromGrid() {
+
+}

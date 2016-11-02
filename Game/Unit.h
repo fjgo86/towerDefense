@@ -1,15 +1,21 @@
 #pragma once
 #include "AnimatedSprite.h"
 
+// Refencias externas.
+class Grid;
+class Enemigo;
+
 /*
 	Clase padre de todas las unidades, enemigas o aliadas.
 */
 class Unit
 {
+private:
+    Grid* _grid;
 protected:
-	const char* _rutaImagen;				///< Ruta en la que encontrar la Imagen del objeto.
-	const char* _nombre = "";			///< Nombre del objeto.
-    AnimatedSprite animatedSprite;		///< Enlace a la animación del objeto.
+	const char* _rutaImagen;            ///< Ruta en la que encontrar la Imagen del objeto.
+	const char* _nombre = "";           ///< Nombre del objeto.
+    AnimatedSprite animatedSprite;      ///< Enlace a la animación del objeto.
 public:
 	Unit();
 	~Unit();
@@ -29,4 +35,13 @@ public:
 	sf::Vector2f getPosition();
 	sf::Vector2f getOrigin();
 	int getDireccion();
+
+    // Grid
+    void attatchToGrid(Grid* grid);
+    void detatchFromGrid();
+
+    // Pathfinding
+    virtual int getWalkCost() = 0;
+    virtual int getWalkCostFor(Enemigo* unit) = 0;
+
 };
