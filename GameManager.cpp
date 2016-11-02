@@ -27,7 +27,8 @@ void GameManager::handleInput()
 					case sf::Keyboard::D:		// pulsar D para crear y posicionar un dragon
 					{
 						Dragon* dragon = new Dragon();
-						dragon->setPosition((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y);
+						//dragon->setPosition((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y);
+						dragon->setPosition((float)gGame.iScreenWidth / 2, 0.f);
 						dragon->draw(0.0f);
 						dragon->setOrigin(true);
 						listadoEnemigos->push_back(dragon);
