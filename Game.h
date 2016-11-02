@@ -4,14 +4,19 @@
 #include "Game\TextureManager.h"
 #include "GameStatesManager.h"
 
-class GameManager;
+#include "MainMenuManager.h"
+
+//class GameManager;
+class MainMenuManager;  // Esta trampita me la tienes que explicar. Sin ello el programa peta.
 
 extern class Game
 {
 private:
-	GameManager* pGameManager;
-	GameStatesManager* pGameStatesManager;
+	//GameManager* pGameManager;
+    MainMenuManager* pMenuManager;
+	
 public:
+    GameStatesManager* pGameStatesManager;
 	TextureManager* pTextureManager;
 	int iScreenWidth;	///< Tamaño en pixeles del ancho de la pantalla.
 	int iScreenHeight;	///< Tamaño en pixeles del alto de la pantalla.

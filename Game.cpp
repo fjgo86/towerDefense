@@ -6,10 +6,9 @@
 #include "GameStatesManager.h"
 #include <iostream>
 
-
 void Game::onTick(){
-	pGameManager->handleInput();
-    pGameManager->onTick();
+	pGameStatesManager->getEstadoActual()->handleInput();
+	pGameStatesManager->getEstadoActual()->onTick();
 }
 
 Game::Game(){
@@ -25,14 +24,15 @@ Game::Game(){
     pGameWindow.clear();
 
 	pTextureManager = new TextureManager();
-    pGameManager = new GameManager();
+    //pGameManager = new GameManager();
+    pMenuManager = new MainMenuManager();
 
 	pGameStatesManager = new GameStatesManager();
-	pGameStatesManager->setEstadoActual(pGameManager);
+	pGameStatesManager->setEstadoActual(pMenuManager);
 }
 
 
 Game::~Game(){
     delete pTextureManager;
-    delete pGameManager;
+    delete pMenuManager;
 }
