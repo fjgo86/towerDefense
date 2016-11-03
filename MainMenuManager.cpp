@@ -3,8 +3,6 @@
 
 MainMenuManager::MainMenuManager() {
 
-    pGameStatesManager = new GameStatesManager();
-
     fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
     texto.setFont(fuente);
     texto.setPosition(gGame.iScreenWidth / 2, gGame.iScreenWidth / 2);

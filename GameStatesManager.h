@@ -1,11 +1,12 @@
 #pragma once
 #include "GameState.h"
-#include <stack>
+#include <deque>
 
 class GameStatesManager
 {
 private:
-	std::stack<GameState*> estados;
+	//std::stack<GameState*> estados;
+    std::deque<GameState*> estados;
 
 public:
 

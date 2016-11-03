@@ -14,7 +14,6 @@ private:
     sf::Text texto;
 
     GameManager* pGameManager;
-    GameStatesManager* pGameStatesManager;
 
 public:
     MainMenuManager();
