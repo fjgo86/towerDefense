@@ -3,6 +3,21 @@
 
 MainMenuManager::MainMenuManager() {
 
+    if (!backgroundMusic.openFromFile("media/music/mainMenu.flac"))
+        std::cout << "Error cargando la musica de fondo" << std::endl;
+    backgroundMusic.setVolume(20.0f);
+    
+    if (backgroundMusic.getStatus() == backgroundMusic.Stopped)
+        backgroundMusic.play();
+        //std::cout << "Reproduciendo musica" << std::endl;
+
+    logoTex.loadFromFile("media/logos/logo.png");
+
+    logo.setTexture(logoTex);
+    logo.setPosition(gGame.iScreenWidth / 2, gGame.iScreenHeight * 0.2);
+    logo.setOrigin(logo.getGlobalBounds().width / 2, logo.getGlobalBounds().height / 2);
+    logo.setColor(sf::Color(255, 255, 255, this->alphaLogo));
+
     fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
     texto.setFont(fuente);
     texto.setPosition(gGame.iScreenWidth / 2, gGame.iScreenWidth / 2);
@@ -25,6 +40,8 @@ void MainMenuManager::handleInput() {
 
             case sf::Keyboard::Space: {		// pulsar SPACE para pasar al juego
                 
+                if (backgroundMusic.getStatus() == backgroundMusic.Playing)
+                    backgroundMusic.stop();
                 pGameManager = new GameManager();
                 gGame.pGameStatesManager->setEstadoActual(pGameManager);
                 break;
@@ -52,10 +69,23 @@ void MainMenuManager::handleInput() {
 
 void MainMenuManager::onTick() {
 
+    this->update();
+
+    gGame.pGameWindow.draw(logo);
     gGame.pGameWindow.draw(texto);
+}
+
+void MainMenuManager::update() {
+
+    if (this->alphaLogo < 255)
+        logo.setColor(sf::Color(255, 255, 255, this->alphaLogo++));
+
+    if ((this->scaleLogo += 0.01) < 1.5f)
+        logo.setScale(this->scaleLogo, this->scaleLogo);
 }
 
 MainMenuManager::~MainMenuManager() {
 
     delete pGameManager;
+    backgroundMusic.stop();
 }
