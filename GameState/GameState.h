@@ -6,6 +6,6 @@ public:
     virtual void onTick() = 0;
 
     GameState();
-    ~GameState();
+    virtual ~GameState();
 };
 

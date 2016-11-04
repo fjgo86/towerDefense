@@ -1,25 +1,25 @@
 #pragma once
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics.hpp>
 #include "Game/TextureManager.h"
 #include "GameState/GameStatesManager.h"
-#include "Menu/MainMenuManager.h"
+#include "Game/GameManager.h"
 
-class MainMenuManager;	// Esta trampita me la tienes que explicar. Sin ello el programa peta.
+class MainMenuManager;
 
 extern class Game{
-private:
-    MainMenuManager* pMenuManager;
-    
 public:
     Game();
     ~Game();
 
-    GameStatesManager* pGameStatesManager;
-    TextureManager* pTextureManager;
-    sf::RenderWindow pGameWindow;	///< Enlace a la pantalla del juego.
+	MainMenuManager* _menu;
+	GameManager* _game;
 
-    int iScreenWidth;		///< Tamaño en pixeles del ancho de la pantalla.
-    int iScreenHeight;		///< Tamaño en pixeles del alto de la pantalla.
+    GameStatesManager*	_statesManager;
+    TextureManager*		_textureManager;
+    sf::RenderWindow	_gameWindow;	///< Enlace a la pantalla del juego.
+
+    int _screenWidth;		///< Tamaño en pixeles del ancho de la pantalla.
+    int _screenHeight;		///< Tamaño en pixeles del alto de la pantalla.
 
     void onTick();			///< Método que se encarga de gestionar el paso del tiempo en el juego.
 } gGame;

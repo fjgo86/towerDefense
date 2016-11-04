@@ -6,25 +6,26 @@
 #include "../Game.h"
 #include "Units/Enemigos/Dragon.h"
 #include "Units/Torres/Torre1.h"
+#include "../Menu/MainMenuManager.h"
 
 void GameManager::handleInput() {
     sf::Event event;
-    while (gGame.pGameWindow.pollEvent(event)){
+    while (gGame._gameWindow.pollEvent(event)){
         switch (event.type){
             case sf::Event::Closed:
-                gGame.pGameWindow.close();
+                gGame._gameWindow.close();
                 break;
             case sf::Event::KeyReleased: {
                 switch (event.key.code){
                     case sf::Keyboard::Escape:
                         //gGame.pGameWindow.close();
-                        gGame.pGameStatesManager->setEstadoActual(new MainMenuManager());
+                        gGame._statesManager->setEstadoActual(gGame._menu);
                         break;
                         
                     case sf::Keyboard::D:{        // pulsar D para crear y posicionar un dragon
                         Dragon* dragon = new Dragon();
                         //dragon->setPosition((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y);
-                        dragon->setPosition((float)gGame.iScreenWidth / 2, 0.f);
+                        dragon->setPosition((float)gGame._screenWidth / 2, 0.f);
                         dragon->draw(0.0f);
                         dragon->setOrigin(true);
                         listadoEnemigos->push_back(dragon);
@@ -33,7 +34,7 @@ void GameManager::handleInput() {
                             
                     case sf::Keyboard::T: {        // pulsar T para crear y posicionar una torre
                         Torre1* torre = new Torre1();
-                        torre->setPosition((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y);
+                        torre->setPosition((float)sf::Mouse::getPosition(gGame._gameWindow).x, (float)sf::Mouse::getPosition(gGame._gameWindow).y);
                         torre->draw(0.0f);
                         torre->setOrigin(true);
                         listadoTorres->push_back(torre);
@@ -116,9 +117,9 @@ void GameManager::addTextoFPS() {
     textFPS.setStyle(sf::Text::Bold);
     textFPS.setFillColor(sf::Color::White);
     textFPS.setString(str); //ss.str() converts the string buffer into a regular string
-    textFPS.setPosition((float)gGame.iScreenWidth - 150.0f, 15.0f);
+    textFPS.setPosition((float)gGame._screenWidth - 150.0f, 15.0f);
     
-    gGame.pGameWindow.draw(textFPS);
+    gGame._gameWindow.draw(textFPS);
 }
 
 void GameManager::addTextoMousePos() {
@@ -130,12 +131,12 @@ void GameManager::addTextoMousePos() {
     }
 
     // Guarda en variables la posición actual del ratón relativa a la ventana del juego.
-    int fixedX = sf::Mouse::getPosition(gGame.pGameWindow).x,
-        fixedY = sf::Mouse::getPosition(gGame.pGameWindow).y;
+    int fixedX = sf::Mouse::getPosition(gGame._gameWindow).x,
+        fixedY = sf::Mouse::getPosition(gGame._gameWindow).y;
 
     // Guarda en variables el tamaño máximo de la ventana del juego.
-    int maxSizeX = (int)gGame.pGameWindow.getSize().x,
-        maxSizeY = (int)gGame.pGameWindow.getSize().y;
+    int maxSizeX = (int)gGame._gameWindow.getSize().x,
+        maxSizeY = (int)gGame._gameWindow.getSize().y;
     
     // Comprobación para que, aunque el ratón esté fuera de la pantalla, el juego no use coordenadas que no están dentro suya.
     if (fixedX > maxSizeX) {
@@ -164,7 +165,7 @@ void GameManager::addTextoMousePos() {
     textCoordsRaton.setStyle(sf::Text::Bold);
     textCoordsRaton.setFillColor(sf::Color::White);
     textCoordsRaton.setString(str);
-    textCoordsRaton.setPosition((float)gGame.iScreenWidth - 150.0f, 35.0f);
+    textCoordsRaton.setPosition((float)gGame._screenWidth - 150.0f, 35.0f);
 
-    gGame.pGameWindow.draw(textCoordsRaton);
+    gGame._gameWindow.draw(textCoordsRaton);
 }

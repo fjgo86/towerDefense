@@ -62,5 +62,5 @@ int Grid::getWalkCost() {
 
 void Grid::onTick() {
     if (_tile != nullptr)
-        gGame.pGameWindow.draw(_tile->getSprite());
+        gGame._gameWindow.draw(_tile->getSprite());
 }

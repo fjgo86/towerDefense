@@ -4,37 +4,38 @@
 #include <SFML/System.hpp>
 
 #include "Game.h"
+#include "Menu/MainMenuManager.h"
 #include "Game/GameManager.h"
 #include "GameState/GameStatesManager.h"
 
 
 void Game::onTick(){
-    pGameStatesManager->getEstadoActual()->handleInput();
-    pGameStatesManager->getEstadoActual()->onTick();
+	_statesManager->getEstadoActual()->handleInput();
+	_statesManager->getEstadoActual()->onTick();
 }
 
 Game::Game(){
     std::cout << "Inicializando Game" << std::endl;
-    iScreenWidth = 1280;
-    iScreenHeight = 720;
+    _screenWidth = 1280;
+    _screenHeight = 720;
 
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
-    pGameWindow.create(sf::VideoMode(this->iScreenWidth, this->iScreenHeight), "Tower Defense", sf::Style::Default, settings);
-    pGameWindow.setFramerateLimit(60);
-    pGameWindow.clear();
+    _gameWindow.create(sf::VideoMode(this->_screenWidth, this->_screenHeight), "Tower Defense", sf::Style::Default, settings);
+	_gameWindow.setFramerateLimit(60);
+	_gameWindow.clear();
 
-    pTextureManager = new TextureManager();
-    //pGameManager = new GameManager();
-    pMenuManager = new MainMenuManager();
+    _textureManager = new TextureManager();
+    _game = new GameManager();
+    _menu = new MainMenuManager();
 
-    pGameStatesManager = new GameStatesManager();
-    pGameStatesManager->setEstadoActual(pMenuManager);
+    _statesManager = new GameStatesManager();
+	_statesManager->setEstadoActual(_menu);
 }
 
 
 Game::~Game(){
-    delete pTextureManager;
-    delete pMenuManager;
+    delete _textureManager;
+	delete _statesManager;
 }

@@ -6,7 +6,7 @@
 
 AnimatedSprite::AnimatedSprite(std::string nombre, const char * rutaImagen) {
     try {
-        sfTexture = gGame.pTextureManager->loadFromFile(nombre, rutaImagen);    // Si hay cualquier error con la animación, se borra la Unit y se bloquea todo el código.
+        sfTexture = gGame._textureManager->loadFromFile(nombre, rutaImagen);    // Si hay cualquier error con la animación, se borra la Unit y se bloquea todo el código.
     }
     catch (...) {
         std::cout << "Error cargando fichero '" << rutaImagen << "'" << std::endl;
@@ -61,7 +61,7 @@ void AnimatedSprite::draw() {
         sizeY);
     sfSprite.setTexture(sfTexture);
     sfSprite.setTextureRect(rectSourceSprite);
-    gGame.pGameWindow.draw(sfSprite);
+    gGame._gameWindow.draw(sfSprite);
 }
 
 bool AnimatedSprite::canWalk() {
@@ -69,9 +69,9 @@ bool AnimatedSprite::canWalk() {
         return false;
 
     unsigned int MAPBOUND_X_MIN = 10;
-    unsigned int MAPBOUND_X_MAX = gGame.iScreenHeight - 10;
+    unsigned int MAPBOUND_X_MAX = gGame._screenHeight - 10;
     unsigned int MAPBOUND_Y_MIN = 10;
-    unsigned int MAPBOUND_Y_MAX = gGame.iScreenWidth - 10;
+    unsigned int MAPBOUND_Y_MAX = gGame._screenWidth - 10;
 
     switch (_dir) {
         case DIR_N:

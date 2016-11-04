@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../Game.h"
+#include <SFML/Audio.hpp>
+
 #include "../GameState/GameState.h"
 #include "../Game/GameManager.h"
 #include "../GameState/GameStatesManager.h"
-#include <SFML/Audio.hpp>
 
 /*
     Clase que se encarga del menú principal de la aplicación
@@ -16,11 +16,9 @@ private:
 
     sf::Texture logoTex;
     sf::Sprite logo;
-    int alphaLogo = 0;
+    sf::Uint8 alphaLogo = 0;
     float scaleLogo = 1;
     sf::Music backgroundMusic;
-
-    GameManager* pGameManager;
 
     /*
     Método para actualizar elementos antes de dibujarlos

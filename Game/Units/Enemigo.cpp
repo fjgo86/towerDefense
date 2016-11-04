@@ -1,5 +1,6 @@
-#include "Enemigo.h"
 #include <iostream>
+
+#include "Enemigo.h"
 
 Enemigo::Enemigo() {
 }

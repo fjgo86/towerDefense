@@ -5,8 +5,8 @@
 
 Map::Map() {
     // Pixeles default del game / pixeles por unidad (default)
-    _maxX = gGame.pGameWindow.getSize().x / _tileSize; ///< 1024 / 16 = 64.
-    _maxY = gGame.pGameWindow.getSize().y / _tileSize; ///< 720 / 16 / 45.
+    _maxX = gGame._gameWindow.getSize().x / _tileSize; ///< 1024 / 16 = 64.
+    _maxY = gGame._gameWindow.getSize().y / _tileSize; ///< 720 / 16 / 45.
     // Rellenado del map de la clase
     for (unsigned int x = 0; x < _maxX; x++) {
         for (unsigned int y = 0; y < _maxY; y++) {
