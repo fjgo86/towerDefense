@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Game.h"
-#include "GameState.h"
-#include "GameManager.h"
-#include "GameStatesManager.h"
+#include "../Game.h"
+#include "../GameState/GameState.h"
+#include "../Game/GameManager.h"
+#include "../GameState/GameStatesManager.h"
 #include <SFML/Audio.hpp>
 
 /*
@@ -22,7 +22,10 @@ private:
 
     GameManager* pGameManager;
 
-    void update();  ///< Método para actualizar elementos antes de dibujarlos
+	/*
+	Método para actualizar elementos antes de dibujarlos
+	*/
+    void update();
 
 public:
     MainMenuManager();

@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="GameStatesManager.h" />
+    <ClInclude Include="GameState\GameState.h" />
+    <ClInclude Include="GameState\GameStatesManager.h" />
     <ClInclude Include="Game\ColectorBasura.h" />
-    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Game\Units\Enemigo.h" />
     <ClInclude Include="Game\Units\Enemigos\Dragon.h" />
     <ClInclude Include="Game\AnimatedSprite.h" />
@@ -35,13 +35,13 @@
     <ClInclude Include="Game\Map\Map.h" />
     <ClInclude Include="Game\Map\Tile.h" />
     <ClInclude Include="Game\Map\Grid.h" />
-    <ClInclude Include="MainMenuManager.h" />
+    <ClInclude Include="Menu\MainMenuManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="GameStatesManager.cpp" />
+    <ClCompile Include="GameState\GameState.cpp" />
+    <ClCompile Include="GameState\GameStatesManager.cpp" />
     <ClCompile Include="Game\ColectorBasura.cpp" />
-    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Game\Units\Enemigo.cpp" />
     <ClCompile Include="Game\Units\Enemigos\Dragon.cpp" />
     <ClCompile Include="Game\AnimatedSprite.cpp" />
@@ -55,7 +55,7 @@
     <ClCompile Include="Game\TextureManager.cpp" />
     <ClCompile Include="Game\Map\Map.cpp" />
     <ClCompile Include="Game\Map\Tile.cpp" />
-    <ClCompile Include="MainMenuManager.cpp" />
+    <ClCompile Include="Menu\MainMenuManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5E1DA751-D877-4DF3-A85E-29BBC4894EFB}</ProjectGuid>

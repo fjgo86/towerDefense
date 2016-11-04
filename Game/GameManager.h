@@ -1,8 +1,8 @@
 #pragma once
-#include "GameState.h"
-#include "Game\UnitManager.h"
-#include "Game\ColectorBasura.h"
-#include "Game\Map\Map.h"
+#include "../GameState/GameState.h"
+#include "../Game/UnitManager.h"
+#include "../Game/ColectorBasura.h"
+#include "../Game/Map/Map.h"
 
 /*
 	Clase que se encarga de manejar el tiempo de juego, el flujo de objetos, su interacción...

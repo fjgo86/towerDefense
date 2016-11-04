@@ -9,15 +9,15 @@
     <ClInclude Include="Game\Units\Enemigos\Dragon.h" />
     <ClInclude Include="Game\Units\Torre.h" />
     <ClInclude Include="Game\Units\Torres\Torre1.h" />
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Game\ColectorBasura.h" />
     <ClInclude Include="Game\TextureManager.h" />
-    <ClInclude Include="GameStatesManager.h" />
-    <ClInclude Include="GameState.h" />
     <ClInclude Include="Game\Map\Map.h" />
     <ClInclude Include="Game\Map\Tile.h" />
     <ClInclude Include="Game\Map\Grid.h" />
-    <ClInclude Include="MainMenuManager.h" />
+    <ClInclude Include="GameState\GameStatesManager.h" />
+    <ClInclude Include="Game\GameManager.h" />
+    <ClInclude Include="Menu\MainMenuManager.h" />
+    <ClInclude Include="GameState\GameState.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -29,14 +29,14 @@
     <ClCompile Include="Game\Units\Enemigos\Dragon.cpp" />
     <ClCompile Include="Game\Units\Torre.cpp" />
     <ClCompile Include="Game\Units\Torres\Torre1.cpp" />
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Game\ColectorBasura.cpp" />
     <ClCompile Include="Game\TextureManager.cpp" />
-    <ClCompile Include="GameStatesManager.cpp" />
-    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Game\Map\Map.cpp" />
     <ClCompile Include="Game\Map\Tile.cpp" />
     <ClCompile Include="Game\Map\Grid.cpp" />
-    <ClCompile Include="MainMenuManager.cpp" />
+    <ClCompile Include="GameState\GameStatesManager.cpp" />
+    <ClCompile Include="Game\GameManager.cpp" />
+    <ClCompile Include="Menu\MainMenuManager.cpp" />
+    <ClCompile Include="GameState\GameState.cpp" />
   </ItemGroup>
 </Project>

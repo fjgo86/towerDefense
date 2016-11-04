@@ -1,10 +1,12 @@
+#include <iostream>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
 #include "Game.h"
-#include "GameManager.h"
-#include "GameStatesManager.h"
-#include <iostream>
+#include "Game/GameManager.h"
+#include "GameState/GameStatesManager.h"
+
 
 void Game::onTick(){
 	pGameStatesManager->getEstadoActual()->handleInput();

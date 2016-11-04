@@ -1,5 +1,5 @@
 #include "GameStatesManager.h"
-#include "GameManager.h"
+#include "../Game/GameManager.h"
 #include <iostream>
 
 GameStatesManager::GameStatesManager()

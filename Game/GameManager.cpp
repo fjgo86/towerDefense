@@ -1,9 +1,11 @@
-#include "GameManager.h"
-#include "Game\Units\Enemigos\Dragon.h"
-#include "Game\Units\Torres\Torre1.h"
-#include "Game.h"
-#include <SFML/Window/Event.hpp>
 #include <iostream>
+
+#include <SFML/Window/Event.hpp>
+
+#include "GameManager.h"
+#include "../Game.h"
+#include "Units/Enemigos/Dragon.h"
+#include "Units/Torres/Torre1.h"
 
 void GameManager::handleInput(){
 	sf::Event event;
