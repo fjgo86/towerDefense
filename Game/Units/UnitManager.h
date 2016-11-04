@@ -5,8 +5,7 @@ class ColectorBasura;
 /*
 	Clase que guarda un listado de Unit*.
 */
-class UnitManager : public std::vector<Unit*>
-{
+class UnitManager : public std::vector<Unit*>{
 private:
 
 public:

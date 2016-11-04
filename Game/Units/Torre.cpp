@@ -2,26 +2,26 @@
 #include "Enemigo.h"
 #include <iostream>
 
-Torre::Torre(){
+Torre::Torre() {
 	this->initRangeCircle();
 }
 
-Torre::~Torre(){
+Torre::~Torre() {
 }
 
-bool Torre::onTick(const float elapsed){
+bool Torre::onTick(const float elapsed) {
 	if (checkMouseOver())
         gGame.pGameWindow.draw(this->rangeCircle);
 	draw(elapsed);
 	return true;
 }
 
-bool Torre::checkMouseOver(){
+bool Torre::checkMouseOver() {
 	sf::Vector2f mousePos = sf::Vector2f((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y);
 	return getFloatRect().contains(mousePos) ? true : false;
 }
 
-void Torre::initRangeCircle(){
+void Torre::initRangeCircle() {
 	this->rangeCircle.setPointCount(50);
 	this->rangeCircle.setRadius(this->range);
 	this->rangeCircle.setFillColor(sf::Color(50, 192, 240, 75));

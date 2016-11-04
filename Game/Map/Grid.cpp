@@ -1,7 +1,10 @@
+
+#include <iostream>
+
 #include "Grid.h"
+
 #include "../../Game.h"
 #include "Map.h"
-#include <iostream>
 
 Grid::Grid(unsigned int x, unsigned int y, bool isBorderGrid) {
     _posX = x;

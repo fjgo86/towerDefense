@@ -12,8 +12,7 @@ enum eDir {
     DIR_NE
 };
 
-class AnimatedSprite
-{
+class AnimatedSprite {
 private:
 	sf::Texture sfTexture;					///< Textura del objeto.
 	sf::Sprite sfSprite;					///< Sprite del objeto.

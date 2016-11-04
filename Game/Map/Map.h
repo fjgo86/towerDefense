@@ -1,5 +1,6 @@
 #pragma once
 #include <map>
+
 #include "Grid.h"
 
 #define COORD(x, y) std::pair<unsigned int, unsigned int>(x, y) // Acceso directo al Pair de las coordenadas.

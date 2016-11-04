@@ -7,15 +7,14 @@
 #include "Units/Enemigos/Dragon.h"
 #include "Units/Torres/Torre1.h"
 
-void GameManager::handleInput(){
+void GameManager::handleInput() {
 	sf::Event event;
-	while (gGame.pGameWindow.pollEvent(event))
-	{
+	while (gGame.pGameWindow.pollEvent(event)){
 		switch (event.type){
 			case sf::Event::Closed:
 				gGame.pGameWindow.close();
 				break;
-			case sf::Event::KeyReleased:{
+			case sf::Event::KeyReleased: {
 				switch (event.key.code){
 					case sf::Keyboard::Escape:
 						//gGame.pGameWindow.close();
@@ -32,8 +31,7 @@ void GameManager::handleInput(){
 						break;
 					}
 							
-					case sf::Keyboard::T:		// pulsar T para crear y posicionar una torre
-					{
+					case sf::Keyboard::T: {		// pulsar T para crear y posicionar una torre
 						Torre1* torre = new Torre1();
 						torre->setPosition((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y);
 						torre->draw(0.0f);
@@ -45,17 +43,14 @@ void GameManager::handleInput(){
 					default:
 						break;
 				}
-				case sf::Event::MouseButtonPressed:
-				{
-					switch (event.mouseButton.button)
-					{
+				case sf::Event::MouseButtonPressed: {
+					switch (event.mouseButton.button) {
 					case sf::Mouse::Left:
 						break;
 					}
 					break;
 				}
-				case sf::Event::MouseMoved:
-				{
+				case sf::Event::MouseMoved: {
 					break;
 				}
 			}
@@ -63,7 +58,7 @@ void GameManager::handleInput(){
 	}
 }
 
-GameManager::GameManager(){
+GameManager::GameManager() {
 	frameCount = 0;
 	averageFPS = 60;	// lo mismo que window.setFrameLimit();
 	listadoEnemigos = new UnitManager();
@@ -76,7 +71,7 @@ GameManager::GameManager(){
 }
 
 
-GameManager::~GameManager(){
+GameManager::~GameManager() {
 	delete listadoEnemigos;
 	delete listadoTorres;
 	delete gbcEnemigos;
@@ -88,8 +83,7 @@ void GameManager::onTick() {
 	clock.restart();
 	frameCount++;
 	timeCount += tick;
-	if (timeCount >= 1.0f)
-	{
+	if (timeCount >= 1.0f){
 		averageFPS = frameCount;
 		frameCount = 0;
 		timeCount = 0.0f;
@@ -104,12 +98,11 @@ void GameManager::onTick() {
 	addTextoMousePos();
 }
 
-void GameManager::addTextoFPS(){
+void GameManager::addTextoFPS() {
 	sf::Font font;
 
 	// Carga fichero de fuentes.
-	if (!font.loadFromFile("media/fonts/arial.ttf"))
-	{
+	if (!font.loadFromFile("media/fonts/arial.ttf")) {
 		std::cout << "Error cargando fuente.\n";
 	}
 
@@ -128,12 +121,11 @@ void GameManager::addTextoFPS(){
 	gGame.pGameWindow.draw(textFPS);
 }
 
-void GameManager::addTextoMousePos(){
+void GameManager::addTextoMousePos() {
 	sf::Font font;
 
 	// Carga fichero de fuentes.
-	if (!font.loadFromFile("media/fonts/arial.ttf"))
-	{
+	if (!font.loadFromFile("media/fonts/arial.ttf")){
 		std::cout << "Error cargando fuente.\n";
 	}
 

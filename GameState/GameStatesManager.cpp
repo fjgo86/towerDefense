@@ -1,19 +1,18 @@
-#include "GameStatesManager.h"
-#include "../Game/GameManager.h"
 #include <iostream>
 
-GameStatesManager::GameStatesManager()
-{
+#include "GameStatesManager.h"
+#include "../Game/GameManager.h"
+
+
+GameStatesManager::GameStatesManager() {
 }
 
-GameState* GameStatesManager::getEstadoActual()
-{
+GameState* GameStatesManager::getEstadoActual() {
 	//return this->estados.top();
     return this->estados.front(); // Devuelve el primer elemento del deque
 }
 
-void GameStatesManager::setEstadoActual(GameState* estado)
-{
+void GameStatesManager::setEstadoActual(GameState* estado) {
     auto estadoBuscado = std::find(this->estados.begin(), this->estados.end(), estado);
     
     if (estadoBuscado == this->estados.end()) {
@@ -30,6 +29,5 @@ void GameStatesManager::setEstadoActual(GameState* estado)
     std::cout << "Estados: " << this->estados.size() << std::endl;
 }
 
-GameStatesManager::~GameStatesManager()
-{
+GameStatesManager::~GameStatesManager() {
 }

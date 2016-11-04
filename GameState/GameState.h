@@ -1,6 +1,5 @@
 #pragma once
-class GameState
-{
+class GameState {
 public:
 
 	virtual void handleInput() = 0;

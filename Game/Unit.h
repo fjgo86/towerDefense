@@ -8,8 +8,7 @@ class Enemigo;
 /*
 	Clase padre de todas las unidades, enemigas o aliadas.
 */
-class Unit
-{
+class Unit {
 private:
     Grid* _grid;
 protected:

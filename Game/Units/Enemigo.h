@@ -4,8 +4,7 @@
 /*
 	Clase genérica para los enemigos.
 */
-class Enemigo : public Unit
-{
+class Enemigo : public Unit {
 protected:
     bool _canFly; ///< Puede volar esta unidad?
 public:

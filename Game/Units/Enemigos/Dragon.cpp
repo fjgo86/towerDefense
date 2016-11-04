@@ -1,8 +1,7 @@
 #include "Dragon.h"
 #include "../../Game.h"
 
-Dragon::Dragon()
-{
+Dragon::Dragon() {
 	//int randomNumber = rand() % (4 + 1);
 
 	setNombre("Dragon prueba");
@@ -13,6 +12,5 @@ Dragon::Dragon()
 }
 
 
-Dragon::~Dragon()
-{
+Dragon::~Dragon() {
 }

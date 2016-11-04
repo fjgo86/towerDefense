@@ -8,8 +8,7 @@
 	Clase que se encarga de manejar el tiempo de juego, el flujo de objetos, su interacción...
 	TODO: Meter aquí un controlador de teclas, etc
 */
-class GameManager : public GameState
-{
+class GameManager : public GameState {
 private:
 	UnitManager* listadoEnemigos;	///< Lista (std::vector) de los enemigos.
 	UnitManager* listadoTorres;		///< Lista (std::vector) de las torres.

@@ -5,8 +5,7 @@
 /*
 	Clase genérica para las torres.
 */
-class Torre : public Unit
-{
+class Torre : public Unit {
 private:
 	bool mouseIsOver;   ///< True si el ratón está encima de esta Torre.
 	sf::CircleShape rangeCircle;    ///< RangeCircle que muestra el rango de la Torre.

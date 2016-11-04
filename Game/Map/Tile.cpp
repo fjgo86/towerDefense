@@ -9,7 +9,7 @@ Tile::Tile() {
 Tile::~Tile() {
 }
 
-void Tile::attatchToGrid(Grid* grid, bool isBorderTile){
+void Tile::attatchToGrid(Grid* grid, bool isBorderTile) {
     _grid = grid;
     sfTexture.loadFromFile("media/Tiles/tile_gris_1.png");
     sfSprite.setTexture(sfTexture);

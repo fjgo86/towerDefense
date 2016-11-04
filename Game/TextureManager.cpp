@@ -1,6 +1,6 @@
-#include "TextureManager.h"
 #include <iostream>
 
+#include "TextureManager.h"
 
 
 sf::Texture TextureManager::loadFromFile(std::string nombre, const char * file) {
