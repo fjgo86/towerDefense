@@ -9,8 +9,8 @@ Enemigo::~Enemigo() {
 }
 
 bool Enemigo::onTick(const float elapsed) {
-	draw(elapsed);
-	return true;
+    draw(elapsed);
+    return true;
 }
 
 bool Enemigo::canFly() {

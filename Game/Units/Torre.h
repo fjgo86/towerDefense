@@ -3,14 +3,14 @@
 #include "../../Game.h"
 
 /*
-	Clase genérica para las torres.
+    Clase genérica para las torres.
 */
 class Torre : public Unit {
 private:
-	bool mouseIsOver;   ///< True si el ratón está encima de esta Torre.
-	sf::CircleShape rangeCircle;    ///< RangeCircle que muestra el rango de la Torre.
-	void initRangeCircle();         ///< Inicializa el RangeCircle.
-	float range = 150.0f;           ///< Rango efectivo de la Torre.
+    bool mouseIsOver;   ///< True si el ratón está encima de esta Torre.
+    sf::CircleShape rangeCircle;    ///< RangeCircle que muestra el rango de la Torre.
+    void initRangeCircle();         ///< Inicializa el RangeCircle.
+    float range = 150.0f;           ///< Rango efectivo de la Torre.
 
 public:
     Torre();
@@ -20,8 +20,8 @@ public:
     /*
         Está el ratón encima de esta Torre?
     */
-	bool checkMouseOver();
-	bool onTick(const float elapsed);
+    bool checkMouseOver();
+    bool onTick(const float elapsed);
 
     // Pathfinding
     /*

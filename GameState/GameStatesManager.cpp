@@ -8,7 +8,7 @@ GameStatesManager::GameStatesManager() {
 }
 
 GameState* GameStatesManager::getEstadoActual() {
-	//return this->estados.top();
+    //return this->estados.top();
     return this->estados.front(); // Devuelve el primer elemento del deque
 }
 

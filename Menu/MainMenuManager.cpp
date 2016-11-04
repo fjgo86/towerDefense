@@ -30,37 +30,37 @@ void MainMenuManager::handleInput() {
     sf::Event event;
     while (gGame.pGameWindow.pollEvent(event)) {
         switch (event.type) {
-			case sf::Event::Closed:
-				gGame.pGameWindow.close();
-				break;
-			case sf::Event::KeyReleased: {
-				switch (event.key.code) {
-					case sf::Keyboard::Escape:
-						gGame.pGameWindow.close();
-						break;
+            case sf::Event::Closed:
+                gGame.pGameWindow.close();
+                break;
+            case sf::Event::KeyReleased: {
+                switch (event.key.code) {
+                    case sf::Keyboard::Escape:
+                        gGame.pGameWindow.close();
+                        break;
 
-					case sf::Keyboard::Space:{		// pulsar SPACE para pasar al juego
-						if (backgroundMusic.getStatus() == backgroundMusic.Playing)
-							backgroundMusic.stop();
-						pGameManager = new GameManager();
-						gGame.pGameStatesManager->setEstadoActual(pGameManager);
-						break;
-					}
+                    case sf::Keyboard::Space:{        // pulsar SPACE para pasar al juego
+                        if (backgroundMusic.getStatus() == backgroundMusic.Playing)
+                            backgroundMusic.stop();
+                        pGameManager = new GameManager();
+                        gGame.pGameStatesManager->setEstadoActual(pGameManager);
+                        break;
+                    }
 
-					default:
-						break;
-				}
-			}
-			case sf::Event::MouseButtonPressed: {
-				switch (event.mouseButton.button) {
-				case sf::Mouse::Left:
-					break;
-				}
-				break;
-			}
-			case sf::Event::MouseMoved: {
-				break;
-			}
+                    default:
+                        break;
+                }
+            }
+            case sf::Event::MouseButtonPressed: {
+                switch (event.mouseButton.button) {
+                case sf::Mouse::Left:
+                    break;
+                }
+                break;
+            }
+            case sf::Event::MouseMoved: {
+                break;
+            }
         }
     }
 }

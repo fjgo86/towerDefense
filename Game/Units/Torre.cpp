@@ -3,32 +3,32 @@
 #include <iostream>
 
 Torre::Torre() {
-	this->initRangeCircle();
+    this->initRangeCircle();
 }
 
 Torre::~Torre() {
 }
 
 bool Torre::onTick(const float elapsed) {
-	if (checkMouseOver())
+    if (checkMouseOver())
         gGame.pGameWindow.draw(this->rangeCircle);
-	draw(elapsed);
-	return true;
+    draw(elapsed);
+    return true;
 }
 
 bool Torre::checkMouseOver() {
-	sf::Vector2f mousePos = sf::Vector2f((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y);
-	return getFloatRect().contains(mousePos) ? true : false;
+    sf::Vector2f mousePos = sf::Vector2f((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y);
+    return getFloatRect().contains(mousePos) ? true : false;
 }
 
 void Torre::initRangeCircle() {
-	this->rangeCircle.setPointCount(50);
-	this->rangeCircle.setRadius(this->range);
-	this->rangeCircle.setFillColor(sf::Color(50, 192, 240, 75));
-	this->rangeCircle.setOutlineColor(sf::Color(50, 192, 240, 150));
-	this->rangeCircle.setOutlineThickness(1);
-	this->rangeCircle.setPosition(sf::Vector2f((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y));
-	this->rangeCircle.setOrigin(this->range, this->range);
+    this->rangeCircle.setPointCount(50);
+    this->rangeCircle.setRadius(this->range);
+    this->rangeCircle.setFillColor(sf::Color(50, 192, 240, 75));
+    this->rangeCircle.setOutlineColor(sf::Color(50, 192, 240, 150));
+    this->rangeCircle.setOutlineThickness(1);
+    this->rangeCircle.setPosition(sf::Vector2f((float)sf::Mouse::getPosition(gGame.pGameWindow).x, (float)sf::Mouse::getPosition(gGame.pGameWindow).y));
+    this->rangeCircle.setOrigin(this->range, this->range);
 }
 
 int Torre::getWalkCost() {

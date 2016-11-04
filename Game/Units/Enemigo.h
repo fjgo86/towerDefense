@@ -2,18 +2,18 @@
 #include "../Unit.h"
 
 /*
-	Clase genérica para los enemigos.
+    Clase genérica para los enemigos.
 */
 class Enemigo : public Unit {
 protected:
     bool _canFly; ///< Puede volar esta unidad?
 public:
-	Enemigo();
-	~Enemigo();
+    Enemigo();
+    ~Enemigo();
 
     // General
 
-	bool onTick(const float elapsed);
+    bool onTick(const float elapsed);
 
     // Pathfinding
     /*

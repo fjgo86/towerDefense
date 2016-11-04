@@ -22,9 +22,9 @@ private:
 
     GameManager* pGameManager;
 
-	/*
-	Método para actualizar elementos antes de dibujarlos
-	*/
+    /*
+    Método para actualizar elementos antes de dibujarlos
+    */
     void update();
 
 public:

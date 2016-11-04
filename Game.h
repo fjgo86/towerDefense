@@ -4,23 +4,23 @@
 #include "GameState/GameStatesManager.h"
 #include "Menu/MainMenuManager.h"
 
-class MainMenuManager;  // Esta trampita me la tienes que explicar. Sin ello el programa peta.
+class MainMenuManager;	// Esta trampita me la tienes que explicar. Sin ello el programa peta.
 
 extern class Game{
 private:
     MainMenuManager* pMenuManager;
-	
+    
 public:
-	Game();
-	~Game();
+    Game();
+    ~Game();
 
     GameStatesManager* pGameStatesManager;
-	TextureManager* pTextureManager;
-	sf::RenderWindow pGameWindow;	///< Enlace a la pantalla del juego.
+    TextureManager* pTextureManager;
+    sf::RenderWindow pGameWindow;	///< Enlace a la pantalla del juego.
 
-	int iScreenWidth;	///< Tamaño en pixeles del ancho de la pantalla.
-	int iScreenHeight;	///< Tamaño en pixeles del alto de la pantalla.
+    int iScreenWidth;		///< Tamaño en pixeles del ancho de la pantalla.
+    int iScreenHeight;		///< Tamaño en pixeles del alto de la pantalla.
 
-	void onTick();		///< Método que se encarga de gestionar el paso del tiempo en el juego.
+    void onTick();			///< Método que se encarga de gestionar el paso del tiempo en el juego.
 } gGame;
 

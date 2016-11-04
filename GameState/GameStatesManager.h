@@ -5,15 +5,15 @@
 
 class GameStatesManager {
 private:
-	//std::stack<GameState*> estados;
+    //std::stack<GameState*> estados;
     std::deque<GameState*> estados;
 
 public:
 
-	GameState* getEstadoActual();
-	void setEstadoActual(GameState* estado);
+    GameState* getEstadoActual();
+    void setEstadoActual(GameState* estado);
 
-	GameStatesManager();
-	~GameStatesManager();
+    GameStatesManager();
+    ~GameStatesManager();
 };
 

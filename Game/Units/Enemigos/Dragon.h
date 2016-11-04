@@ -3,7 +3,7 @@
 
 class Dragon : public Enemigo {
 public:
-	Dragon();
-	~Dragon();
+    Dragon();
+    ~Dragon();
 };
 

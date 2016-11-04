@@ -2,9 +2,9 @@
 
 
 Torre1::Torre1() {
-	setNombre("Torre prueba");
-	setRutaImagen("media/unit_dragon_verde.png");
-	animatedSprite.setDireccion(DIR_S);
+    setNombre("Torre prueba");
+    setRutaImagen("media/unit_dragon_verde.png");
+    animatedSprite.setDireccion(DIR_S);
 }
 
 

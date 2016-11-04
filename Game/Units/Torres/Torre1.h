@@ -3,7 +3,7 @@
 
 class Torre1 : public Torre {
 public:
-	Torre1();
-	~Torre1();
+    Torre1();
+    ~Torre1();
 };
 

@@ -4,7 +4,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Game\Unit.h" />
     <ClInclude Include="Game\AnimatedSprite.h" />
-    <ClInclude Include="Game\UnitManager.h" />
     <ClInclude Include="Game\Units\Enemigo.h" />
     <ClInclude Include="Game\Units\Enemigos\Dragon.h" />
     <ClInclude Include="Game\Units\Torre.h" />
@@ -18,13 +17,13 @@
     <ClInclude Include="Game\GameManager.h" />
     <ClInclude Include="Menu\MainMenuManager.h" />
     <ClInclude Include="GameState\GameState.h" />
+    <ClInclude Include="Game\Units\UnitManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Game\Unit.cpp" />
     <ClCompile Include="Game\AnimatedSprite.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Game\UnitManager.cpp" />
     <ClCompile Include="Game\Units\Enemigo.cpp" />
     <ClCompile Include="Game\Units\Enemigos\Dragon.cpp" />
     <ClCompile Include="Game\Units\Torre.cpp" />
@@ -38,5 +37,6 @@
     <ClCompile Include="Game\GameManager.cpp" />
     <ClCompile Include="Menu\MainMenuManager.cpp" />
     <ClCompile Include="GameState\GameState.cpp" />
+    <ClCompile Include="Game\Units\UnitManager.cpp" />
   </ItemGroup>
 </Project>
