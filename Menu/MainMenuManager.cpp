@@ -7,14 +7,15 @@
 MainMenuManager::MainMenuManager() {
 
     if (!backgroundMusic.openFromFile("media/music/mainMenu.flac"))
-        std::cout << "Error cargando la musica de fondo" << std::endl;
+        std::cout << "Error cargando la musica de fondo." << std::endl;
     backgroundMusic.setVolume(20.0f);
     
     if (backgroundMusic.getStatus() == backgroundMusic.Stopped)
         backgroundMusic.play();
         //std::cout << "Reproduciendo musica" << std::endl;
 
-    logoTex.loadFromFile("media/logos/logo.png");
+    if (!logoTex.loadFromFile("media/logos/logo.png"))
+        std::cout << "Error cargando la textura del logo." << std::endl;
 
     logo.setTexture(logoTex);
     logo.setPosition((float)(gGame._screenWidth / 2), (float)gGame._screenHeight * 0.2f);

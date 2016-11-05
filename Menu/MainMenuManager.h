@@ -14,7 +14,7 @@ private:
     sf::Font fuente;
     sf::Text texto;
 
-    sf::Texture logoTex;
+    sf::Texture logoTex, musicOn, musicOff;
     sf::Sprite logo;
     sf::Uint8 alphaLogo = 0;
     float scaleLogo = 1;
