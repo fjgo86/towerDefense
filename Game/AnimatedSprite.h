@@ -14,7 +14,7 @@ enum eDir {
 
 class AnimatedSprite {
 private:
-    sf::Texture sfTexture;		///< Textura del objeto.
+    sf::Texture* sfTexture;		///< Textura del objeto.
     sf::Sprite sfSprite;		///< Sprite del objeto.
     int sizeX;					///< Tamaño X de cada frame.
     int sizeY;					///< Tamaño Y de cada frame.

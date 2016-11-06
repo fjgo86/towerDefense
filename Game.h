@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Game/TextureManager.h"
+#include "Game/SpriteManager.h"
 #include "GameState/GameStatesManager.h"
 #include "Game/GameManager.h"
 
@@ -16,6 +16,7 @@ public:
 
     GameStatesManager*	_statesManager;
     TextureManager*		_textureManager;
+	SpriteManager*		_spriteManager;
     sf::RenderWindow	_gameWindow;	///< Enlace a la pantalla del juego.
 
     int _screenWidth;		///< Tamaño en pixeles del ancho de la pantalla.

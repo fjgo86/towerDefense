@@ -36,6 +36,7 @@
     <ClInclude Include="Game\Map\Tile.h" />
     <ClInclude Include="Game\Map\Grid.h" />
     <ClInclude Include="Menu\MainMenuManager.h" />
+    <ClInclude Include="Game\SpriteManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameState\GameState.cpp" />
@@ -56,6 +57,7 @@
     <ClCompile Include="Game\Map\Map.cpp" />
     <ClCompile Include="Game\Map\Tile.cpp" />
     <ClCompile Include="Menu\MainMenuManager.cpp" />
+    <ClCompile Include="Game\SpriteManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5E1DA751-D877-4DF3-A85E-29BBC4894EFB}</ProjectGuid>

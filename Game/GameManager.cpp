@@ -89,7 +89,7 @@ void GameManager::onTick() {
         frameCount = 0;
         timeCount = 0.0f;
     }
-    mapa->onTick();
+    mapa->draw();
     listadoEnemigos->onTick(gbcEnemigos, tick);
     listadoTorres->onTick(gbcTorres, tick);
 

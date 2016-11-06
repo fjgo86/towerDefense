@@ -18,6 +18,7 @@
     <ClInclude Include="Menu\MainMenuManager.h" />
     <ClInclude Include="GameState\GameState.h" />
     <ClInclude Include="Game\Units\UnitManager.h" />
+    <ClInclude Include="Game\SpriteManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -38,5 +39,6 @@
     <ClCompile Include="Menu\MainMenuManager.cpp" />
     <ClCompile Include="GameState\GameState.cpp" />
     <ClCompile Include="Game\Units\UnitManager.cpp" />
+    <ClCompile Include="Game\SpriteManager.cpp" />
   </ItemGroup>
 </Project>

@@ -9,12 +9,13 @@
 #include "GameState/GameStatesManager.h"
 
 
-void Game::onTick(){
+
+void Game::onTick() {
 	_statesManager->getEstadoActual()->handleInput();
 	_statesManager->getEstadoActual()->onTick();
 }
 
-Game::Game(){
+Game::Game() {
     std::cout << "Inicializando Game" << std::endl;
     _screenWidth = 1280;
     _screenHeight = 720;
@@ -27,6 +28,8 @@ Game::Game(){
 	_gameWindow.clear();
 
     _textureManager = new TextureManager();
+	_spriteManager = new SpriteManager(_textureManager);
+
     _game = new GameManager();
     _menu = new MainMenuManager();
 

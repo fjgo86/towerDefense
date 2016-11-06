@@ -9,8 +9,7 @@ class Grid;
 */
 class Tile {
     Grid* _grid;
-    sf::Texture sfTexture;
-    sf::Sprite sfSprite;
+	sf::Sprite sfSprite;
 //TODO: Expandir para añadir posibles costes en el pathfinding.
 public:
     Tile();

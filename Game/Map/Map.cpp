@@ -4,15 +4,20 @@
 
 
 Map::Map() {
+	_imagenMapa.create(gGame._screenWidth, gGame._screenHeight);
     // Pixeles default del game / pixeles por unidad (default)
     _maxX = gGame._gameWindow.getSize().x / _tileSize; ///< 1024 / 16 = 64.
     _maxY = gGame._gameWindow.getSize().y / _tileSize; ///< 720 / 16 / 45.
     // Rellenado del map de la clase
     for (unsigned int x = 0; x < _maxX; x++) {
         for (unsigned int y = 0; y < _maxY; y++) {
-            (*this)[COORD(x,y)] = new Grid(x, y, (x == (_maxX -1) || y == (_maxY -1) || x == 0 || y == 0) ? true : false);
+			Grid * grid = new Grid(x, y, (x == (_maxX - 1) || y == (_maxY - 1) || x == 0 || y == 0) ? true : false);
+            (*this)[COORD(x,y)] = grid;
+			_imagenMapa.draw(grid->getTile()->getSprite());
         }
     }
+	_imagenMapa.display();
+	_spriteMapa.setTexture(_imagenMapa.getTexture());
 }
 
 Map::~Map() {
@@ -42,11 +47,20 @@ Grid * Map::getGridFromPixel(unsigned int x, unsigned int y) {
     return getGridAt(finalX, finalY);
 }
 
-void Map::onTick() {
-    iterator it = begin(), final = end();
-    while (it != final) {
-        Grid * grid = it->second;
-        grid->onTick();
-        it++;
-    }
+
+
+void Map::draw() {
+	gGame._gameWindow.draw(_spriteMapa);
+}
+
+void Map::reset() {
+
+	iterator it = begin(), final = end();
+	while (it != final) {
+		Grid * grid = it->second;
+		grid->draw(_imagenMapa);
+		it++;
+	}
+	_imagenMapa.display();
+	_spriteMapa.setTexture(_imagenMapa.getTexture());
 }

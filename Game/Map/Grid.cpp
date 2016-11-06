@@ -31,6 +31,10 @@ void Grid::removeTile(Tile * tile) {
     tile->detatchFromGrid();
 }
 
+Tile * Grid::getTile() {
+	return _tile;
+}
+
 void Grid::addUnit(Unit * unit) {
     if (_unit != nullptr) {
         std::cout << "Añadiendo Unit a Grid con Unit previa (" << _posX << ", " << _posY << ")" << std::endl;
@@ -43,6 +47,10 @@ void Grid::addUnit(Unit * unit) {
 void Grid::removeUnit(Unit * unit) {
     _unit = nullptr;
     unit->detatchFromGrid();
+}
+
+Unit * Grid::getUnit() {
+	return _unit;
 }
 
 std::pair<unsigned int, unsigned int> Grid::getPosition() {
@@ -60,7 +68,8 @@ int Grid::getWalkCost() {
    return -1;
 }
 
-void Grid::onTick() {
-    if (_tile != nullptr)
-        gGame._gameWindow.draw(_tile->getSprite());
+void Grid::draw(sf::RenderTexture & imagenMapa) {
+	if (_tile != nullptr) {
+		imagenMapa.draw(_tile->getSprite());
+	}
 }

@@ -12,16 +12,36 @@ public:
     Grid(unsigned int x, unsigned int y, bool isBorderGrid);
     ~Grid();
 
-    void addTile(Tile* tile);   ///< Añade un Tile al Grid.
-    void removeTile(Tile* tile);///< Retira un Tile del Grid.
+	/*
+	Añade un Tile al Grid.
+	*/
+    void addTile(Tile* tile);
+	/*
+	Retira un Tile del Grid.
+	*/
+    void removeTile(Tile* tile);
+	/*
+	Devuelve el tile del Grid.
+	*/
+	Tile* getTile();
 
-    void addUnit(Unit* unit);   ///< Añade una Unit al Grid.
-    void removeUnit(Unit* unit);///< Retira una Unit del Grid.
+	/*
+	Añade una Unit al Grid.
+	*/
+    void addUnit(Unit* unit);
+	/*
+	Retira una Unit del Grid.
+	*/
+    void removeUnit(Unit* unit);
+	/*
+	Devuelve la Unit del Grid.
+	*/
+	Unit* getUnit();
 
     std::pair<unsigned int, unsigned int> getPosition();    ///< Devuelve un std::pair con la posicion del Grid.
 
     int getWalkCost();      ///< Devuelve el coste del Grid para el PathFinder.
 
-    void onTick();
+    void draw(sf::RenderTexture & imagenMapa);
 };
 
