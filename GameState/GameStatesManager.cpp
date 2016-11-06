@@ -2,31 +2,38 @@
 
 #include "GameStatesManager.h"
 #include "../Game/GameManager.h"
+#include "../Menu/MainMenuManager.h"
 
 
 GameStatesManager::GameStatesManager() {
+
+    this->initEstados();
+}
+
+void GameStatesManager::initEstados() {
+ 
+    this->estados["game"] = new GameManager();
+    this->estados["menu"] = new MainMenuManager();
 }
 
 GameState* GameStatesManager::getEstadoActual() {
-	//return this->estados.top();
-    return this->estados.front(); // Devuelve el primer elemento del deque
+
+    return this->estadoActual;
 }
 
-void GameStatesManager::setEstadoActual(GameState* estado) {
-    auto estadoBuscado = std::find(this->estados.begin(), this->estados.end(), estado);
-    
-    if (estadoBuscado == this->estados.end()) {
-    
-        std::cout << "El estado no existe, lo voy a crear con ID = " << estado << std::endl;
-        this->estados.push_front(estado);
-    }
-    else {
+void GameStatesManager::setEstadoActual(std::string estado) {
 
-        std::cout << "El estado ya existe y tiene la ID = " << estado << ", lo voy a activar." << std::endl;
-        this->estados.front() = estado;
-    }
+    this->estadoActual = this->estados[estado];
 
     std::cout << "Estados: " << this->estados.size() << std::endl;
+}
+
+void GameStatesManager::newGame(bool iniciarAutomaticamente) {
+
+    this->estados["game"] = new GameManager();
+
+    if (iniciarAutomaticamente)
+        this->setEstadoActual("game");
 }
 
 GameStatesManager::~GameStatesManager() {

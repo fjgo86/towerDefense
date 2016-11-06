@@ -30,11 +30,8 @@ Game::Game() {
     _textureManager = new TextureManager();
 	_spriteManager = new SpriteManager(_textureManager);
 
-    _game = new GameManager();
-    _menu = new MainMenuManager();
-
     _statesManager = new GameStatesManager();
-	_statesManager->setEstadoActual(_menu);
+	_statesManager->setEstadoActual("menu");
 }
 
 

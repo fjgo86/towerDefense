@@ -1,19 +1,32 @@
 #pragma once
-#include <deque>
+#include <map>
 
 #include "GameState.h"
 
-class GameStatesManager {
+class GameStatesManager {   
 private:
-    //std::stack<GameState*> estados;
-    std::deque<GameState*> estados;
+    std::map<std::string, GameState*> estados;
+    GameState* estadoActual;
 
 public:
 
+    /*
+    Método que se ejecuta solo la primera vez, para añadir los estados esenciales (menu, partida...)
+    */
+    void initEstados();
+    /*
+    Obtener el estado actual
+    */
     GameState* getEstadoActual();
-    void setEstadoActual(GameState* estado);
-
+    /*
+    Cambiar el estado actual
+    */
+    void setEstadoActual(std::string estado);
+    /*
+    Crear una partida nueva
+    */
+    void GameStatesManager::newGame(bool iniciarAutomaticamente = false);
+    
     GameStatesManager();
     ~GameStatesManager();
 };
-

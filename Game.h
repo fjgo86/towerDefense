@@ -11,9 +11,6 @@ public:
     Game();
     ~Game();
 
-	MainMenuManager* _menu;
-	GameManager* _game;
-
     GameStatesManager*	_statesManager;
     TextureManager*		_textureManager;
 	SpriteManager*		_spriteManager;

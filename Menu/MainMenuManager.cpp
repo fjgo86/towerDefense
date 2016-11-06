@@ -24,7 +24,7 @@ MainMenuManager::MainMenuManager() {
 
     fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
     texto.setFont(fuente);
-    texto.setPosition((float)(gGame._screenWidth / 2), (float)(gGame._screenWidth / 2)); // <--- Es correcto usar como Y Width en vez de Height ?
+    texto.setPosition((float)(gGame._screenWidth / 2), (float)(gGame._screenHeight * 0.8f)); // <--- Es correcto usar como Y Width en vez de Height ? NO, era una errata, y no se como estaba funcionando bien asi jaja
     texto.setString("PULSAR ESPACIO PARA CONTINUAR");
     texto.setOrigin(texto.getGlobalBounds().width / 2, texto.getGlobalBounds().height / 2);
 }
@@ -44,7 +44,12 @@ void MainMenuManager::handleInput() {
                     case sf::Keyboard::Space:        // pulsar SPACE para pasar al juego
                         if (backgroundMusic.getStatus() == backgroundMusic.Playing)
                             backgroundMusic.stop();
-                        gGame._statesManager->setEstadoActual(gGame._game);
+                        gGame._statesManager->setEstadoActual("game");
+                        break;
+                    case sf::Keyboard::N:        // pulsar N para iniciar una nueva partida
+                        if (backgroundMusic.getStatus() == backgroundMusic.Playing)
+                            backgroundMusic.stop();
+                        gGame._statesManager->newGame(true);
                         break;
                     default:
                         break;

@@ -19,7 +19,7 @@ void GameManager::handleInput() {
                 switch (event.key.code){
                     case sf::Keyboard::Escape:
                         //gGame.pGameWindow.close();
-                        gGame._statesManager->setEstadoActual(gGame._menu);
+                        gGame._statesManager->setEstadoActual("menu");
                         break;
                         
                     case sf::Keyboard::D:{        // pulsar D para crear y posicionar un dragon
