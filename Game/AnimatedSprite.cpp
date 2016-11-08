@@ -19,6 +19,7 @@ AnimatedSprite::AnimatedSprite(std::string nombre, const char * rutaImagen) {
     _speed = 0;
     _isStopped = false;
     _dir = DIR_N;
+	sfSprite.setTexture(*sfTexture);
 }
 
 AnimatedSprite::AnimatedSprite() {
@@ -59,7 +60,6 @@ void AnimatedSprite::draw() {
         getFacingDir() * sizeY,					// Multiplicando la dirección (que también representa cada fila de frames) actual por el tamaño de cada frame tenemos la posicion del primer pixel del frame a mostrar.
         sizeX,	// tamaño maximo del frame.
         sizeY);
-    sfSprite.setTexture(*sfTexture);
     sfSprite.setTextureRect(rectSourceSprite);
     gGame._gameWindow.draw(sfSprite);
 }

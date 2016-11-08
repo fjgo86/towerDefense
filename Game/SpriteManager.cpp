@@ -9,21 +9,21 @@ SpriteManager::SpriteManager(TextureManager* textureManager) {
 SpriteManager::~SpriteManager() {
 }
 
-sf::Sprite SpriteManager::loadFromTexture(std::string nombre, sf::Texture &textura) {
+sf::Sprite* SpriteManager::loadFromTexture(std::string nombre, sf::Texture &textura) {
 	if (exists(nombre))		// Si ya está cargada, se detiene el código.
 		return getRef(nombre);
 
 	sf::Sprite sprite(textura);
-	add(nombre, sprite);		// Añade el Sprite.
+	add(nombre, &sprite);		// Añade el Sprite.
 
 	return getRef(nombre);
 }
 
-void SpriteManager::add(std::string nombre, sf::Sprite sprite) {
+void SpriteManager::add(std::string nombre, sf::Sprite* sprite) {
 	(*this)[nombre] = sprite;
 }
 
-sf::Sprite SpriteManager::getRef(std::string sprite) {
+sf::Sprite* SpriteManager::getRef(std::string sprite) {
 	return (*this)[sprite];
 }
 

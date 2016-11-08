@@ -4,11 +4,13 @@
 
 class Grid {
 private:
-    Tile* _tile;    ///< Tile de terreno que hay en este Grid.
-    Unit* _unit;    ///< Unit que hay en este Grid.
+    Tile* _tile;		///< Tile de terreno que hay en este Grid.
+    Unit* _unit;		///< Unit que hay en este Grid.
+	bool _isBorderGrid;	///< Retorna si este Grid está en el borde del mapa o no.
 public:
-    unsigned int _posX; ///< Posición X de este Grid.
-    unsigned int _posY; ///< Posición Y de este Grid.
+    unsigned int _posX;		///< Posición X de este Grid.
+    unsigned int _posY;		///< Posición Y de este Grid.
+	bool isBorderGrid();	///< Devuelve _isBorderGrid;
     Grid(unsigned int x, unsigned int y, bool isBorderGrid);
     ~Grid();
 

@@ -6,12 +6,17 @@
 #include "../../Game.h"
 #include "Map.h"
 
+bool Grid::isBorderGrid() {
+	return _isBorderGrid;
+}
+
 Grid::Grid(unsigned int x, unsigned int y, bool isBorderGrid) {
     _posX = x;
     _posY = y;
     _unit = nullptr;
+	_isBorderGrid = isBorderGrid;
     _tile = new Tile();
-    _tile->attatchToGrid(this, isBorderGrid);
+    _tile->attatchToGrid(this);
 }
 
 Grid::~Grid() {
