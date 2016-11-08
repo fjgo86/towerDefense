@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "MainMenuManager.h"
-#include "UI/BotonMenu.h"
 
 #include "../Game.h"
 
@@ -50,17 +49,17 @@ void MainMenuManager::initMenu() {
     */
 
     for (int i = 0; i < Menu_QTY; i++) {
-        /*
-        BotonMenu* boton = new BotonMenu(
+        
+            botonesMenu[i] = new BotonMenu(
             Menu_Strings[i],
-            (gGame._screenWidth * 0.1),
-            ((gGame._screenHeight * 0.5) + (gGame._screenHeight * 0.1 * i)),
+            500,//(gGame._screenWidth * 0.1),
+            500,//((gGame._screenHeight * 0.5) + (gGame._screenHeight * 0.1 * i)),
             50.f,
             50.f);     // Coordenadas de origen del boton
-        */
-
+        
+        /*
         botonMenu[i] = sf::Text(Menu_Strings[i], this->fuente);
-        botonMenu[i].setPosition(gGame._screenWidth * 0.05, ((gGame._screenHeight * 0.8) + (botonMenu[i].getGlobalBounds().height * 1.5 * i)));
+        botonMenu[i].setPosition(gGame._screenWidth * 0.05, ((gGame._screenHeight * 0.8) + (botonMenu[i].getGlobalBounds().height * 1.5 * i)));*/
         //std::cout << Menu_Strings[i] << std::endl;
     }
 }
@@ -112,9 +111,20 @@ void MainMenuManager::onTick() {
 
     gGame._gameWindow.draw(logo);
     //gGame._gameWindow.draw(botonMusica);
-    for each(sf::Text boton in botonMenu) {
-        gGame._gameWindow.draw(boton);
+    //for each(sf::Text boton in botonMenu) {
+    for each (BotonMenu* boton in botonesMenu) {
+        
+        boton->setPosition(500.f, 500.f);
+        gGame._gameWindow.draw(*boton);
+        std::cout << boton->getText() << std::endl;
     }
+    /*
+    for (int i = 0; i < Menu_QTY; i++) {
+
+        gGame._gameWindow.draw(*botonesMenu[i]);
+        botonesMenu[i]->setPosition(500, 500);
+        std::cout << botonesMenu[i]->getText() << std::endl;
+    }*/
 }
 
 void MainMenuManager::update() {
