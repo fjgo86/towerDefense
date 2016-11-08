@@ -4,7 +4,6 @@
 #include "../Game/GameManager.h"
 #include "../Menu/MainMenuManager.h"
 
-
 GameStatesManager::GameStatesManager() {
 
     this->initEstados();

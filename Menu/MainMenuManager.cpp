@@ -1,32 +1,68 @@
 #include <iostream>
 
 #include "MainMenuManager.h"
+#include "UI/BotonMenu.h"
 
 #include "../Game.h"
 
 MainMenuManager::MainMenuManager() {
 
+    fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
+
+    this->initMusic();
+    this->initMenu();
+}
+
+void loadTextures() {
+
+    gGame._textureManager->loadFromFile("logoMenu", "media/logos/logo.png");
+}
+
+void MainMenuManager::initMusic() {
+
     if (!backgroundMusic.openFromFile("media/music/mainMenu.flac"))
         std::cout << "Error cargando la musica de fondo." << std::endl;
-    backgroundMusic.setVolume(20.0f);
-    
+    backgroundMusic.setVolume(0.5f);
+    backgroundMusic.setLoop(true);
+
     if (backgroundMusic.getStatus() == backgroundMusic.Stopped)
         backgroundMusic.play();
-        //std::cout << "Reproduciendo musica" << std::endl;
+    //std::cout << "Reproduciendo musica" << std::endl;
+}
 
-    if (!logoTex.loadFromFile("media/logos/logo.png"))
-        std::cout << "Error cargando la textura del logo." << std::endl;
+void MainMenuManager::initMenu() {
 
-    logo.setTexture(logoTex);
-    logo.setPosition((float)(gGame._screenWidth / 2), (float)gGame._screenHeight * 0.2f);
+    loadTextures();
+
+    // Logo principal del juego
+    logo.setTexture(*gGame._textureManager->getRef("logoMenu"));
+    logo.setPosition((float)gGame._screenWidth / 2, (float)gGame._screenHeight * 0.2f);
     logo.setOrigin(logo.getGlobalBounds().width / 2, logo.getGlobalBounds().height / 2);
     logo.setColor(sf::Color(255, 255, 255, this->alphaLogo));
 
+    /*
+    // Texto en la parte baja de la pantalla (PROVISIONAL)
     fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
     texto.setFont(fuente);
     texto.setPosition((float)(gGame._screenWidth / 2), (float)(gGame._screenHeight * 0.8f)); // <--- Es correcto usar como Y Width en vez de Height ? NO, era una errata, y no se como estaba funcionando bien asi jaja
     texto.setString("PULSAR ESPACIO PARA CONTINUAR");
     texto.setOrigin(texto.getGlobalBounds().width / 2, texto.getGlobalBounds().height / 2);
+    */
+
+    for (int i = 0; i < Menu_QTY; i++) {
+        /*
+        BotonMenu* boton = new BotonMenu(
+            Menu_Strings[i],
+            (gGame._screenWidth * 0.1),
+            ((gGame._screenHeight * 0.5) + (gGame._screenHeight * 0.1 * i)),
+            50.f,
+            50.f);     // Coordenadas de origen del boton
+        */
+
+        botonMenu[i] = sf::Text(Menu_Strings[i], this->fuente);
+        botonMenu[i].setPosition(gGame._screenWidth * 0.05, ((gGame._screenHeight * 0.8) + (botonMenu[i].getGlobalBounds().height * 1.5 * i)));
+        //std::cout << Menu_Strings[i] << std::endl;
+    }
 }
 
 void MainMenuManager::handleInput() {
@@ -75,7 +111,10 @@ void MainMenuManager::onTick() {
     this->update();
 
     gGame._gameWindow.draw(logo);
-    gGame._gameWindow.draw(texto);
+    //gGame._gameWindow.draw(botonMusica);
+    for each(sf::Text boton in botonMenu) {
+        gGame._gameWindow.draw(boton);
+    }
 }
 
 void MainMenuManager::update() {

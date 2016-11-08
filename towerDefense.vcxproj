@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Menu\UI\BotonMenu.h" />
     <ClInclude Include="GameState\GameState.h" />
     <ClInclude Include="GameState\GameStatesManager.h" />
     <ClInclude Include="Game\ColectorBasura.h" />
@@ -39,6 +40,7 @@
     <ClInclude Include="Game\SpriteManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Menu\UI\BotonMenu.cpp" />
     <ClCompile Include="GameState\GameState.cpp" />
     <ClCompile Include="GameState\GameStatesManager.cpp" />
     <ClCompile Include="Game\ColectorBasura.cpp" />
