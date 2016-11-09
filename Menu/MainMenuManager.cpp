@@ -39,28 +39,14 @@ void MainMenuManager::initMenu() {
     logo.setOrigin(logo.getGlobalBounds().width / 2, logo.getGlobalBounds().height / 2);
     logo.setColor(sf::Color(255, 255, 255, this->alphaLogo));
 
-    /*
-    // Texto en la parte baja de la pantalla (PROVISIONAL)
-    fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
-    texto.setFont(fuente);
-    texto.setPosition((float)(gGame._screenWidth / 2), (float)(gGame._screenHeight * 0.8f)); // <--- Es correcto usar como Y Width en vez de Height ? NO, era una errata, y no se como estaba funcionando bien asi jaja
-    texto.setString("PULSAR ESPACIO PARA CONTINUAR");
-    texto.setOrigin(texto.getGlobalBounds().width / 2, texto.getGlobalBounds().height / 2);
-    */
-
     for (int i = 0; i < Menu_QTY; i++) {
         
-            botonesMenu[i] = new BotonMenu(
+            botonesMenu[i] = BotonMenu(
             Menu_Strings[i],
-            500,//(gGame._screenWidth * 0.1),
-            500,//((gGame._screenHeight * 0.5) + (gGame._screenHeight * 0.1 * i)),
+            500,
+            500,
             50.f,
-            50.f);     // Coordenadas de origen del boton
-        
-        /*
-        botonMenu[i] = sf::Text(Menu_Strings[i], this->fuente);
-        botonMenu[i].setPosition(gGame._screenWidth * 0.05, ((gGame._screenHeight * 0.8) + (botonMenu[i].getGlobalBounds().height * 1.5 * i)));*/
-        //std::cout << Menu_Strings[i] << std::endl;
+            50.f);
     }
 }
 
@@ -111,20 +97,14 @@ void MainMenuManager::onTick() {
 
     gGame._gameWindow.draw(logo);
     //gGame._gameWindow.draw(botonMusica);
-    //for each(sf::Text boton in botonMenu) {
-    for each (BotonMenu* boton in botonesMenu) {
-        
-        boton->setPosition(500.f, 500.f);
-        gGame._gameWindow.draw(*boton);
-        std::cout << boton->getText() << std::endl;
-    }
-    /*
-    for (int i = 0; i < Menu_QTY; i++) {
 
-        gGame._gameWindow.draw(*botonesMenu[i]);
-        botonesMenu[i]->setPosition(500, 500);
-        std::cout << botonesMenu[i]->getText() << std::endl;
-    }*/
+    for each (BotonMenu boton in botonesMenu) {
+        
+        boton.setPosition(500.f, 500.f);
+        gGame._gameWindow.draw(boton);
+        std::cout << "Boton X: " << boton.getPosition().x << std::endl;
+        std::cout << "Boton Y: " << boton.getPosition().y << std::endl;
+    }
 }
 
 void MainMenuManager::update() {

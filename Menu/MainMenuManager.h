@@ -20,9 +20,8 @@ enum Menu {
 class MainMenuManager : public GameState {
 private:
     sf::Font fuente;
-    sf::Text botonMenu[3];
 
-    BotonMenu* botonesMenu[3];
+    BotonMenu botonesMenu[3];
 
     sf::Sprite logo, botonMusica;
     sf::Uint8 alphaLogo = 0;
