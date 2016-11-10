@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
@@ -23,7 +25,7 @@ private:
 
     BotonMenu botonesMenu[3];
 
-    sf::Sprite logo, botonMusica;
+    sf::Sprite logo;
     sf::Uint8 alphaLogo = 0;
     float scaleLogo = 1;
     sf::Music backgroundMusic;

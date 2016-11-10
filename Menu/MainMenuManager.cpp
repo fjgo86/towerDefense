@@ -43,10 +43,10 @@ void MainMenuManager::initMenu() {
         
             botonesMenu[i] = BotonMenu(
             Menu_Strings[i],
-            500,
-            500,
-            50.f,
-            50.f);
+            fuente);
+
+            botonesMenu[i].setPosition(gGame._screenWidth * 0.05f,
+                                      (gGame._screenHeight * 0.8) + (botonesMenu[i].getBounds().height * i * 1.5));
     }
 }
 
@@ -89,6 +89,12 @@ void MainMenuManager::handleInput() {
 				break;
         }
     }
+
+    /*
+    Actualiza los estados de los botones
+    */
+    for each (BotonMenu boton in botonesMenu)
+        boton.update(event, gGame._gameWindow);
 }
 
 void MainMenuManager::onTick() {
@@ -96,15 +102,9 @@ void MainMenuManager::onTick() {
     this->update();
 
     gGame._gameWindow.draw(logo);
-    //gGame._gameWindow.draw(botonMusica);
 
-    for each (BotonMenu boton in botonesMenu) {
-        
-        boton.setPosition(500.f, 500.f);
+    for each (BotonMenu boton in botonesMenu)
         gGame._gameWindow.draw(boton);
-        std::cout << "Boton X: " << boton.getPosition().x << std::endl;
-        std::cout << "Boton Y: " << boton.getPosition().y << std::endl;
-    }
 }
 
 void MainMenuManager::update() {
