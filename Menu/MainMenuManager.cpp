@@ -12,7 +12,7 @@ MainMenuManager::MainMenuManager() {
     this->initMenu();
 }
 
-void loadTextures() {
+void MainMenuManager::loadTextures() {
 
     gGame._textureManager->loadFromFile("logoMenu", "media/logos/logo.png");
 }
@@ -31,7 +31,7 @@ void MainMenuManager::initMusic() {
 
 void MainMenuManager::initMenu() {
 
-    loadTextures();
+    this->loadTextures();
 
     // Logo principal del juego
     logo.setTexture(*gGame._textureManager->getRef("logoMenu"));
@@ -39,14 +39,14 @@ void MainMenuManager::initMenu() {
     logo.setOrigin(logo.getGlobalBounds().width / 2, logo.getGlobalBounds().height / 2);
     logo.setColor(sf::Color(255, 255, 255, this->alphaLogo));
 
-    for (int i = 0; i < Menu_QTY; i++) {
-        
-            botonesMenu[i] = BotonMenu(
-            Menu_Strings[i],
-            fuente);
-
-            botonesMenu[i].setPosition(gGame._screenWidth * 0.05f,
-                                      (gGame._screenHeight * 0.8) + (botonesMenu[i].getBounds().height * i * 1.5));
+    sf::Vector2f pos = sf::Vector2f(gGame._screenWidth * 0.05f, gGame._screenHeight * 0.9f);
+    for (int i = Menu_QTY - 1; i >= 0; i--) {
+            
+            // Creamos los botones, obtenemos el tamaño del texto
+            // una vez creados, y los posicionamos en relacion a esto
+            botonesMenu[i] = BotonMenu(Menu_Strings[i], fuente);
+            botonesMenu[i].setPosition(pos);
+            botonesMenu[i].setType(i);
     }
 }
 
@@ -63,13 +63,11 @@ void MainMenuManager::handleInput() {
                         gGame._gameWindow.close();
                         break;
                     case sf::Keyboard::Space:        // pulsar SPACE para pasar al juego
-                        if (backgroundMusic.getStatus() == backgroundMusic.Playing)
-                            backgroundMusic.stop();
+                        this->manageBackgroundMusic();
                         gGame._statesManager->setEstadoActual("game");
                         break;
                     case sf::Keyboard::N:        // pulsar N para iniciar una nueva partida
-                        if (backgroundMusic.getStatus() == backgroundMusic.Playing)
-                            backgroundMusic.stop();
+                        this->manageBackgroundMusic();
                         gGame._statesManager->newGame(true);
                         break;
                     default:
@@ -90,30 +88,64 @@ void MainMenuManager::handleInput() {
         }
     }
 
-    /*
-    Actualiza los estados de los botones
-    */
-    for each (BotonMenu boton in botonesMenu)
-        boton.update(event, gGame._gameWindow);
+    // Llamada al método para realizar cambios,
+    // con una referencia a los eventos por si fuera necesario
+    this->update(event);
 }
 
 void MainMenuManager::onTick() {
 
-    this->update();
-
     gGame._gameWindow.draw(logo);
 
-    for each (BotonMenu boton in botonesMenu)
-        gGame._gameWindow.draw(boton);
+    for (int i = 0; i < Menu_QTY; i++) {
+        gGame._gameWindow.draw(botonesMenu[i]);
+    }
 }
 
-void MainMenuManager::update() {
+void MainMenuManager::update(sf::Event &event) {
 
+    /*
+    Actualiza los estados de los botones
+    */
+    for (int i = 0; i < Menu_QTY; i++) {
+        botonesMenu[i].update(event, gGame._gameWindow);
+        
+        if (botonesMenu[i].getState() == BotonMenu::state::clicked) {
+
+            botonesMenu[i].setState(BotonMenu::state::normal);
+
+            switch (botonesMenu[i].getType()) {
+                case Nueva_Partida:
+                    this->manageBackgroundMusic();
+                    gGame._statesManager->newGame(true);
+                    break;
+                case Opciones:
+                    std::cout << "TODO: Pasar a pantalla de opciones" << std::endl;
+                    break;
+                case Salir:
+                    gGame._gameWindow.close();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    /*
+    Transformaciones visuales en el logo
+    */
     if (this->alphaLogo < 255)
         logo.setColor(sf::Color(255, 255, 255, this->alphaLogo++));
 
     if ((this->scaleLogo += 0.01f) < 1.5f)
         logo.setScale(this->scaleLogo, this->scaleLogo);
+}
+
+void MainMenuManager::manageBackgroundMusic() {
+
+    // De momento solo para la musica.
+    if (backgroundMusic.getStatus() == backgroundMusic.Playing)
+        backgroundMusic.stop();
 }
 
 MainMenuManager::~MainMenuManager() {

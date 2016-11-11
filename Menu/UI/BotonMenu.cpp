@@ -12,6 +12,11 @@ BotonMenu::BotonMenu(std::string texto, sf::Font &font) {
     this->crearBoton(texto, font, sf::Vector2f(0.f, 0.f), sf::Vector2f(0.f, 0.f));
 }
 
+BotonMenu::BotonMenu(std::string texto, sf::Font &font, sf::Vector2f posicion) {
+
+    this->crearBoton(texto, font, posicion, sf::Vector2f(0.f, 0.f));
+}
+
 BotonMenu::BotonMenu(std::string texto, sf::Font &font, sf::Vector2f posicion, sf::Vector2f origen) {
 
     this->crearBoton(texto, font, posicion, origen);
@@ -38,9 +43,30 @@ void BotonMenu::setPosition(float x, float y) {
     _texto.setPosition(x, y);
 }
 
+void BotonMenu::setPosition(sf::Vector2f &pos) {
+
+    _texto.setPosition(pos);
+    pos.y -= getBounds().height * 1.5;
+}
+
 void BotonMenu::setOrigin(float x, float y) {
 
     _texto.setOrigin(x, y);
+}
+
+void BotonMenu::setText(std::string texto) {
+
+    _texto.setString(texto);
+}
+
+void BotonMenu::setState(short estado) {
+
+    _buttonState = estado;
+}
+
+void BotonMenu::setType(short tipo) {
+
+    _type = tipo;
 }
 
 sf::Vector2f BotonMenu::getPosition() {
@@ -68,14 +94,23 @@ short BotonMenu::getState() {
     return _buttonState;
 }
 
+short BotonMenu::getType() {
+
+    return _type;
+}
+
+bool BotonMenu::isVisible() {
+
+    return 1;
+}
+
 void BotonMenu::update(sf::Event &e, sf::Window &window) {
 
-    //sf::Vector2i _mousePosition = sf::Mouse::getPosition(window);
     sf::Vector2f _mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window));
     bool mouseHover = this->getBounds().contains(_mousePosition);
 
     if (e.type == sf::Event::MouseMoved)
-        _buttonState = (mouseHover) ? state::hover : state::normal;
+        _buttonState = (mouseHover) ? state::hover : state::normal; 
 
     if ((e.type == sf::Event::MouseButtonPressed) && (e.mouseButton.button == sf::Mouse::Left))
         _buttonState = (mouseHover) ? state::clicked : state::normal;
@@ -87,27 +122,22 @@ void BotonMenu::update(sf::Event &e, sf::Window &window) {
 
         case (state::normal): {
 
-            _texto.setFillColor(sf::Color::Blue);
-            _texto.setPosition(0, 200);
+            _texto.setFillColor(sf::Color::White);
             break;
         }
         case (state::hover): {
 
             _texto.setFillColor(sf::Color::Red);
-            _texto.setPosition(0, 500);
             break;
         }
         case (state::clicked): {
 
-            //_texto.setFillColor(sf::Color::Green);
-            gGame._gameWindow.close();
+            _texto.setFillColor(sf::Color::Green);
             break;
         }
         default:
             break;
     }
-
-    std::cout << "_buttonState: " << _buttonState << std::endl;
 }
 
 void BotonMenu::draw(sf::RenderTarget& target, sf::RenderStates states) const {
