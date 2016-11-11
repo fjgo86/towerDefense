@@ -7,6 +7,7 @@
 GameStatesManager::GameStatesManager() {
 
     this->initEstados();
+	_gameStarted = false;
 }
 
 void GameStatesManager::initEstados() {
@@ -31,8 +32,24 @@ void GameStatesManager::newGame(bool iniciarAutomaticamente) {
 
     this->estados["game"] = new GameManager();
 
-    if (iniciarAutomaticamente)
-        this->setEstadoActual("game");
+	if (iniciarAutomaticamente) {
+
+		this->setEstadoActual("game");
+		_gameStarted = true;
+	}  
+}
+
+void GameStatesManager::endGame() {
+
+	if (_gameStarted) {
+
+		this->estados.erase("game");
+	}
+}
+
+bool GameStatesManager::isGameStarted() {
+
+	return _gameStarted;	
 }
 
 GameStatesManager::~GameStatesManager() {

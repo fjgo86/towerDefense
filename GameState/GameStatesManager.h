@@ -7,6 +7,7 @@ class GameStatesManager {
 private:
     std::map<std::string, GameState*> estados;
     GameState* estadoActual;
+	bool _gameStarted;
 
 public:
 
@@ -25,8 +26,16 @@ public:
     /*
     Crear una partida nueva
     */
-    void GameStatesManager::newGame(bool iniciarAutomaticamente = false);
-    
+    void newGame(bool iniciarAutomaticamente = true);
+	/*
+	Finaliza la partida existente
+	*/
+	void endGame();
+    /*
+	Comprobar si hay una partida existente
+	*/
+	bool isGameStarted();
+
     GameStatesManager();
     ~GameStatesManager();
 };

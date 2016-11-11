@@ -68,7 +68,7 @@ void MainMenuManager::handleInput() {
                         break;
                     case sf::Keyboard::N:        // pulsar N para iniciar una nueva partida
                         this->manageBackgroundMusic();
-                        gGame._statesManager->newGame(true);
+                        gGame._statesManager->newGame();
                         break;
                     default:
                         break;
@@ -117,7 +117,7 @@ void MainMenuManager::update(sf::Event &event) {
             switch (botonesMenu[i].getType()) {
                 case Nueva_Partida:
                     this->manageBackgroundMusic();
-                    gGame._statesManager->newGame(true);
+                    gGame._statesManager->newGame();
                     break;
                 case Opciones:
                     std::cout << "TODO: Pasar a pantalla de opciones" << std::endl;
