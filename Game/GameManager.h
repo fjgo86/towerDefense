@@ -10,6 +10,8 @@
 */
 class GameManager : public GameState {
 private:
+    bool _gameStarted;       ///< bool que indica si hay una partida en curso
+
     UnitManager* listadoEnemigos;	///< Lista (std::vector) de los enemigos.
     UnitManager* listadoTorres;		///< Lista (std::vector) de las torres.
     ColectorBasura* gbcEnemigos;	///< Recolector de basura para los enemigos.
@@ -22,10 +24,16 @@ private:
     float timeCount;                ///< Contador de ticks, ya que el reloj se resetea en cada onTick se lleva aquí la cuenta de ticks para saber cuando ha pasado un segundo.
     sf::Clock clock;                ///< Reloj del programa.
 
+    void setGameStarted(bool started); ///< Cambia el estado de la propiedad _gameStarted
+
 public:
-    GameManager();
-    ~GameManager();
+    
     void onTick();
     void handleInput();
+
+    bool getGameStarted();          ///< Devuelve true si hay una partida en curso
+
+    GameManager();
+    ~GameManager();
 };
 

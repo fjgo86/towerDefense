@@ -68,7 +68,7 @@ GameManager::GameManager() {
     gbcTorres = new ColectorBasura();
     mapa = new Map();
     
-    //listadoEnemigos->push_back(new Dragon());
+    setGameStarted(true);
 }
 
 
@@ -77,6 +77,8 @@ GameManager::~GameManager() {
     delete listadoTorres;
     delete gbcEnemigos;
     delete gbcTorres;
+
+    setGameStarted(false);
 }
 
 void GameManager::onTick() {
@@ -168,4 +170,14 @@ void GameManager::addTextoMousePos() {
     textCoordsRaton.setPosition((float)gGame._screenWidth - 150.0f, 35.0f);
 
     gGame._gameWindow.draw(textCoordsRaton);
+}
+
+bool GameManager::getGameStarted() {
+
+    return _gameStarted;
+}
+
+void GameManager::setGameStarted(bool started) {
+
+    _gameStarted = started;
 }

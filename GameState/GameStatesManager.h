@@ -27,10 +27,6 @@ public:
     Crear una partida nueva
     */
     void newGame(bool iniciarAutomaticamente = true);
-	/*
-	Finaliza la partida existente
-	*/
-	void endGame();
     /*
 	Comprobar si hay una partida existente
 	*/

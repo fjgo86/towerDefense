@@ -6,8 +6,7 @@
 
 GameStatesManager::GameStatesManager() {
 
-    this->initEstados();
-	_gameStarted = false;
+    _gameStarted = false;
 }
 
 void GameStatesManager::initEstados() {
@@ -30,27 +29,23 @@ void GameStatesManager::setEstadoActual(std::string estado) {
 
 void GameStatesManager::newGame(bool iniciarAutomaticamente) {
 
+    // TODO: Comprobar que no se hace un delete null
+    delete this->estados["game"];
     this->estados["game"] = new GameManager();
 
 	if (iniciarAutomaticamente) {
 
 		this->setEstadoActual("game");
 		_gameStarted = true;
-	}  
-}
-
-void GameStatesManager::endGame() {
-
-	if (_gameStarted) {
-
-		this->estados.erase("game");
 	}
 }
 
 bool GameStatesManager::isGameStarted() {
 
-	return _gameStarted;	
+    GameManager* game = (GameManager*)this->estados["game"];
+    return game->getGameStarted();
 }
 
 GameStatesManager::~GameStatesManager() {
+    std::cout << "Destructor de GameStatesManager" << std::endl;
 }

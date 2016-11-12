@@ -100,6 +100,8 @@ void MainMenuManager::onTick() {
     for (int i = 0; i < Menu_QTY; i++) {
         gGame._gameWindow.draw(botonesMenu[i]);
     }
+
+    std::cout << gGame._statesManager->isGameStarted() << std::endl;
 }
 
 void MainMenuManager::update(sf::Event &event) {
