@@ -21,6 +21,12 @@ public:
         Menu_QTY
     };
 
+    /*
+    Método para gestionar la musica de fondo. TODO: QUE HAGA MAS COSAS
+    action { 0 = stop, 1 = play, 2 = pause }
+    */
+    void manageBackgroundMusic(short action);
+    
     MainMenuManager();
     ~MainMenuManager();
 
@@ -30,9 +36,10 @@ public:
 private:
     sf::Font fuente;
 
-    sf::Sprite logo;
+    sf::Shader backgroundShader;
+    sf::Sprite background, logo;
     sf::Uint8 alphaLogo = 0;
-    float scaleLogo = 1;
+    float scaleLogo = 1, t = 0.f;
     sf::Music backgroundMusic;
 
     BotonMenu botonesMenu[Menu_QTY];
@@ -58,8 +65,4 @@ private:
     Método para iniciar la música de fondo
     */
     void initMusic();
-    /*
-    Método para gestionar la musica de fondo. TODO: QUE HAGA MAS COSAS
-    */
-    void manageBackgroundMusic();
 };

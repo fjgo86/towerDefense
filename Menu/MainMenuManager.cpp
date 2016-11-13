@@ -15,6 +15,22 @@ MainMenuManager::MainMenuManager() {
 void MainMenuManager::loadTextures() {
 
     gGame._textureManager->loadFromFile("logoMenu", "media/logos/logo.png");
+    gGame._textureManager->loadFromFile("background", "media/background.jpg");
+
+    if (sf::Shader::isAvailable()) {
+
+        if (!backgroundShader.loadFromFile("media/shaders/clouds.frag", sf::Shader::Fragment)) {
+
+            std::cout << "Error cargando el shader de fondo en el menu principal." << std::endl;
+
+        }
+        else {
+
+            backgroundShader.setUniform("resolution", sf::Glsl::Vec2(gGame._screenWidth, gGame._screenHeight));
+            //background.setTextureRect(sf::IntRect(0, 0, gGame._screenWidth, gGame._screenHeight));
+            background.setTexture(*gGame._textureManager->getRef("background"));
+        }
+    }
 }
 
 void MainMenuManager::initMusic() {
@@ -63,11 +79,11 @@ void MainMenuManager::handleInput() {
                         gGame._gameWindow.close();
                         break;
                     case sf::Keyboard::Space:        // pulsar SPACE para pasar al juego
-                        this->manageBackgroundMusic();
+                        this->manageBackgroundMusic(0);
                         gGame._statesManager->setEstadoActual("game");
                         break;
                     case sf::Keyboard::N:        // pulsar N para iniciar una nueva partida
-                        this->manageBackgroundMusic();
+                        this->manageBackgroundMusic(0);
                         gGame._statesManager->newGame();
                         break;
                     default:
@@ -95,13 +111,12 @@ void MainMenuManager::handleInput() {
 
 void MainMenuManager::onTick() {
 
+    gGame._gameWindow.draw(background, &backgroundShader);
     gGame._gameWindow.draw(logo);
 
     for (int i = 0; i < Menu_QTY; i++) {
         gGame._gameWindow.draw(botonesMenu[i]);
     }
-
-    std::cout << gGame._statesManager->isGameStarted() << std::endl;
 }
 
 void MainMenuManager::update(sf::Event &event) {
@@ -112,13 +127,18 @@ void MainMenuManager::update(sf::Event &event) {
     for (int i = 0; i < Menu_QTY; i++) {
         botonesMenu[i].update(event, gGame._gameWindow);
         
+        if (botonesMenu[i].getState() == BotonMenu::state::hover) {
+
+            
+        }
+
         if (botonesMenu[i].getState() == BotonMenu::state::clicked) {
 
             botonesMenu[i].setState(BotonMenu::state::normal);
 
             switch (botonesMenu[i].getType()) {
                 case Nueva_Partida:
-                    this->manageBackgroundMusic();
+                    this->manageBackgroundMusic(0);
                     gGame._statesManager->newGame();
                     break;
                 case Opciones:
@@ -133,6 +153,9 @@ void MainMenuManager::update(sf::Event &event) {
         }
     }
 
+    // Este parametro controla la velocidad de movimiento de las nubes
+    backgroundShader.setUniform("time", t += 0.5f);
+
     /*
     Transformaciones visuales en el logo
     */
@@ -143,11 +166,28 @@ void MainMenuManager::update(sf::Event &event) {
         logo.setScale(this->scaleLogo, this->scaleLogo);
 }
 
-void MainMenuManager::manageBackgroundMusic() {
+/*
+Método para gestionar la musica de fondo.
+action { 0 = stop, 1 = play, 2 = pause }
+*/
+void MainMenuManager::manageBackgroundMusic(short action) {
 
-    // De momento solo para la musica.
-    if (backgroundMusic.getStatus() == backgroundMusic.Playing)
-        backgroundMusic.stop();
+    switch (action) {
+        case 0:
+            if (backgroundMusic.getStatus() == backgroundMusic.Playing)
+                backgroundMusic.stop();
+            break;
+        case 1:
+            if (backgroundMusic.getStatus() == backgroundMusic.Stopped || backgroundMusic.Paused)
+                backgroundMusic.play();
+            break;
+        case 2:
+            if (backgroundMusic.getStatus() == backgroundMusic.Playing)
+                backgroundMusic.pause();
+            break;
+        default:
+            break;
+    }
 }
 
 MainMenuManager::~MainMenuManager() {

@@ -6,7 +6,6 @@
 #include "../Game.h"
 #include "Units/Enemigos/Dragon.h"
 #include "Units/Torres/Torre1.h"
-#include "../Menu/MainMenuManager.h"
 
 void GameManager::handleInput() {
     sf::Event event;
@@ -18,7 +17,6 @@ void GameManager::handleInput() {
             case sf::Event::KeyReleased: {
                 switch (event.key.code){
                     case sf::Keyboard::Escape:
-                        //gGame.pGameWindow.close();
                         gGame._statesManager->setEstadoActual("menu");
                         break;
                         
