@@ -35,7 +35,6 @@ Game::Game() {
 	_statesManager->setEstadoActual("menu");
 }
 
-
 Game::~Game(){
     delete _textureManager;
 	delete _statesManager;

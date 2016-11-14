@@ -21,4 +21,3 @@ public:
 
     void onTick();			///< Método que se encarga de gestionar el paso del tiempo en el juego.
 } gGame;
-
