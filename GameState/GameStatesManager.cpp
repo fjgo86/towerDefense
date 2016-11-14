@@ -47,5 +47,4 @@ bool GameStatesManager::isGameStarted() {
 }
 
 GameStatesManager::~GameStatesManager() {
-    std::cout << "Destructor de GameStatesManager" << std::endl;
 }

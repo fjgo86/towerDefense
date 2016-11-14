@@ -42,12 +42,16 @@ private:
     float scaleLogo = 1, t = 0.f;
     sf::Music backgroundMusic;
 
+    sf::View viewBackground, viewLobby;
+
     BotonMenu botonesMenu[Menu_QTY];
     std::string Menu_Strings[Menu_QTY] = {
         "Nueva Partida",
         "Opciones",
         "Salir"
     };
+
+    void moveLobby();
 
     /*
     Método para cargar las texturas necesarias
@@ -60,7 +64,7 @@ private:
     /*
     Método que carga las texturas, fuentes, botones... y los coloca
     */
-    void initMenu();
+    void initLobby();
     /*
     Método para iniciar la música de fondo
     */

@@ -8,8 +8,13 @@ MainMenuManager::MainMenuManager() {
 
     fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
 
-    this->initMusic();
-    this->initMenu();
+    viewBackground = sf::View(sf::Vector2f(gGame._screenWidth / 2, gGame._screenHeight / 2),
+      sf::Vector2f(gGame._screenWidth, gGame._screenHeight));
+
+    viewLobby = sf::View(sf::Vector2f(gGame._screenWidth * 1.5, gGame._screenHeight / 2),
+        sf::Vector2f(gGame._screenWidth, gGame._screenHeight));
+    
+    this->initLobby();
 }
 
 void MainMenuManager::loadTextures() {
@@ -22,12 +27,10 @@ void MainMenuManager::loadTextures() {
         if (!backgroundShader.loadFromFile("media/shaders/clouds.frag", sf::Shader::Fragment)) {
 
             std::cout << "Error cargando el shader de fondo en el menu principal." << std::endl;
-
         }
         else {
 
             backgroundShader.setUniform("resolution", sf::Glsl::Vec2(gGame._screenWidth, gGame._screenHeight));
-            //background.setTextureRect(sf::IntRect(0, 0, gGame._screenWidth, gGame._screenHeight));
             background.setTexture(*gGame._textureManager->getRef("background"));
         }
     }
@@ -45,9 +48,10 @@ void MainMenuManager::initMusic() {
     //std::cout << "Reproduciendo musica" << std::endl;
 }
 
-void MainMenuManager::initMenu() {
+void MainMenuManager::initLobby() {
 
     this->loadTextures();
+    this->initMusic();
 
     // Logo principal del juego
     logo.setTexture(*gGame._textureManager->getRef("logoMenu"));
@@ -55,7 +59,8 @@ void MainMenuManager::initMenu() {
     logo.setOrigin(logo.getGlobalBounds().width / 2, logo.getGlobalBounds().height / 2);
     logo.setColor(sf::Color(255, 255, 255, this->alphaLogo));
 
-    sf::Vector2f pos = sf::Vector2f(gGame._screenWidth * 0.05f, gGame._screenHeight * 0.9f);
+    sf::Vector2f pos = sf::Vector2f(viewLobby.getViewport().width * 0.05f, viewLobby.getViewport().height * 0.9f);
+
     for (int i = Menu_QTY - 1; i >= 0; i--) {
             
             // Creamos los botones, obtenemos el tamaño del texto
@@ -86,6 +91,9 @@ void MainMenuManager::handleInput() {
                         this->manageBackgroundMusic(0);
                         gGame._statesManager->newGame();
                         break;
+                    case sf::Keyboard::Return:
+                        moveLobby();
+                        break;
                     default:
                         break;
                 }
@@ -109,11 +117,23 @@ void MainMenuManager::handleInput() {
     this->update(event);
 }
 
+void MainMenuManager::moveLobby() {
+
+    std::cout << "button pos x: " << botonesMenu[0].getPosition().x << std::endl;
+    std::cout << "button pos y: " << botonesMenu[0].getPosition().y << std::endl;
+    //viewLobby.move(1, 0);
+    //viewLobby.setCenter(gGame._screenWidth / 2, gGame._screenHeight / 2);
+}
+
 void MainMenuManager::onTick() {
 
+    // Vista con el fondo y el logo
+    gGame._gameWindow.setView(viewBackground);
     gGame._gameWindow.draw(background, &backgroundShader);
     gGame._gameWindow.draw(logo);
 
+    // Vista con los botones del menu
+    gGame._gameWindow.setView(viewLobby);
     for (int i = 0; i < Menu_QTY; i++) {
         gGame._gameWindow.draw(botonesMenu[i]);
     }
@@ -122,15 +142,10 @@ void MainMenuManager::onTick() {
 void MainMenuManager::update(sf::Event &event) {
 
     /*
-    Actualiza los estados de los botones
+    Actualiza los botones
     */
     for (int i = 0; i < Menu_QTY; i++) {
         botonesMenu[i].update(event, gGame._gameWindow);
-        
-        if (botonesMenu[i].getState() == BotonMenu::state::hover) {
-
-            
-        }
 
         if (botonesMenu[i].getState() == BotonMenu::state::clicked) {
 
@@ -155,6 +170,12 @@ void MainMenuManager::update(sf::Event &event) {
 
     // Este parametro controla la velocidad de movimiento de las nubes
     backgroundShader.setUniform("time", t += 0.5f);
+
+    if (viewLobby.getCenter().x > (gGame._screenWidth / 2)) {
+
+        //std::cout << "ejecutando if - view.x = " << viewLobby.getCenter().x << std::endl;
+        //viewLobby.move(-5, 0);
+    }
 
     /*
     Transformaciones visuales en el logo
