@@ -64,15 +64,14 @@ void MainMenuManager::initMusic() {
 void MainMenuManager::initLobby() {
 
     this->loadTextures();
-    this->initMusic();
+    //this->initMusic();
 
     // Logo principal del juego
     logo.setTexture(*gGame._textureManager->getRef("logoMenu"));
     logo.setPosition((float)gGame._screenWidth / 2, (float)gGame._screenHeight * 0.2f);
     logo.setOrigin(logo.getGlobalBounds().width / 2, logo.getGlobalBounds().height / 2);
-    logo.setColor(sf::Color(255, 255, 255, this->alphaLogo));
+    logo.setScale(1.5f, 1.5f);
 
-    //sf::Vector2f pos = sf::Vector2f(viewLobby.getViewport().width * 0.05f, viewLobby.getViewport().height * 0.9f);
     sf::Vector2f pos = sf::Vector2f(gGame._screenWidth * 0.05f, gGame._screenHeight * 0.9f);
 
     for (int i = Menu_QTY - 1; i >= 0; i--) {
@@ -83,6 +82,8 @@ void MainMenuManager::initLobby() {
             botonesMenu[i].setPosition(pos);
             botonesMenu[i].setType(i);
     }
+
+    //this->moveLobby();
 }
 
 void MainMenuManager::handleInput() {
@@ -112,16 +113,6 @@ void MainMenuManager::handleInput() {
                         break;
                 }
                 break;
-            case sf::Event::KeyPressed:
-                switch (event.key.code) {
-                    case sf::Keyboard::Left:
-                        posX--;
-                        break;
-                    case sf::Keyboard::Right:
-                        posX++;
-                        break;
-                }
-                break;
             case sf::Event::MouseButtonPressed:
                 switch (event.mouseButton.button) {
 					case sf::Mouse::Left:
@@ -144,7 +135,7 @@ void MainMenuManager::handleInput() {
 
 void MainMenuManager::moveLobby() {
 
-    viewLobby.move(5, 0);
+    viewLobby.move(1, 0);
 }
 
 void MainMenuManager::onTick() {
@@ -201,22 +192,11 @@ void MainMenuManager::update(sf::Event &event) {
     // Centra el lobby en la pantalla
     if ((viewLobby.getCenter().x > -(gGame._screenWidth / 2)) && (viewLobby.getCenter().x < (gGame._screenWidth / 2))) {
 
-        float xDistance = 640 - viewLobby.getCenter().x;
-        float distance = sqrt(xDistance * xDistance);
-        if (distance > 1) {
-            float xx = xDistance * easing;
-            viewLobby.move(xx, 0);
+        _xDistanceMenu = (gGame._screenWidth / 2) - viewLobby.getCenter().x;
+        if (_xDistanceMenu > 0) {
+            viewLobby.move(_xDistanceMenu * _easingMenu, 0);
         }
     }
-
-    /*
-    Transformaciones visuales en el logo
-    */
-    if (this->alphaLogo < 255)
-        logo.setColor(sf::Color(255, 255, 255, this->alphaLogo++));
-
-    if ((this->scaleLogo += 0.01f) < 1.5f)
-        logo.setScale(this->scaleLogo, this->scaleLogo);
 }
 
 /*

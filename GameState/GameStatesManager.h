@@ -19,6 +19,8 @@ public:
     Obtener el estado actual
     */
     GameState* getEstadoActual();
+
+    std::string getEstadoActualNombre();
     /*
     Cambiar el estado actual
     */

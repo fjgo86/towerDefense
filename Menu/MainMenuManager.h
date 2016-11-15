@@ -39,8 +39,8 @@ private:
     sf::Shader backgroundShader;
     sf::Sprite background, logo;
     sf::Uint8 alphaLogo = 0;
-    float scaleLogo = 1, t = 0.f, posX = 0;
-    float easing = 0.05f;
+    float scaleLogo = 1, t = 0.f;
+    float _easingMenu = 0.05f, _xDistanceMenu = 0;
     sf::Music backgroundMusic;
 
     sf::View viewBackground, viewLobby;

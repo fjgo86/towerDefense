@@ -3,6 +3,7 @@
 #include "GameStatesManager.h"
 #include "../Game/GameManager.h"
 #include "../Menu/MainMenuManager.h"
+#include "../Menu/LoginState.h"
 
 GameStatesManager::GameStatesManager() {
 
@@ -13,6 +14,7 @@ void GameStatesManager::initEstados() {
  
     this->estados["game"] = new GameManager();
     this->estados["menu"] = new MainMenuManager();
+    this->estados["login"] = new LoginState();
 }
 
 GameState* GameStatesManager::getEstadoActual() {
@@ -20,11 +22,18 @@ GameState* GameStatesManager::getEstadoActual() {
     return this->estadoActual;
 }
 
+std::string GameStatesManager::getEstadoActualNombre() {
+
+    return this->estadoActual->nombreEstado;
+}
+
 void GameStatesManager::setEstadoActual(std::string estado) {
 
     this->estadoActual = this->estados[estado];
+    this->estadoActual->nombreEstado = estado.c_str();
 
     std::cout << "Estados: " << this->estados.size() << std::endl;
+    std::cout << "Estado Actual: " << getEstadoActualNombre() << std::endl;
 }
 
 void GameStatesManager::newGame(bool iniciarAutomaticamente) {
