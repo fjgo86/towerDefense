@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 
 #include "MainMenuManager.h"
 
@@ -11,9 +12,21 @@ MainMenuManager::MainMenuManager() {
     viewBackground = sf::View(sf::Vector2f(gGame._screenWidth / 2, gGame._screenHeight / 2),
       sf::Vector2f(gGame._screenWidth, gGame._screenHeight));
 
-    viewLobby = sf::View(sf::Vector2f(gGame._screenWidth * 1.5, gGame._screenHeight / 2),
+    viewLobby = sf::View(sf::Vector2f(gGame._screenWidth * -0.5, gGame._screenHeight / 2),
         sf::Vector2f(gGame._screenWidth, gGame._screenHeight));
     
+    centerLobby.setRadius(10.f);
+    centerLobby.setOrigin(centerLobby.getGlobalBounds().width / 2, centerLobby.getGlobalBounds().height / 2);
+    centerLobby.setFillColor(sf::Color::Green);
+    centerLobby.setPosition(viewLobby.getCenter());
+
+    frameLobby = sf::RectangleShape(sf::Vector2f(gGame._screenWidth, gGame._screenHeight));
+    frameLobby.setOrigin(frameLobby.getGlobalBounds().width / 2, frameLobby.getGlobalBounds().height / 2);
+    frameLobby.setOutlineColor(sf::Color::Green);
+    frameLobby.setOutlineThickness(1.f);
+    frameLobby.setPosition(viewLobby.getCenter());
+    frameLobby.setFillColor(sf::Color(0, 0, 0, 0));
+
     this->initLobby();
 }
 
@@ -59,7 +72,8 @@ void MainMenuManager::initLobby() {
     logo.setOrigin(logo.getGlobalBounds().width / 2, logo.getGlobalBounds().height / 2);
     logo.setColor(sf::Color(255, 255, 255, this->alphaLogo));
 
-    sf::Vector2f pos = sf::Vector2f(viewLobby.getViewport().width * 0.05f, viewLobby.getViewport().height * 0.9f);
+    //sf::Vector2f pos = sf::Vector2f(viewLobby.getViewport().width * 0.05f, viewLobby.getViewport().height * 0.9f);
+    sf::Vector2f pos = sf::Vector2f(gGame._screenWidth * 0.05f, gGame._screenHeight * 0.9f);
 
     for (int i = Menu_QTY - 1; i >= 0; i--) {
             
@@ -97,6 +111,17 @@ void MainMenuManager::handleInput() {
                     default:
                         break;
                 }
+                break;
+            case sf::Event::KeyPressed:
+                switch (event.key.code) {
+                    case sf::Keyboard::Left:
+                        posX--;
+                        break;
+                    case sf::Keyboard::Right:
+                        posX++;
+                        break;
+                }
+                break;
             case sf::Event::MouseButtonPressed:
                 switch (event.mouseButton.button) {
 					case sf::Mouse::Left:
@@ -119,21 +144,23 @@ void MainMenuManager::handleInput() {
 
 void MainMenuManager::moveLobby() {
 
-    std::cout << "button pos x: " << botonesMenu[0].getPosition().x << std::endl;
-    std::cout << "button pos y: " << botonesMenu[0].getPosition().y << std::endl;
-    //viewLobby.move(1, 0);
-    //viewLobby.setCenter(gGame._screenWidth / 2, gGame._screenHeight / 2);
+    viewLobby.move(5, 0);
 }
 
 void MainMenuManager::onTick() {
 
     // Vista con el fondo y el logo
     gGame._gameWindow.setView(viewBackground);
+
     gGame._gameWindow.draw(background, &backgroundShader);
     gGame._gameWindow.draw(logo);
 
     // Vista con los botones del menu
     gGame._gameWindow.setView(viewLobby);
+
+    gGame._gameWindow.draw(centerLobby);
+    gGame._gameWindow.draw(frameLobby);
+
     for (int i = 0; i < Menu_QTY; i++) {
         gGame._gameWindow.draw(botonesMenu[i]);
     }
@@ -171,10 +198,15 @@ void MainMenuManager::update(sf::Event &event) {
     // Este parametro controla la velocidad de movimiento de las nubes
     backgroundShader.setUniform("time", t += 0.5f);
 
-    if (viewLobby.getCenter().x > (gGame._screenWidth / 2)) {
+    // Centra el lobby en la pantalla
+    if ((viewLobby.getCenter().x > -(gGame._screenWidth / 2)) && (viewLobby.getCenter().x < (gGame._screenWidth / 2))) {
 
-        //std::cout << "ejecutando if - view.x = " << viewLobby.getCenter().x << std::endl;
-        //viewLobby.move(-5, 0);
+        float xDistance = 640 - viewLobby.getCenter().x;
+        float distance = sqrt(xDistance * xDistance);
+        if (distance > 1) {
+            float xx = xDistance * easing;
+            viewLobby.move(xx, 0);
+        }
     }
 
     /*

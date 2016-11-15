@@ -39,7 +39,8 @@ private:
     sf::Shader backgroundShader;
     sf::Sprite background, logo;
     sf::Uint8 alphaLogo = 0;
-    float scaleLogo = 1, t = 0.f;
+    float scaleLogo = 1, t = 0.f, posX = 0;
+    float easing = 0.05f;
     sf::Music backgroundMusic;
 
     sf::View viewBackground, viewLobby;
@@ -51,6 +52,8 @@ private:
         "Salir"
     };
 
+    sf::CircleShape centerLobby;
+    sf::RectangleShape frameLobby;
     void moveLobby();
 
     /*
