@@ -27,7 +27,7 @@ public:
     */
     void manageBackgroundMusic(short action);
     
-    MainMenuManager();
+    MainMenuManager(float uniform);
     ~MainMenuManager();
 
     void onTick();
@@ -39,7 +39,7 @@ private:
     sf::Shader backgroundShader;
     sf::Sprite background, logo;
     sf::Uint8 alphaLogo = 0;
-    float scaleLogo = 1, t = 0.f;
+    float scaleLogo = 1, _backgroundUniform = 0.f;
     float _easingMenu = 0.05f, _xDistanceMenu = 0;
     sf::Music backgroundMusic;
 

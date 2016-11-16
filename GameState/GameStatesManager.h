@@ -33,6 +33,10 @@ public:
 	Comprobar si hay una partida existente
 	*/
 	bool isGameStarted();
+    /*
+    Crea el lobby, y lo posiciona como estado actual
+    */
+    void enterLobby(float uniform);
 
     GameStatesManager();
     ~GameStatesManager();

@@ -119,7 +119,7 @@ void LoginState::handleInput() {
 void LoginState::update(sf::Event &event) {
 
     // Este parametro controla la velocidad de movimiento de las nubes
-    backgroundShader.setUniform("time", t += 0.5f);
+    backgroundShader.setUniform("time", _backgroundUniform += 0.5f);
 
     // Mover el login
     if ((viewLogin.getCenter().x > -(gGame._screenWidth / 2)) && (viewLogin.getCenter().x < (gGame._screenWidth / 2))) {
@@ -128,14 +128,15 @@ void LoginState::update(sf::Event &event) {
         std::cout << "xDistanceMenu: " << _xDistanceMenu << std::endl;
         if (std::trunc(_xDistanceMenu) > 0) {
             viewLogin.move(_xDistanceMenu * _easingMenu, 0);
+            gGame._statesManager->enterLobby(_backgroundUniform);
         }
         else {
 
             std::cout << "ejecutando else" << std::endl;
-            gGame._statesManager->setEstadoActual("menu");
+            std::cout << "login t: " << _backgroundUniform << std::endl;
+            //gGame._statesManager->enterLobby(_backgroundUniform);
         }
     }
-
 
     /*
     Transformaciones visuales en el logo

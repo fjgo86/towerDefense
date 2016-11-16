@@ -5,7 +5,10 @@
 
 #include "../Game.h"
 
-MainMenuManager::MainMenuManager() {
+MainMenuManager::MainMenuManager(float uniform) {
+
+    _backgroundUniform = uniform - 0.5f;
+    std::cout << "menu t: " << _backgroundUniform << std::endl;
 
     fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
 
@@ -17,12 +20,12 @@ MainMenuManager::MainMenuManager() {
     
     centerLobby.setRadius(10.f);
     centerLobby.setOrigin(centerLobby.getGlobalBounds().width / 2, centerLobby.getGlobalBounds().height / 2);
-    centerLobby.setFillColor(sf::Color::Green);
+    centerLobby.setFillColor(sf::Color::Red);
     centerLobby.setPosition(viewLobby.getCenter());
 
     frameLobby = sf::RectangleShape(sf::Vector2f(gGame._screenWidth, gGame._screenHeight));
     frameLobby.setOrigin(frameLobby.getGlobalBounds().width / 2, frameLobby.getGlobalBounds().height / 2);
-    frameLobby.setOutlineColor(sf::Color::Green);
+    frameLobby.setOutlineColor(sf::Color::Red);
     frameLobby.setOutlineThickness(1.f);
     frameLobby.setPosition(viewLobby.getCenter());
     frameLobby.setFillColor(sf::Color(0, 0, 0, 0));
@@ -83,7 +86,7 @@ void MainMenuManager::initLobby() {
             botonesMenu[i].setType(i);
     }
 
-    //this->moveLobby();
+    this->moveLobby();
 }
 
 void MainMenuManager::handleInput() {
@@ -187,7 +190,7 @@ void MainMenuManager::update(sf::Event &event) {
     }
 
     // Este parametro controla la velocidad de movimiento de las nubes
-    backgroundShader.setUniform("time", t += 0.5f);
+    backgroundShader.setUniform("time", _backgroundUniform += 0.5f);
 
     // Centra el lobby en la pantalla
     if ((viewLobby.getCenter().x > -(gGame._screenWidth / 2)) && (viewLobby.getCenter().x < (gGame._screenWidth / 2))) {

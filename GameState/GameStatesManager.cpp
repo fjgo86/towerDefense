@@ -13,7 +13,6 @@ GameStatesManager::GameStatesManager() {
 void GameStatesManager::initEstados() {
  
     this->estados["game"] = new GameManager();
-    this->estados["menu"] = new MainMenuManager();
     this->estados["login"] = new LoginState();
 }
 
@@ -55,5 +54,17 @@ bool GameStatesManager::isGameStarted() {
     return game->getGameStarted();
 }
 
+void GameStatesManager::enterLobby(float uniform) {
+
+    this->estados["menu"] = new MainMenuManager(uniform);
+    setEstadoActual("menu");
+}
+
 GameStatesManager::~GameStatesManager() {
+
+    for (auto it = this->estados.begin(); it != this->estados.end(); ++it) {
+
+        delete it->second;
+        this->estados.erase(it);
+    }
 }
