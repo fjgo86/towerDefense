@@ -3,31 +3,37 @@
 #include <SFML/Graphics.hpp>
 
 #include "../GameState/GameState.h"
+#include "LoginManager.h"
+#include "MainMenuManager.h"
 
-class LoginState : public GameState {
+class LobbyState : public GameState {
+
 private:
+    LoginManager loginView;
+    MainMenuManager menuView;
+
     sf::Shader backgroundShader;
     sf::Sprite background, logo;
     sf::Uint8 alphaLogo = 0;
     float scaleLogo = 1, _backgroundUniform = 0.f;
     float _easingMenu = 0.05f, _xDistanceMenu = 0;
 
-    sf::View viewBackground, viewLogin;
-    sf::CircleShape centerLobby;
-    sf::RectangleShape frameLobby;
+    bool _moveLobby = false;
 
+    /*
+    Método para cargar las texturas necesarias
+    */
+    void loadBackgroundTextures();
     void initLogin();
     void update(sf::Event &event);
-
+    void moveLobby();
 
 public:
-    LoginState();
-    ~LoginState();
-
-    void loadTextures();
-    void moveToLobby();
 
     void onTick();
     void handleInput();
+
+    LobbyState();
+    ~LobbyState();
 };
 

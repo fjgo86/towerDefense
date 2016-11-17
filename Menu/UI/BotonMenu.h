@@ -30,7 +30,7 @@ public:
     /*
     Método donde se comprueban los eventos, y se realizan acciones
     */
-    void update(sf::Event &e, sf::Window &windown);
+    void update(sf::Event &e, sf::Window &window);
 
     // SETTERS
     void setPosition(float x, float y);

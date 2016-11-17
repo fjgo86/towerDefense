@@ -19,7 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Menu\LoginState.h" />
+    <ClInclude Include="Menu\UI\LoginBox.h" />
+    <ClInclude Include="Menu\LobbyState.h" />
+    <ClInclude Include="Menu\LoginManager.h" />
     <ClInclude Include="Menu\UI\BotonMenu.h" />
     <ClInclude Include="GameState\GameState.h" />
     <ClInclude Include="GameState\GameStatesManager.h" />
@@ -41,7 +43,9 @@
     <ClInclude Include="Game\SpriteManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Menu\LoginState.cpp" />
+    <ClCompile Include="Menu\UI\LoginBox.cpp" />
+    <ClCompile Include="Menu\LobbyState.cpp" />
+    <ClCompile Include="Menu\LoginManager.cpp" />
     <ClCompile Include="Menu\UI\BotonMenu.cpp" />
     <ClCompile Include="GameState\GameState.cpp" />
     <ClCompile Include="GameState\GameStatesManager.cpp" />

@@ -32,7 +32,7 @@ Game::Game() {
 
     _statesManager = new GameStatesManager();
     _statesManager->initEstados();
-	_statesManager->setEstadoActual("login");
+	_statesManager->setEstadoActual("lobby");
 }
 
 Game::~Game(){

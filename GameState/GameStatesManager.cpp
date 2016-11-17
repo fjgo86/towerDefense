@@ -3,7 +3,7 @@
 #include "GameStatesManager.h"
 #include "../Game/GameManager.h"
 #include "../Menu/MainMenuManager.h"
-#include "../Menu/LoginState.h"
+#include "../Menu/LobbyState.h"
 
 GameStatesManager::GameStatesManager() {
 
@@ -12,8 +12,8 @@ GameStatesManager::GameStatesManager() {
 
 void GameStatesManager::initEstados() {
  
-    this->estados["game"] = new GameManager();
-    this->estados["login"] = new LoginState();
+    //this->estados["game"] = new GameManager();
+    this->estados["lobby"] = new LobbyState();
 }
 
 GameState* GameStatesManager::getEstadoActual() {
@@ -54,17 +54,12 @@ bool GameStatesManager::isGameStarted() {
     return game->getGameStarted();
 }
 
-void GameStatesManager::enterLobby(float uniform) {
-
-    this->estados["menu"] = new MainMenuManager(uniform);
-    setEstadoActual("menu");
-}
-
 GameStatesManager::~GameStatesManager() {
 
-    for (auto it = this->estados.begin(); it != this->estados.end(); ++it) {
+    for (auto it = this->estados.begin(); it != this->estados.end(); it++) {
 
-        delete it->second;
-        this->estados.erase(it);
+        //TODO: Esta función crashea el juego. El array/iterador se sale de rango¿?. Averiguar por qué.
+        //delete it->second;
+        //this->estados.erase(it);
     }
 }

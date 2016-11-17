@@ -12,7 +12,7 @@
 /*
     Clase que se encarga del menú principal de la aplicación
 */
-class MainMenuManager : public GameState {
+class MainMenuManager : public sf::View {
 public:
     enum Menu {
         Nueva_Partida,
@@ -27,23 +27,15 @@ public:
     */
     void manageBackgroundMusic(short action);
     
-    MainMenuManager(float uniform);
+    MainMenuManager();
     ~MainMenuManager();
 
     void onTick();
-    void handleInput();
+    void handleInput(sf::Event &event);
 
 private:
     sf::Font fuente;
-
-    sf::Shader backgroundShader;
-    sf::Sprite background, logo;
-    sf::Uint8 alphaLogo = 0;
-    float scaleLogo = 1, _backgroundUniform = 0.f;
-    float _easingMenu = 0.05f, _xDistanceMenu = 0;
     sf::Music backgroundMusic;
-
-    sf::View viewBackground, viewLobby;
 
     BotonMenu botonesMenu[Menu_QTY];
     std::string Menu_Strings[Menu_QTY] = {
@@ -52,14 +44,6 @@ private:
         "Salir"
     };
 
-    sf::CircleShape centerLobby;
-    sf::RectangleShape frameLobby;
-    void moveLobby();
-
-    /*
-    Método para cargar las texturas necesarias
-    */
-    void loadTextures();
     /*
     Método para actualizar elementos antes de dibujarlos
     */

@@ -20,7 +20,9 @@
     <ClInclude Include="Game\Units\UnitManager.h" />
     <ClInclude Include="Game\SpriteManager.h" />
     <ClInclude Include="Menu\UI\BotonMenu.h" />
-    <ClInclude Include="Menu\LoginState.h" />
+    <ClInclude Include="Menu\LoginManager.h" />
+    <ClInclude Include="Menu\LobbyState.h" />
+    <ClInclude Include="Menu\UI\LoginBox.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -43,6 +45,8 @@
     <ClCompile Include="Game\Units\UnitManager.cpp" />
     <ClCompile Include="Game\SpriteManager.cpp" />
     <ClCompile Include="Menu\UI\BotonMenu.cpp" />
-    <ClCompile Include="Menu\LoginState.cpp" />
+    <ClCompile Include="Menu\LoginManager.cpp" />
+    <ClCompile Include="Menu\LobbyState.cpp" />
+    <ClCompile Include="Menu\UI\LoginBox.cpp" />
   </ItemGroup>
 </Project>
