@@ -9,11 +9,11 @@ private:
     sf::Text _labelUser, _labelPw;
     sf::RectangleShape _labelUserBackground, _labelPwBackground;
     sf::RectangleShape _wrapper, _textBoxUser, _textBoxPw, _buttonConnect;
-    //std::vector<sf::RectangleShape> loginBoxRectElements = { _wrapper, _textBoxUser, _textBoxPw };
+    std::vector<sf::Transformable*> _loginBoxComponents;
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
+	
 public:
 
     LoginBox();

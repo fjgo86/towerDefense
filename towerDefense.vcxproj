@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Grupo.h" />
     <ClInclude Include="Menu\UI\LoginBox.h" />
     <ClInclude Include="Menu\LobbyState.h" />
     <ClInclude Include="Menu\LoginManager.h" />
@@ -44,6 +45,7 @@
     <ClInclude Include="Menu\ViewsWrapper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Grupo.cpp" />
     <ClCompile Include="Menu\UI\LoginBox.cpp" />
     <ClCompile Include="Menu\LobbyState.cpp" />
     <ClCompile Include="Menu\LoginManager.cpp" />
