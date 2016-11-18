@@ -7,9 +7,14 @@
 
 LobbyState::LobbyState() {
 
+    // Iniciamos la vista actual a la del login.
+    _vistaActual = &loginView;
+
+    // Iniciamos elementos visuales de la pantalla de login.
     this->initLogin();
 }
 
+// Carga las texturas y shaders necesarios.
 void LobbyState::loadBackgroundTextures() {
 
     gGame._textureManager->loadFromFile("logoMenu", "media/logos/logo.png");
@@ -29,8 +34,10 @@ void LobbyState::loadBackgroundTextures() {
     }
 }
 
+// Posicionamiento de los elementos en el fondo de pantalla
 void LobbyState::initLogin() {
 
+    // Carga de texturas
     this->loadBackgroundTextures();
 
     // Logo principal del juego
@@ -42,12 +49,14 @@ void LobbyState::initLogin() {
 
 void LobbyState::onTick() {
 
+    // Recupera la vista por defecto (la de esta clase) y "incrusta" los elementos en ella
     gGame._gameWindow.setView(gGame._gameWindow.getDefaultView());
     gGame._gameWindow.draw(background, &backgroundShader);
     gGame._gameWindow.draw(logo);
 
     loginView.onTick();
     menuView.onTick();
+    //_vistaActual->onTick();
 }
 
 void LobbyState::handleInput() {
@@ -66,8 +75,7 @@ void LobbyState::handleInput() {
                 switch (event.key.code) {
             
                     case sf::Keyboard::Escape:
-                        //gGame._gameWindow.close();
-                        loginView.handleInput(event);
+                        gGame._gameWindow.close();
                         break;
                     case sf::Keyboard::Return:
                         moveLobby();
@@ -76,35 +84,28 @@ void LobbyState::handleInput() {
                         break;
                 }
                 break;
-
-            case sf::Event::MouseButtonPressed:
-                switch (event.mouseButton.button) {
-
-                    case sf::Mouse::Left:
-                        break;
-                    default:
-                        break;
-                }
-                break;
             default:
                 break;
         }
-    }
 
-    menuView.handleInput(event);
-    //loginView.handleInput(event);
+        _vistaActual->handleInput(event);
+    }
 
     // Llamada al método para realizar cambios,
     // con una referencia a los eventos por si fuera necesario
-    this->update(event);
+    this->update();
 }
 
 void LobbyState::moveLobby() {
 
-    _moveLobby = true;
+    if (_xDistanceMenu == 0) {
+
+        _moveLobby = true;
+        _vistaActual = &menuView;
+    }   
 }
 
-void LobbyState::update(sf::Event &event) {
+void LobbyState::update() {
 
     // Este parametro controla la velocidad de movimiento de las nubes
     backgroundShader.setUniform("time", _backgroundUniform += 0.5f);
@@ -122,15 +123,14 @@ void LobbyState::update(sf::Event &event) {
     if (_moveLobby) {
 
         _xDistanceMenu = (gGame._screenWidth * 1.5) - loginView.getCenter().x;
-        //_xDistanceMenu = (0) - loginView.getCenter().x;
         std::cout << "xDistanceMenu: " << _xDistanceMenu << std::endl;
-        //if (std::trunc(_xDistanceMenu) > 0) {
+
         if (_xDistanceMenu > 0.01f) {
             loginView.move(_xDistanceMenu * _easingMenu, 0);
             menuView.move(_xDistanceMenu * _easingMenu, 0);
         }
         else {
-            //loginView.move(2, 0);
+         
         std::cout << "Animacion Finalizada" << std::endl;
         _moveLobby = false;
         }

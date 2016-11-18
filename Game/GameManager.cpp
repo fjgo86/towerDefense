@@ -1,14 +1,14 @@
 #include <iostream>
 
-#include <SFML/Window/Event.hpp>
-
 #include "GameManager.h"
 #include "../Game.h"
 #include "Units/Enemigos/Dragon.h"
 #include "Units/Torres/Torre1.h"
 
 void GameManager::handleInput() {
+
     sf::Event event;
+
     while (gGame._gameWindow.pollEvent(event)){
         switch (event.type){
             case sf::Event::Closed:

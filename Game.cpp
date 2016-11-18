@@ -8,11 +8,10 @@
 #include "Game/GameManager.h"
 #include "GameState/GameStatesManager.h"
 
-
-
 void Game::onTick() {
-	_statesManager->getEstadoActual()->handleInput();
-	_statesManager->getEstadoActual()->onTick();
+    
+    _statesManager->getEstadoActual()->handleInput();
+    _statesManager->getEstadoActual()->onTick();
 }
 
 Game::Game() {

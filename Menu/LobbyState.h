@@ -3,12 +3,14 @@
 #include <SFML/Graphics.hpp>
 
 #include "../GameState/GameState.h"
+#include "ViewsWrapper.h"
 #include "LoginManager.h"
 #include "MainMenuManager.h"
 
 class LobbyState : public GameState {
 
 private:
+    ViewsWrapper* _vistaActual;
     LoginManager loginView;
     MainMenuManager menuView;
 
@@ -25,7 +27,7 @@ private:
     */
     void loadBackgroundTextures();
     void initLogin();
-    void update(sf::Event &event);
+    void update();
     void moveLobby();
 
 public:

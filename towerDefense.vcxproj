@@ -41,6 +41,7 @@
     <ClInclude Include="Game\Map\Grid.h" />
     <ClInclude Include="Menu\MainMenuManager.h" />
     <ClInclude Include="Game\SpriteManager.h" />
+    <ClInclude Include="Menu\ViewsWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Menu\UI\LoginBox.cpp" />
@@ -66,6 +67,7 @@
     <ClCompile Include="Game\Map\Tile.cpp" />
     <ClCompile Include="Menu\MainMenuManager.cpp" />
     <ClCompile Include="Game\SpriteManager.cpp" />
+    <ClCompile Include="Menu\ViewsWrapper.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5E1DA751-D877-4DF3-A85E-29BBC4894EFB}</ProjectGuid>

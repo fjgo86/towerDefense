@@ -13,7 +13,7 @@ LoginManager::LoginManager() {
 
 void LoginManager::handleInput(sf::Event &event) {
 
-    while (gGame._gameWindow.pollEvent(event)) {
+    //while (gGame._gameWindow.pollEvent(event)) {
         switch (event.type) {
             case sf::Event::Closed:
                 gGame._gameWindow.close();
@@ -35,12 +35,10 @@ void LoginManager::handleInput(sf::Event &event) {
                         break;
                 }
                 break;
-            case sf::Event::MouseMoved:
-                break;
             default:
                 break;
         }
-    }
+    //}
 }
 
 void LoginManager::onTick() {

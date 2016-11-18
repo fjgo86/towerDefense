@@ -23,6 +23,7 @@
     <ClInclude Include="Menu\LoginManager.h" />
     <ClInclude Include="Menu\LobbyState.h" />
     <ClInclude Include="Menu\UI\LoginBox.h" />
+    <ClInclude Include="Menu\ViewsWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -48,5 +49,6 @@
     <ClCompile Include="Menu\LoginManager.cpp" />
     <ClCompile Include="Menu\LobbyState.cpp" />
     <ClCompile Include="Menu\UI\LoginBox.cpp" />
+    <ClCompile Include="Menu\ViewsWrapper.cpp" />
   </ItemGroup>
 </Project>

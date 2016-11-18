@@ -1,4 +1,7 @@
 #pragma once
+
+#include <SFML/Window/Event.hpp>
+
 class GameState {
 public:
 

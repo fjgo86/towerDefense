@@ -15,6 +15,7 @@ public:
     TextureManager*		_textureManager;
 	SpriteManager*		_spriteManager;
     sf::RenderWindow	_gameWindow;	///< Enlace a la pantalla del juego.
+    //sf::Event           _event;
 
     int _screenWidth;		///< Tamaño en pixeles del ancho de la pantalla.
     int _screenHeight;		///< Tamaño en pixeles del alto de la pantalla.

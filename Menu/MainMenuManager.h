@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
+#include "ViewsWrapper.h"
 #include "UI/BotonMenu.h"
 
 #include "../GameState/GameState.h"
@@ -12,7 +13,7 @@
 /*
     Clase que se encarga del menú principal de la aplicación
 */
-class MainMenuManager : public sf::View {
+class MainMenuManager : public ViewsWrapper {
 public:
     enum Menu {
         Nueva_Partida,

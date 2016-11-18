@@ -34,17 +34,16 @@ void MainMenuManager::initLobby() {
 
     for (int i = Menu_QTY - 1; i >= 0; i--) {
             
-            // Creamos los botones, obtenemos el tamaño del texto
-            // una vez creados, y los posicionamos en relacion a esto
-            botonesMenu[i] = BotonMenu(Menu_Strings[i], fuente);
-            botonesMenu[i].setPosition(pos);
-            botonesMenu[i].setType(i);
+        // Creamos los botones. NOTA: Se posicionan de abajo a arriba
+        // con vistas a añadir algun botón en un futuro.
+        botonesMenu[i] = BotonMenu(Menu_Strings[i], fuente);
+        botonesMenu[i].setPosition(pos);
+        botonesMenu[i].setType(i);
     }
 }
 
 void MainMenuManager::handleInput(sf::Event &event) {
     
-    while (gGame._gameWindow.pollEvent(event)) {
         switch (event.type) {
             case sf::Event::Closed:
                 gGame._gameWindow.close();
@@ -52,7 +51,7 @@ void MainMenuManager::handleInput(sf::Event &event) {
             case sf::Event::KeyReleased:
                 switch (event.key.code) {
                     case sf::Keyboard::Escape:
-                        //gGame._gameWindow.close();
+                        gGame._gameWindow.close();
                         break;
                     case sf::Keyboard::Space:        // pulsar SPACE para pasar al juego
                         this->manageBackgroundMusic(0);
@@ -69,19 +68,16 @@ void MainMenuManager::handleInput(sf::Event &event) {
             case sf::Event::MouseButtonPressed:
                 switch (event.mouseButton.button) {
 					case sf::Mouse::Left:
-                        std::cout << "mouse left en MainMenuManager" << std::endl;
+                        std::cout << "mouse left at MainMenuManager" << std::endl;
 						break;
 					default:
 						break;
                 }
                 break;
-            case sf::Event::MouseMoved: 
-                break;
 			default:
 				break;
         }
-    }
-    
+
     // Llamada al método para realizar cambios,
     // con una referencia a los eventos por si fuera necesario
     this->update(event);
