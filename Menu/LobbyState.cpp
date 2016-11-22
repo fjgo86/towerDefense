@@ -28,7 +28,7 @@ void LobbyState::loadBackgroundTextures() {
         }
         else {
 
-            backgroundShader.setUniform("resolution", sf::Glsl::Vec2(gGame._screenWidth, gGame._screenHeight));
+            backgroundShader.setUniform("resolution", sf::Glsl::Vec2((float)gGame._screenWidth, (float)gGame._screenHeight));
             background.setTexture(*gGame._textureManager->getRef("background"));
         }
     }
@@ -122,7 +122,7 @@ void LobbyState::update() {
     // Mover el login
     if (_moveLobby) {
 
-        _xDistanceMenu = (gGame._screenWidth * 1.5) - loginView.getCenter().x;
+        _xDistanceMenu = ((float)gGame._screenWidth * 1.5f) - loginView.getCenter().x;
         std::cout << "xDistanceMenu: " << _xDistanceMenu << std::endl;
 
         if (_xDistanceMenu > 0.01f) {

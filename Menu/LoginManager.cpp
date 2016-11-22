@@ -7,8 +7,8 @@
 
 LoginManager::LoginManager() {
 
-    this->setCenter(gGame._screenWidth / 2, gGame._screenHeight / 2);
-    this->setSize(gGame._screenWidth, gGame._screenHeight);
+    this->setCenter((float)gGame._screenWidth / 2, (float)gGame._screenHeight / 2);
+    this->setSize((float)gGame._screenWidth, (float)gGame._screenHeight);
 }
 
 void LoginManager::handleInput(sf::Event &event) {

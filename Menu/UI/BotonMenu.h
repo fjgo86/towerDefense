@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-class BotonMenu : public sf::Drawable {
+class BotonMenu : public sf::Drawable, public sf::Transformable {
 
 private:
     sf::Font _fuente;
