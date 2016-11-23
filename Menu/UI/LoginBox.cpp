@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "LoginBox.h"
 #include "../../Game.h"
 
@@ -22,8 +24,6 @@ LoginBox::LoginBox() {
 	_wrapper.setPosition(0, 0);
     _wrapper.setFillColor(lightBlue);
 
-	_loginBoxComponents.push_back((LoginBoxComponent*)&_wrapper);
-
     /*
     Usuario
     */
@@ -38,11 +38,6 @@ LoginBox::LoginBox() {
     _labelUserBackground.setSize(sf::Vector2f(_wrapper.getGlobalBounds().width * 0.25f, _labelUser.getGlobalBounds().height * 1.8f));
     _labelUserBackground.setPosition(_labelUser.getPosition().x * 0.8f, _labelUser.getPosition().y);
     _labelUserBackground.setFillColor(pink);
-
-	// Añadimos los componentes al vector
-	_loginBoxComponents.push_back((LoginBoxComponent*)&_textBoxUser);
-	_loginBoxComponents.push_back((LoginBoxComponent*)&_labelUser);
-	_loginBoxComponents.push_back((LoginBoxComponent*)&_labelUserBackground);
 
     /*
     Contraseña
@@ -60,15 +55,9 @@ LoginBox::LoginBox() {
     _labelPwBackground.setPosition(_labelPw.getPosition().x * 0.8f , _labelPw.getPosition().y);
     _labelPwBackground.setFillColor(pink);
 
-	// Añadimos los componentes al vector
-	_loginBoxComponents.push_back((LoginBoxComponent*)&_textBoxPw);
-	_loginBoxComponents.push_back((LoginBoxComponent*)&_labelPw);
-	_loginBoxComponents.push_back((LoginBoxComponent*)&_labelPwBackground);
-
     /*
     Boton "Conectar"
     */
-
     _botonConectar.setFont(_fuente);
     _botonConectar.setString("Conectar");
     _botonConectar.setOrigin(_botonConectar.getGlobalBounds().width / 2, _botonConectar.getGlobalBounds().height / 2);
@@ -78,37 +67,34 @@ LoginBox::LoginBox() {
     _botonConectarBackground.setOrigin(_botonConectarBackground.getGlobalBounds().width / 2, _botonConectarBackground.getGlobalBounds().height / 2);
     _botonConectarBackground.setPosition(_botonConectar.getPosition().x, _botonConectar.getPosition().y);
     _botonConectarBackground.setFillColor(green);
+}
 
-    // Añadimos el boton al vector
-    _loginBoxComponents.push_back((LoginBoxComponent*)&_botonConectar);
-    _loginBoxComponents.push_back((LoginBoxComponent*)&_botonConectarBackground);
+void LoginBox::move(float x, float y) {
 
-    /*
-    Movemos el conjunto al centro de la pantalla
-    */
-
-	for (std::vector<LoginBoxComponent*>::iterator i = _loginBoxComponents.begin(); i != _loginBoxComponents.end(); ++i) {
-		
-		//(*i)->move((float)gGame._screenWidth / 4, (float)gGame._screenHeight * 0.4f);
-        
-	}
+    _labelUser.move(x, y);
+    _labelPw.move(x, y);
+    _botonConectar.move(x, y);
+    _labelUserBackground.move(x, y);
+    _labelPwBackground.move(x, y);
+    _wrapper.move(x, y);
+    _textBoxUser.move(x, y);
+    _textBoxPw.move(x, y);
+    _botonConectarBackground.move(x, y);
 }
 
 void LoginBox::update(sf::Event &event) {
 
     sf::Vector2f mousePosition = static_cast<sf::Vector2f>(sf::Mouse::getPosition(gGame._gameWindow));
-    //sf::RectangleShape mouseHover = checkHoverWhat(mousePosition);
+    sf::RectangleShape mouseHover = checkHoverWhat(mousePosition);
 }
-/*
+
 sf::RectangleShape LoginBox::checkHoverWhat(sf::Vector2f m_mousePosition) {
     
-    for (std::vector<sf::Transformable*>::iterator i = _loginBoxComponents.begin(); i != _loginBoxComponents.end(); ++i) {
-
-        (*i)->
-    }
-    
+    // Pongo esto para que no pete. Pero está sin terminar.
+    sf::RectangleShape rect;
+    return rect;
 }
-*/
+
 
 void LoginBox::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     
