@@ -11,7 +11,6 @@ private:
     sf::RectangleShape _labelUserBackground, _labelPwBackground;
     sf::RectangleShape _wrapper, _textBoxUser, _textBoxPw, _botonConectarBackground;
 
-    
     float _focusedOutlineThickness, _unfocusedOutlineThickness;
     sf::Color _focusedOutlineColor;
 

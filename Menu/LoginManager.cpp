@@ -44,15 +44,16 @@ void LoginManager::handleInput(sf::Event &event) {
             //_mousePos = sf::Mouse::getPosition(gGame._gameWindow);
             //this->handleLoginBoxEvents(_mousePos, 1);
             break;
+
         case sf::Event::TextEntered:
             this->handleLoginBoxEvents(sf::Vector2i(0, 0), 2, event.text.unicode);
-
+		
         default:
             break;
     }
 }
 
-void LoginManager::handleLoginBoxEvents(sf::Vector2i pos, char type, char c) {
+void LoginManager::handleLoginBoxEvents(sf::Vector2i pos, char type, sf::Uint32 c) {
 
     switch (type) {
         case 0:     // Click izquierdo
@@ -87,7 +88,21 @@ void LoginManager::handleLoginBoxEvents(sf::Vector2i pos, char type, char c) {
             std::cout << "tecla pulsada: " << c << std::endl;
             if (_loginBox._focusedTextBox != nullptr && (c < 128)) {
 
-                _loginBox._focusedTextBox->setString( _loginBox._focusedTextBox->getString() + c );
+				/*
+				XUN: Aqui es donde quiero diferenciar que textBox tiene el foco, para poder dibujar en el password asteriscos en lugar de la contraseña
+				*/
+
+				switch (c) {
+
+					case 8:		// Tecla BACKSPACE, para borrar el ultimo caracter
+						_loginBox._focusedTextBox->setString(_loginBox._focusedTextBox->getString().substring(0, _loginBox._focusedTextBox->getString().getSize() - 1));
+						break;
+					case 27:	// Tecla ESCAPE, lo capturo para que no pinte un simbolo extraño
+						break;
+					default:
+						_loginBox._focusedTextBox->setString(_loginBox._focusedTextBox->getString() + c);
+						break;
+				}
             }
 
         default:
