@@ -78,7 +78,7 @@ void LobbyState::handleInput() {
                         gGame._gameWindow.close();
                         break;
                     case sf::Keyboard::Return:
-                        moveLobby();
+                        //moveLobby();
                         break;
                     default:
                         break;

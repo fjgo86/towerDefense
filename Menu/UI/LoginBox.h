@@ -2,6 +2,16 @@
 
 #include <SFML/Graphics.hpp>
 
+class LoginBoxFocusedTextBox {
+public:
+	sf::Text* _textBox;
+	// Tipo de TextBox. 0: Usuario, 1: Password
+	bool _type;
+
+	LoginBoxFocusedTextBox();
+	~LoginBoxFocusedTextBox();
+};
+
 class LoginBox : public sf::Drawable, public sf::Transformable {
 
 private:
@@ -31,7 +41,7 @@ public:
     void setOrigin(float x, float y);
     void setFocusedComponent(unsigned short int component);
 
-    sf::Text* _focusedTextBox;
+    LoginBoxFocusedTextBox _focusedTextBox;
 
     sf::FloatRect getGlobalBounds();
     sf::RectangleShape getBotonConectar();

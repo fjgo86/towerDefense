@@ -3,6 +3,12 @@
 #include "LoginBox.h"
 #include "../../Game.h"
 
+LoginBoxFocusedTextBox::LoginBoxFocusedTextBox() {
+}
+
+LoginBoxFocusedTextBox::~LoginBoxFocusedTextBox(){
+}
+
 LoginBox::LoginBox() {
 
     _fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
@@ -11,7 +17,7 @@ LoginBox::LoginBox() {
     _focusedOutlineThickness = 2.f;
     _unfocusedOutlineThickness = 0.f;
     _focusedOutlineColor = sf::Color::White;
-    _focusedTextBox = nullptr;
+    _focusedTextBox._textBox = nullptr;
     _textBoxUser.setOutlineColor(_focusedOutlineColor);
     _textBoxPw.setOutlineColor(_focusedOutlineColor);
 
@@ -129,12 +135,14 @@ void LoginBox::setFocusedComponent(unsigned short int component) {
 
     switch (component) {
         case MainComponents::TextBoxUser:
-            _focusedTextBox = &_textUser;
+            _focusedTextBox._textBox = &_textUser;
+			_focusedTextBox._type = 0;
             _textBoxUser.setOutlineThickness(_focusedOutlineThickness);
             break;
 
         case MainComponents::TextBoxPassword:
-            _focusedTextBox = &_textPw;
+            _focusedTextBox._textBox = &_textPw;
+			_focusedTextBox._type = 1;
             _textBoxPw.setOutlineThickness(_focusedOutlineThickness);
             break;
 
@@ -143,7 +151,7 @@ void LoginBox::setFocusedComponent(unsigned short int component) {
             break;
 
         case MainComponents::MainComponentsQTY:
-            _focusedTextBox = nullptr;
+            _focusedTextBox._textBox = nullptr;
             break;
 
         default:

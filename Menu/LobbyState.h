@@ -28,10 +28,9 @@ private:
     void loadBackgroundTextures();
     void initLogin();
     void update();
-    void moveLobby();
 
 public:
-
+	void moveLobby();
     void onTick();
     void handleInput();
 
