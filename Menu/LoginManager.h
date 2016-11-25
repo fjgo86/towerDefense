@@ -8,6 +8,8 @@
 class LoginManager : public ViewsWrapper {
 private:
     LoginBox _loginBox;
+    sf::Vector2i _mousePos;
+    void handleLoginBoxEvents(sf::Vector2i pos, char type, char c = NULL);
 
 public:
     LoginManager();
