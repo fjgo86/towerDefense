@@ -14,12 +14,13 @@ private:
     LoginManager loginView;
     MainMenuManager menuView;
 
+    sf::Vector2i _mousePos;
+
     sf::Shader backgroundShader;
     sf::Sprite background, logo;
     sf::Uint8 alphaLogo = 0;
     float scaleLogo = 1, _backgroundUniform = 0.f;
     float _easingMenu = 0.05f, _xDistanceMenu = 0;
-
     bool _moveLobby = false;
 
     /*
@@ -28,9 +29,15 @@ private:
     void loadBackgroundTextures();
     void initLogin();
     void update();
+    /*
+    Método que mueve "echa" al login y "mete" al menú
+    */
+    void moveLobby(); 
 
 public:
-	void moveLobby();
+	
+    void sendData(std::string u, std::string p);
+
     void onTick();
     void handleInput();
 

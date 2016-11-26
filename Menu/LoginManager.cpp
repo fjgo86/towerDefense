@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "LoginManager.h"
+#include "LobbyState.h"
 
 #include "../Game.h"
 
@@ -39,8 +40,7 @@ void LoginManager::handleInput(sf::Event &event) {
                 }
             break;
         case sf::Event::MouseMoved:            
-            // Con vistas a hacer algun efecto al hacer hover sobre los elementos
-
+            // TODO: Pendiente de revisión
             //_mousePos = sf::Mouse::getPosition(gGame._gameWindow);
             //this->handleLoginBoxEvents(_mousePos, 1);
             break;
@@ -57,22 +57,19 @@ void LoginManager::handleLoginBoxEvents(sf::Vector2i pos, char type, sf::Uint32 
 
     switch (type) {
         case 0:     // Click izquierdo
-            
+
             if (_loginBox.getTextBoxUser().getGlobalBounds().contains((sf::Vector2f)pos)) {
 
                 _loginBox.setFocusedComponent(LoginBox::MainComponents::TextBoxUser);
             }
-
             else if (_loginBox.getTextBoxPassword().getGlobalBounds().contains((sf::Vector2f)pos)) {
 
                 _loginBox.setFocusedComponent(LoginBox::MainComponents::TextBoxPassword);
             }
-
             else if (_loginBox.getBotonConectar().getGlobalBounds().contains((sf::Vector2f)pos)) {
 
-                _loginBox.setFocusedComponent(LoginBox::MainComponents::BotonConectar);
+                //_loginBox.setFocusedComponent(LoginBox::MainComponents::BotonConectar);
             }
-
             else {
 
                 _loginBox.setFocusedComponent(LoginBox::MainComponents::MainComponentsQTY);
@@ -81,23 +78,55 @@ void LoginManager::handleLoginBoxEvents(sf::Vector2i pos, char type, sf::Uint32 
             break;
 
         case 1:     // Movimiento de raton
-            std::cout << "moved" << std::endl;
+            
+            if (_loginBox.getTextBoxUser().getGlobalBounds().contains((sf::Vector2f)pos)) {
+
+                _loginBox.setHoveredComponent(LoginBox::MainComponents::TextBoxUser);
+            }
+            else if (_loginBox.getTextBoxPassword().getGlobalBounds().contains((sf::Vector2f)pos)) {
+
+                _loginBox.setHoveredComponent(LoginBox::MainComponents::TextBoxPassword);
+            }
+            else if (_loginBox.getBotonConectar().getGlobalBounds().contains((sf::Vector2f)pos)) {
+
+                _loginBox.setHoveredComponent(LoginBox::MainComponents::BotonConectar);
+            }
+            else {
+
+                _loginBox.setHoveredComponent(LoginBox::MainComponents::MainComponentsQTY);
+            }
+            
             break;
 
-        case 2:
+        case 2:     // Pulsacion de teclas
             std::cout << "tecla pulsada: " << c << std::endl;
             if (_loginBox._focusedTextBox._textBox != nullptr && (c < 128)) {
 
 				switch (c) {
 
 					case 8:		// Tecla BACKSPACE, para borrar el ultimo caracter
+                        _loginBox._focusedTextBox._pw->setString(_loginBox._focusedTextBox._pw->getString().substring(0, _loginBox._focusedTextBox._pw->getString().getSize() - 1));
 						_loginBox._focusedTextBox._textBox->setString(_loginBox._focusedTextBox._textBox->getString().substring(0, _loginBox._focusedTextBox._textBox->getString().getSize() - 1));
 						break;
 					case 27:	// Tecla ESCAPE, lo capturo para que no pinte un simbolo extraño
 						break;
+                    case 13:	// Tecla RETURN, lo capturo para que no pinte un simbolo extraño
+                        break;
+                    case 9:
+                        if (_loginBox._focusedTextBox._type) {
+
+                            _loginBox.setFocusedComponent(LoginBox::MainComponents::TextBoxUser);
+
+                        }
+                        else {
+
+                            _loginBox.setFocusedComponent(LoginBox::MainComponents::TextBoxPassword);
+                        }
+                        break;
 					default:
 						if (_loginBox._focusedTextBox._type) {
 
+                            _loginBox._focusedTextBox._pw->setString(_loginBox._focusedTextBox._pw->getString() + c);
 							_loginBox._focusedTextBox._textBox->setString(_loginBox._focusedTextBox._textBox->getString() + "*");
 
 						} else {
@@ -112,6 +141,21 @@ void LoginManager::handleLoginBoxEvents(sf::Vector2i pos, char type, sf::Uint32 
         default:
             break;
     }
+}
+
+std::string LoginManager::getUser() {
+
+    return _loginBox.getUser();
+}
+
+std::string LoginManager::getPassword() {
+
+    return _loginBox.getPassword();
+}
+
+sf::RectangleShape LoginManager::getConnectButton() {
+
+    return _loginBox.getBotonConectar();
 }
 
 void LoginManager::onTick() {

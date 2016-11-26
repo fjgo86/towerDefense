@@ -12,24 +12,26 @@ LoginBoxFocusedTextBox::~LoginBoxFocusedTextBox(){
 LoginBox::LoginBox() {
 
     _fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
+    _arial.loadFromFile("media/fonts/PT_Sans-Narrow-Web-Regular.ttf");
 
     // Inicialización de valores por defecto
     _focusedOutlineThickness = 2.f;
     _unfocusedOutlineThickness = 0.f;
-    _focusedOutlineColor = sf::Color::White;
+    _focusedOutlineColor = sf::Color(134, 179, 249, 200);
+
+    // Inicializando punteros a null para evitar "wild pointers"
     _focusedTextBox._textBox = nullptr;
-    _textBoxUser.setOutlineColor(_focusedOutlineColor);
-    _textBoxPw.setOutlineColor(_focusedOutlineColor);
+    _focusedTextBox._rect = nullptr;
 
     // Inicialización de colores
     // rgb(36, 86, 204)
-    sf::Color lightBlue = sf::Color(36, 86, 204, 80);
+    lightBlue = sf::Color(36, 86, 204, 80);
     // rgb(19, 49, 119)
-    sf::Color darkBlue = sf::Color(19, 49, 119, 150);
+    darkBlue = sf::Color(19, 49, 119, 150);
     // rgb(188, 16, 79)
-    sf::Color pink = sf::Color(188, 16, 79, 150);
+    pink = sf::Color(188, 16, 79, 150);
     // rgb(5, 178, 25)
-    sf::Color green = sf::Color(5, 178, 25, 150);
+    green = sf::Color(5, 178, 25, 150);
 
     /*
     Marco exterior (envoltorio de todo)
@@ -54,9 +56,8 @@ LoginBox::LoginBox() {
     _labelUserBackground.setFillColor(pink);
 
     // Texto de usuario DENTRO del textbox
-    _textUser.setFont(_fuente);
-    _textUser.setString("_");
-    _textUser.setPosition(_textBoxUser.getPosition().x + (_textBoxUser.getGlobalBounds().width * 0.1f), _textBoxUser.getPosition().y);
+    _textUser.setFont(_arial);
+    _textUser.setPosition(_textBoxUser.getPosition().x + (_textBoxUser.getGlobalBounds().width * 0.05f), _textBoxUser.getPosition().y);
 
     /*
     Contraseña
@@ -74,9 +75,8 @@ LoginBox::LoginBox() {
     _labelPwBackground.setFillColor(pink);
 
     // Texto de contraseña DENTRO del textbox
-    _textPw.setFont(_fuente);
-    _textPw.setString("_");
-    _textPw.setPosition(_textBoxPw.getPosition().x + (_textBoxPw.getGlobalBounds().width * 0.1f), _textBoxPw.getPosition().y);
+    _textPw.setFont(_arial);
+    _textPw.setPosition(_textBoxPw.getPosition().x + (_textBoxPw.getGlobalBounds().width * 0.05f), _textBoxPw.getPosition().y);
 
     /*
     Boton "Conectar"
@@ -130,33 +130,96 @@ void LoginBox::setOrigin(float x, float y) {
 
 void LoginBox::setFocusedComponent(unsigned short int component) {
 
+    _textBoxUser.setOutlineColor(_focusedOutlineColor);
     _textBoxUser.setOutlineThickness(_unfocusedOutlineThickness);
+
+    _textBoxPw.setOutlineColor(_focusedOutlineColor);
     _textBoxPw.setOutlineThickness(_unfocusedOutlineThickness);
+
+    _botonConectarBackground.setOutlineColor(_focusedOutlineColor);
+    _botonConectarBackground.setOutlineThickness(_unfocusedOutlineThickness);
 
     switch (component) {
         case MainComponents::TextBoxUser:
             _focusedTextBox._textBox = &_textUser;
+            _focusedTextBox._rect = &_textBoxUser;
 			_focusedTextBox._type = 0;
             _textBoxUser.setOutlineThickness(_focusedOutlineThickness);
             break;
 
         case MainComponents::TextBoxPassword:
             _focusedTextBox._textBox = &_textPw;
+            _focusedTextBox._rect = &_textBoxPw;
+            _focusedTextBox._pw = &_pw;
 			_focusedTextBox._type = 1;
             _textBoxPw.setOutlineThickness(_focusedOutlineThickness);
             break;
 
         case MainComponents::BotonConectar:
+            _focusedTextBox._rect = &_botonConectarBackground;
             _botonConectarBackground.setOutlineThickness(_focusedOutlineThickness);
             break;
 
         case MainComponents::MainComponentsQTY:
+            _focusedTextBox._rect = nullptr;
             _focusedTextBox._textBox = nullptr;
             break;
 
         default:
             break;
     }
+}
+
+/*
+TODO: Esta función queda pendiente de revisión, porque no funciona muy bien
+*/
+void LoginBox::setHoveredComponent(unsigned short int component) {
+    
+    if (_focusedTextBox._rect != nullptr) {
+
+        _textBoxUser.setOutlineColor(_hoverOutlineColor);
+        _textBoxUser.setOutlineThickness(_unfocusedOutlineThickness);
+
+        _textBoxPw.setOutlineColor(_hoverOutlineColor);
+        _textBoxPw.setOutlineThickness(_unfocusedOutlineThickness);
+
+        _botonConectarBackground.setOutlineColor(_hoverOutlineColor);
+        _botonConectarBackground.setOutlineThickness(_unfocusedOutlineThickness);
+    }
+    
+    switch (component) {
+    case MainComponents::TextBoxUser:
+        _textBoxUser.setOutlineThickness(_focusedOutlineThickness);
+        break;
+
+    case MainComponents::TextBoxPassword:
+        _textBoxPw.setOutlineThickness(_focusedOutlineThickness);
+        break;
+
+    case MainComponents::BotonConectar:
+        _botonConectarBackground.setOutlineThickness(_focusedOutlineThickness);
+        break;
+
+    case MainComponents::MainComponentsQTY:
+        //_textBoxUser.setOutlineColor(_hoverOutlineColor);
+        //_textBoxPw.setOutlineColor(_hoverOutlineColor);
+        //_botonConectarBackground.setOutlineColor(_hoverOutlineColor);
+        break;
+
+    default:
+        //_focusedTextBox._rect->setOutlineColor(_hoverOutlineColor);
+        break;
+    }
+}
+
+std::string LoginBox::getUser() {
+
+    return _textUser.getString();
+}
+
+std::string LoginBox::getPassword() {
+
+    return _pw.getString();
 }
 
 sf::FloatRect LoginBox::getGlobalBounds() {

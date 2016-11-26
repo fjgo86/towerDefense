@@ -15,6 +15,10 @@ public:
     LoginManager();
     ~LoginManager();
 
+    std::string getUser();
+    std::string getPassword();
+    sf::RectangleShape getConnectButton();
+
     void onTick();
     void handleInput(sf::Event &event);
 };

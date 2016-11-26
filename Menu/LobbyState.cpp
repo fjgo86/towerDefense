@@ -78,10 +78,23 @@ void LobbyState::handleInput() {
                         gGame._gameWindow.close();
                         break;
                     case sf::Keyboard::Return:
-                        //moveLobby();
+                        //sendData(loginView.getUser(), loginView.getPassword());
                         break;
                     default:
                         break;
+                }
+                break;
+            case sf::Event::MouseButtonPressed:
+                switch (event.mouseButton.button) {
+                case sf::Mouse::Left:
+                    _mousePos = sf::Mouse::getPosition(gGame._gameWindow);
+                    if (loginView.getConnectButton().getGlobalBounds().contains((sf::Vector2f)_mousePos)) {
+
+                        sendData(loginView.getUser(), loginView.getPassword());
+                    }
+                    break;
+                default:
+                    break;
                 }
                 break;
             default:
@@ -94,6 +107,11 @@ void LobbyState::handleInput() {
     // Llamada al método para realizar cambios,
     // con una referencia a los eventos por si fuera necesario
     this->update();
+}
+
+void LobbyState::sendData(std::string u, std::string p) {
+
+    std::cout << "Comprobando en servidor..." << std::endl << "Usuario: " << u << " - Password: " << p << std::endl;
 }
 
 void LobbyState::moveLobby() {
