@@ -26,6 +26,7 @@
     <ClInclude Include="Menu\ViewsWrapper.h" />
     <ClInclude Include="Grupo.h" />
     <ClInclude Include="Menu\UI\LoginBoxComponent.h" />
+    <ClInclude Include="Networking\Network.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -54,5 +55,6 @@
     <ClCompile Include="Menu\ViewsWrapper.cpp" />
     <ClCompile Include="Grupo.cpp" />
     <ClCompile Include="Menu\UI\LoginBoxComponent.cpp" />
+    <ClCompile Include="Networking\Network.cpp" />
   </ItemGroup>
 </Project>
