@@ -27,6 +27,7 @@
     <ClInclude Include="Grupo.h" />
     <ClInclude Include="Menu\UI\LoginBoxComponent.h" />
     <ClInclude Include="Networking\Network.h" />
+    <ClInclude Include="Menu\ConnectionManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -56,5 +57,6 @@
     <ClCompile Include="Grupo.cpp" />
     <ClCompile Include="Menu\UI\LoginBoxComponent.cpp" />
     <ClCompile Include="Networking\Network.cpp" />
+    <ClCompile Include="Menu\ConnectionManager.cpp" />
   </ItemGroup>
 </Project>

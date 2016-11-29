@@ -6,7 +6,7 @@
 
 MainMenuManager::MainMenuManager() {
 
-    this->setCenter(gGame._screenWidth * -0.5, gGame._screenHeight / 2);
+    this->setCenter(gGame._screenWidth * -1.5, gGame._screenHeight / 2);
     this->setSize(gGame._screenWidth, gGame._screenHeight);
 
     fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");

@@ -2,7 +2,6 @@
 
 #include <functional>
 
-#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
 #include "ViewsWrapper.h"

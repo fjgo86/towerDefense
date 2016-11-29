@@ -5,6 +5,7 @@
 #include "../GameState/GameState.h"
 #include "ViewsWrapper.h"
 #include "LoginManager.h"
+#include "ConnectionManager.h"
 #include "MainMenuManager.h"
 
 class LobbyState : public GameState {
@@ -12,6 +13,7 @@ class LobbyState : public GameState {
 private:
     ViewsWrapper* _vistaActual;
     LoginManager loginView;
+    ConnectionManager connView;
     MainMenuManager menuView;
 
     sf::Vector2i _mousePos;
@@ -20,7 +22,7 @@ private:
     sf::Sprite background, logo;
     sf::Uint8 alphaLogo = 0;
     float scaleLogo = 1, _backgroundUniform = 0.f;
-    float _easingMenu = 0.05f, _xDistanceMenu = 0;
+    float _easingQty = 0.05f, _targetDistance = 0;
     bool _moveLobby = false;
 
     /*
@@ -30,9 +32,10 @@ private:
     void initLogin();
     void update();
     /*
-    Método que mueve "echa" al login y "mete" al menú
+    Método que mueve el Lobby para cambiar entre vistas
     */
-    void moveLobby(); 
+    void moveLobby(ViewsWrapper* targetView);
+    bool _moveLobbyToRight = true;
 
 public:
 	

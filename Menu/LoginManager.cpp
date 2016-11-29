@@ -99,7 +99,7 @@ void LoginManager::handleLoginBoxEvents(sf::Vector2i pos, char type, sf::Uint32 
             break;
 
         case 2:     // Pulsacion de teclas
-            std::cout << "tecla pulsada: " << c << std::endl;
+
             if (_loginBox._focusedTextBox._textBox != nullptr && (c < 128)) {
 
 				switch (c) {

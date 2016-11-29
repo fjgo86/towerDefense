@@ -7,6 +7,11 @@
 
 LobbyState::LobbyState() {
 
+    // Inicializamos los ID de las vistas
+    loginView.viewId = ViewsWrapper::LoginView;
+    connView.viewId = ViewsWrapper::ConnectionView;
+    menuView.viewId = ViewsWrapper::MenuView;
+
     // Iniciamos la vista actual a la del login.
     _vistaActual = &loginView;
 
@@ -55,6 +60,7 @@ void LobbyState::onTick() {
     gGame._gameWindow.draw(logo);
 
     loginView.onTick();
+    connView.onTick();
     menuView.onTick();
     //_vistaActual->onTick();
 }
@@ -79,6 +85,25 @@ void LobbyState::handleInput() {
                         break;
                     case sf::Keyboard::Return:
                         //sendData(loginView.getUser(), loginView.getPassword());
+                        break;
+                    case sf::Keyboard::Left:
+                        loginView.move(50, 0);
+                        connView.move(50, 0);
+                        menuView.move(50, 0);
+                        break;
+                    case sf::Keyboard::Right:
+                        loginView.move(-50, 0);
+                        connView.move(-50, 0);
+                        menuView.move(-50, 0);
+                        break;
+                    case sf::Keyboard::F1:
+                        connView.setNetworkStatus(ConnectionManager::Disconnected);
+                        break;
+                    case sf::Keyboard::F2:
+                        connView.setNetworkStatus(ConnectionManager::Connecting);
+                        break;
+                    case sf::Keyboard::F3:
+                        connView.setNetworkStatus(ConnectionManager::Connected);
                         break;
                     default:
                         break;
@@ -112,15 +137,24 @@ void LobbyState::handleInput() {
 void LobbyState::sendData(std::string u, std::string p) {
 
     std::cout << "Comprobando en servidor..." << std::endl << "Usuario: " << u << " - Password: " << p << std::endl;
+
+    if (u == "hola" && p == "hola") {
+        //this->moveLobby();
+    }
 }
 
-void LobbyState::moveLobby() {
+void LobbyState::moveLobby(ViewsWrapper* targetView) {
 
-    if (_xDistanceMenu == 0) {
+    // Comprueba que no haya una animación en curso
+    if (_targetDistance == 0) {
 
-        _moveLobby = true;
-        _vistaActual = &menuView;
-    }   
+        // Comprueba que no se realice una animación hacia la misma vista.
+        if (_vistaActual->viewId != targetView->viewId) _moveLobby = true;
+        // Determina si es un movimiento hacia la derecha o a la izquierda
+        _moveLobbyToRight = (_vistaActual->viewId > targetView->viewId) ? true : false;
+        // Indica cual va a ser la nueva vista
+        _vistaActual = targetView;
+    }
 }
 
 void LobbyState::update() {
@@ -136,21 +170,51 @@ void LobbyState::update() {
 
     if ((this->scaleLogo += 0.01f) < 1.5f)
         logo.setScale(this->scaleLogo, this->scaleLogo);
-
-    // Mover el login
+    
+    // Coloca la vista dependiendo del estado de la conexión.
+    // De esta manera, el movimiento entre vistas se realiza automáticamente
+    switch (connView.getNetworkStatus()) {
+        case ConnectionManager::Disconnected:
+            moveLobby(&loginView);
+            break;
+        case ConnectionManager::Connecting:
+            moveLobby(&connView);
+            break;
+        case ConnectionManager::Connected:
+            moveLobby(&menuView);
+            break;
+        default:
+            break;
+    }
+    
+    // Mueve la vista
     if (_moveLobby) {
 
-        _xDistanceMenu = ((float)gGame._screenWidth * 1.5f) - loginView.getCenter().x;
-        std::cout << "xDistanceMenu: " << _xDistanceMenu << std::endl;
+        if (_moveLobbyToRight) {
 
-        if (_xDistanceMenu > 0.01f) {
-            loginView.move(_xDistanceMenu * _easingMenu, 0);
-            menuView.move(_xDistanceMenu * _easingMenu, 0);
+            _targetDistance = (_vistaActual->getCenter().x - gGame._screenWidth / 2);
         }
         else {
-         
-        std::cout << "Animacion Finalizada" << std::endl;
-        _moveLobby = false;
+
+            _targetDistance = gGame._screenWidth - (_vistaActual->getCenter().x + gGame._screenWidth / 2);
+        }
+
+        if (_targetDistance > 0.01f && !_moveLobbyToRight) {
+            loginView.move(_targetDistance * _easingQty, 0);
+            connView.move(_targetDistance * _easingQty, 0);
+            menuView.move(_targetDistance * _easingQty, 0);
+        }
+        else if (_targetDistance > 0.01f && _moveLobbyToRight) {
+
+            loginView.move(-_targetDistance * _easingQty, 0);
+            connView.move(-_targetDistance * _easingQty, 0);
+            menuView.move(-_targetDistance * _easingQty, 0);
+        }
+        else {
+
+            std::cout << "Animacion Finalizada" << std::endl;
+            _targetDistance = 0;
+            _moveLobby = false;
         }
     }
 }

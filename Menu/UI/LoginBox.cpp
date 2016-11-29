@@ -174,7 +174,7 @@ void LoginBox::setFocusedComponent(unsigned short int component) {
 TODO: Esta función queda pendiente de revisión, porque no funciona muy bien
 */
 void LoginBox::setHoveredComponent(unsigned short int component) {
-    
+    /*
     if (_focusedTextBox._rect != nullptr) {
 
         _textBoxUser.setOutlineColor(_hoverOutlineColor);
@@ -186,8 +186,9 @@ void LoginBox::setHoveredComponent(unsigned short int component) {
         _botonConectarBackground.setOutlineColor(_hoverOutlineColor);
         _botonConectarBackground.setOutlineThickness(_unfocusedOutlineThickness);
     }
-    
+    */
     switch (component) {
+    /*
     case MainComponents::TextBoxUser:
         _textBoxUser.setOutlineThickness(_focusedOutlineThickness);
         break;
@@ -195,11 +196,12 @@ void LoginBox::setHoveredComponent(unsigned short int component) {
     case MainComponents::TextBoxPassword:
         _textBoxPw.setOutlineThickness(_focusedOutlineThickness);
         break;
-
+    */
     case MainComponents::BotonConectar:
+        std::cout << "hover BotonConectar" << std::endl;
         _botonConectarBackground.setOutlineThickness(_focusedOutlineThickness);
         break;
-
+    
     case MainComponents::MainComponentsQTY:
         //_textBoxUser.setOutlineColor(_hoverOutlineColor);
         //_textBoxPw.setOutlineColor(_hoverOutlineColor);
