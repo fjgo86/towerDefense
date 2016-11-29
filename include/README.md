@@ -1,0 +1,1 @@
+Librerías incluidas en el proyecto (en 64 bits).
