@@ -145,6 +145,7 @@ void LobbyState::sendData(std::string u, std::string p) {
 
 void LobbyState::moveLobby(ViewsWrapper* targetView) {
 
+    // TODO: Revisar esto, para poder cambiar entre vistas sin tener que esperar a que termine la animacion
     // Comprueba que no haya una animación en curso
     if (_targetDistance == 0) {
 
