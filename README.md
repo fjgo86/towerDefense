@@ -1,3 +1,9 @@
+# To Do
+- [ ] Tarea 1
+- [x] Tarea 2
+- [ ] Tarea 3
+- [x] Tarea 4
+
 Servidor para el towerDefense
 
 Instrucciones:
