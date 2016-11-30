@@ -10,9 +10,16 @@ class Account;
 */
 class Client : public sf::TcpSocket {
 private:
+    enum CONNECTION_TYPE {
+        CT_CONNECTING,
+        CT_CONNECTED,
+        CT_DISCONNECTED
+    };
+
 	int _id; ///< ID que apunta a la posición del Client en el vector Network::_clients<Client*>
 	sf::Clock _lastActivity; ///< Registro de tiempo de la última actividad del cliente (Timeout, control de in/actividad ...).
     Account *_cuenta;
+    CONNECTION_TYPE _connType;
 public:
 	Client();
 	~Client();
@@ -29,16 +36,6 @@ public:
     * @param ID informa de la posición del Client.
     */
     void setID(int id);
-    /*
-    * @brief Devuelve la Account del este Client.
-    * return un puntero a la Account del Client.
-    */
-    Account *getAccount();
-    /*
-    * @brief Asigna una Account a este Client.
-    * @param cuenta asigna la Account a este Client.
-    */
-    void setAccount(Account *cuenta);
 	/*
 	* @Brief Se recibe un paquete del cliente.
 	* Se ha recibido un paquete de datos por parte del Client
@@ -56,16 +53,10 @@ public:
 	* El Client se acaba de desconectar.
 	*/
 	void onDisconnect();
-    /*
-    * @brief Login
-    * El Client acaba de conectarse a una cuenta.
-    */
-    void onLogin();
 	/*
 	* @brief Ejecuta un Tick.
 	* Ejecuta un Tick en el cliente, actualmente para controlar el _lastActivity.
 	*/
 	void onTick();
-
 };
 

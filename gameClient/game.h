@@ -3,12 +3,14 @@
 #include "gamestates/game/sprite_manager.h"
 #include "gamestates/gamestates_manager.h"
 #include "gamestates/game/game_manager.h"
+#include "network\clients\client.h"
 
 extern class Game{
 public:
     Game();
     ~Game();
 
+    Client *_client;
     GameStatesManager*	_statesManager;
     TextureManager*		_textureManager;
 	SpriteManager*		_spriteManager;

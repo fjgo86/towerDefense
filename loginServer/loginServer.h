@@ -3,7 +3,7 @@
 #include "../logger/log.h"
 #include "../logger/logger.h"
 
-#include "../network/network.h"
+#include "network/serverListener.h"
 #include "../db/db.h"
 
 
@@ -11,7 +11,7 @@ extern class LoginServer {
 private:
     bool isActive;
 public:
-    Network* _network;
+    ServerListener* _network;
 
     LoginServer();
     ~LoginServer();

@@ -6,7 +6,7 @@ set( gc_main_SOURCES
 	gameClient/main.cpp
 	gameClient/game.cpp
 	gameClient/game.h )
-#SOURCE_GROUP (client FILES ${gc_main_SOURCES})
+SOURCE_GROUP (client FILES ${gc_main_SOURCES})
 
 # /gamestates files
 #message("Preparando archivos GameStates")
@@ -97,7 +97,7 @@ SOURCE_GROUP (client\\gamestates\\game\\units\\enemigos FILES ${gc_gs_game_units
 set( gc_gs_game_units_torres_SOURCES 
 	gameClient/gamestates/game/units/torres/torre1.cpp 
 	gameClient/gamestates/game/units/torres/torre1.h)
-SOURCE_GROUP (client\\gamestates\\game\\units\torres FILES ${gc_gs_game_units_torres_SOURCES})
+SOURCE_GROUP (client\\gamestates\\game\\units\\torres FILES ${gc_gs_game_units_torres_SOURCES})
 
 #GAME END
 
@@ -107,6 +107,19 @@ set( gc_clients_SOURCES
 	gameClient/network/clients/client.h 
 	gameClient/network/clients/client.cpp )
 SOURCE_GROUP (network\\clients FILES ${gc_clients_SOURCES})
+
+# /network/packets files
+#message("Preparando archivos network/packets")
+set( gc_packets_SOURCES 
+	gameClient/network/packets/packetIn.h 
+	gameClient/network/packets/packetIn.cpp
+	gameClient/network/packets/packetOut.h 
+	gameClient/network/packets/packetOut.cpp
+	gameClient/network/packets/packetIO.h 
+	gameClient/network/packets/packetIO.cpp
+	gameClient/network/packets/login.h 
+	gameClient/network/packets/login.cpp )
+SOURCE_GROUP (network\\packets FILES ${gc_packets_SOURCES})
 
 set(gameClient_SOURCES 
 		${gc_main_SOURCES} 
@@ -119,6 +132,7 @@ set(gameClient_SOURCES
 		${gc_gs_game_units_enemigos_SOURCES}
 		${gc_gs_game_units_torres_SOURCES}
 		${network_SOURCES}
+		${gc_packets_SOURCES}
 		${gc_clients_SOURCES}
 		${packets_SOURCES}
 		${logger_SOURCES}

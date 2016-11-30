@@ -1,4 +1,4 @@
-#include "LoginServer.h"
+#include "loginServer.h"
 
 Logger gLog;
 DB gMySQL;
@@ -21,5 +21,5 @@ bool LoginServer::onTick() {
 }
 
 void LoginServer::init() {
-	_network = new Network();
+	_network = new ServerListener();
 }

@@ -5,7 +5,7 @@
 #include "../../../logger/log.h"
 #include "../../loginServer.h"
 
-#include "../../../network/packets/listado_paquetes.h"
+#include "../../../networking/packets.h"
 #include "../packets/login.h"
 
 Client::Client() {
@@ -37,7 +37,7 @@ void Client::receivePacket(int id, sf::Packet data) {
 	switch (id) {
 		case PACKET_Login:
 			_LOG(Log::LOGLVL_EVENT, "Recibido packetLogin \n");
-			//new PacketLogin(this, data);
+			new PacketLogin(this, data);
 	}
 	_lastActivity.restart();
 }
@@ -57,11 +57,12 @@ void Client::onLogin() {
 }
 
 void Client::onTick() {
-	//_LOG(Log::LOGLVL_EVENT, "onTick en Client " << getID() << ".\n");
+	_LOG(Log::LOGLVL_EVENT, "onTick en Client " << getID() << ".\n");
 
 
     sf::Packet packet;
     if (receive(packet) == sf::Socket::Status::Done) {
+        _EVENTLOG("Packet recibido\n");
         int packetID;
         packet >> packetID;
         receivePacket(packetID, packet);

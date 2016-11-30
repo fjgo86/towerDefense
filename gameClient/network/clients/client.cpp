@@ -4,13 +4,16 @@
 
 #include "../logger/log.h"
 
-#include "../../../network/packets/listado_paquetes.h"
+#include "../../../networking/packets.h"
+#include "../../../networking/config.h"
 #include "../packets/login.h"
 
 Client::Client() {
+    setBlocking(false);
+    _connType = CT_DISCONNECTED;
 	_lastActivity.restart();
+    onConnect();
 }
-
 
 Client::~Client() {
 }
@@ -24,36 +27,20 @@ void Client::setID(int id) {
 	// TODO: Security checks con respecto al vector.
 }
 
-Account * Client::getAccount() {
-    return _cuenta;
-}
-
-void Client::setAccount(Account * cuenta) {
-    _cuenta = cuenta;
-}
-
 void Client::receivePacket(int id, sf::Packet data) {
-	switch (id) {
-		case PACKET_Login:
-			_LOG(Log::LOGLVL_EVENT, "Recibido packetLogin \n");
-			//new PacketLogin(this, data);
-	}
-	_lastActivity.restart();
+
 }
 
 void Client::onConnect() {
-	_LOG(Log::LOGLVL_EVENT, "Client " << getID() << "conectado desde " << std::string(getRemoteAddress().toString()) << ".\n");
+	_LOG(Log::LOGLVL_EVENT, "Conectado con el servidor.\n");
+    _connType = CT_CONNECTING;
+    connect(sf::IpAddress(SERVERIP) , 5300);
 }
 
 void Client::onDisconnect() {
-	_LOG(Log::LOGLVL_EVENT, "Client " << getID() << " desconectado" << ".\n");
+	_LOG(Log::LOGLVL_EVENT, "Desconectado del servidor.\n");
 	close();
 }
-
-void Client::onLogin() {
-    // TODO: Envíar un packet con contenido para el Lobby.
-}
-
 void Client::onTick() {
 	//_LOG(Log::LOGLVL_EVENT, "onTick en Client " << getID() << ".\n");
 
@@ -65,8 +52,7 @@ void Client::onTick() {
         receivePacket(packetID, packet);
     }
 
-	if (getRemoteAddress() == sf::IpAddress::None && _lastActivity.getElapsedTime().asSeconds() > 10.0f) {
-		_LOG(Log::LOGLVL_EVENT, "Client " << getID() << " afk" << ".\n");
+	if (_connType == CT_CONNECTED && (getRemoteAddress() == sf::IpAddress::None || _lastActivity.getElapsedTime().asSeconds() > 600.0f)) {
 		onDisconnect();
 	}
 }

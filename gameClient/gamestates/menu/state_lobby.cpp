@@ -4,6 +4,7 @@
 #include "state_lobby.h"
 
 #include "../../game.h"
+#include "../../network/packets/login.h"
 
 LobbyState::LobbyState() {
 
@@ -22,12 +23,12 @@ LobbyState::LobbyState() {
 // Carga las texturas y shaders necesarios.
 void LobbyState::loadBackgroundTextures() {
 
-    gGame._textureManager->loadFromFile("logoMenu", "../gameClient/media/logos/logo.png");
-    gGame._textureManager->loadFromFile("background", "../gameClient/media/background.jpg");
+    gGame._textureManager->loadFromFile("logoMenu", "media/logos/logo.png");
+    gGame._textureManager->loadFromFile("background", "media/background.jpg");
 
     if (sf::Shader::isAvailable()) {
 
-        if (!backgroundShader.loadFromFile("../gameClient/media/shaders/clouds.frag", sf::Shader::Fragment)) {
+        if (!backgroundShader.loadFromFile("media/shaders/clouds.frag", sf::Shader::Fragment)) {
 
             std::cout << "Error cargando el shader de fondo en el menu principal." << std::endl;
         }
@@ -114,7 +115,6 @@ void LobbyState::handleInput() {
                 case sf::Mouse::Left:
                     _mousePos = sf::Mouse::getPosition(*gGame._gameWindow);
                     if (loginView.getConnectButton().getGlobalBounds().contains((sf::Vector2f)_mousePos)) {
-
                         sendData(loginView.getUser(), loginView.getPassword());
                     }
                     break;
@@ -137,9 +137,9 @@ void LobbyState::handleInput() {
 void LobbyState::sendData(std::string u, std::string p) {
 
     std::cout << "Comprobando en servidor..." << std::endl << "Usuario: " << u << " - Password: " << p << std::endl;
-    if (u == "hola" && p == "hola") {
-        //this->moveLobby();
-    }
+    PacketLogin* packet = new PacketLogin();
+    packet->checkAccount(u, p);
+    gGame._client->send(*packet);
 }
 
 void LobbyState::moveLobby(ViewsWrapper* targetView) {

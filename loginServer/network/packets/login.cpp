@@ -1,18 +1,18 @@
-#include "packetLogin.h"
+#include "login.h"
 #include <string>
 
-#include "../../logger/log.h"
+#include "../../../logger/log.h"
 #include "../../accounts/account.h"
 #include "../clients/client.h"
-#include "../db.h"
-#include "listado_paquetes.h"
+#include "../../../db/db.h"
+#include "../../../networking/packets.h"
 
 #define TABLECUENTAS "cuentas"
 #define ROWUSER "user"
 #define ROWPW "pw"
 
 class Account;
-PacketLogin::PacketLogin(Client *client, sf::Packet data) {
+PacketLogin::PacketLogin(Client *client, sf::Packet data) : PacketOut(PACKET_Login) {
 	std::string nombre;
 	std::string password;
     Account *cuenta = NULL;

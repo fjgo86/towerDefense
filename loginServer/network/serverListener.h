@@ -10,13 +10,13 @@ class Client;
 * así como de enviar periódicamente los datos que estos necesiten
 * y de recibir cualquier dato que generen.
 */
-class Network {
+class ServerListener : public sf::TcpListener {
 private:
-    sf::TcpListener _listener;	///< Clase que se mantiene a la espera de los datos recibidos.
     std::vector<Client*> _clients;	///< Clase que guarda un listado de todos los Clients conectados.
+    sf::TcpListener _listener;
 public:
-    Network();
-    ~Network();
+    ServerListener();
+    ~ServerListener();
     /*
     * brief Ejecuta un tick.
     Ejecuta un tick en todo el network, encargandose de recibir nuevos clients así como enviar y recibir datos

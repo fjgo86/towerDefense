@@ -1,11 +1,12 @@
 #pragma once
 
 #include <SFML/Network.hpp>
+#include "packetOut.h"
 
 class Client;
 class Account;
 
-class PacketLogin {
+class PacketLogin : public PacketOut {
 public:
     /*
     * @brief Valor devuelto en el intento de conexión de una cuenta.

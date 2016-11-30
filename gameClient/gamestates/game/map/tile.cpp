@@ -7,7 +7,7 @@
 
 Tile::Tile() {
 	try {
-		sfTexture = gGame._textureManager->loadFromFile("tile", "../gameClient/media/Tiles/tile_gris_1.png");
+		sfTexture = gGame._textureManager->loadFromFile("tile", "media/Tiles/tile_gris_1.png");
 		sfSprite.setTexture(*sfTexture);
 	}
 	catch (...) {
