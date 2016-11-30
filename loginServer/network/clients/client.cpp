@@ -10,6 +10,7 @@
 
 Client::Client() {
 	_lastActivity.restart();
+    setBlocking(false);
 }
 
 
@@ -35,6 +36,9 @@ void Client::setAccount(Account * cuenta) {
 
 void Client::receivePacket(int id, sf::Packet data) {
 	switch (id) {
+        default:
+            _ERRORLOG("Reciviendo Packet inexistente: " << id << ".\n");
+            break;
 		case PACKET_Login:
 			_LOG(Log::LOGLVL_EVENT, "Recibido packetLogin \n");
 			new PacketLogin(this, data);
@@ -57,7 +61,7 @@ void Client::onLogin() {
 }
 
 void Client::onTick() {
-	_LOG(Log::LOGLVL_EVENT, "onTick en Client " << getID() << ".\n");
+	//_LOG(Log::LOGLVL_EVENT, "onTick en Client " << getID() << ".\n");
 
 
     sf::Packet packet;

@@ -12,11 +12,11 @@ LoginServer::~LoginServer() {
 }
 
 bool LoginServer::onTick() {
-	if (isActive) {
+	//if (isActive) {
 		gLog.onTick();
 		_network->onTick();
 		return true;
-	}
+	//}
 	return false;
 }
 

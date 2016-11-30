@@ -15,6 +15,6 @@ bool PacketLogin::readPacket(sf::Packet data) {
 }
 
 void PacketLogin::checkAccount(std::string user, std::string pw) {
-    (*this) >> user >> pw;
+    (*this) << user << pw;
 }
 

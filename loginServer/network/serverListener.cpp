@@ -15,6 +15,7 @@ ServerListener::ServerListener() {
     else{
         _ERRORLOG("No se puede conectar al socket \n");
     }
+    setBlocking(false);
 }
 
 ServerListener::~ServerListener() {
@@ -54,15 +55,13 @@ void ServerListener::onTick() {
         client->onConnect();
         addClient(client);
     }
-    else {
-        //delete client;
+
+    if (_clients.size() <= 0) {
+        return;
     }
 
-    if (!_clients.size())
-        return;
-
     for (int i = 0; i < _clients.size(); i++) {
-        if (_clients[i])
+        //if (_clients[i] != nullptr)
 	        _clients[i]->onTick();
     }
 }

@@ -115,6 +115,7 @@ void LobbyState::handleInput() {
                 case sf::Mouse::Left:
                     _mousePos = sf::Mouse::getPosition(*gGame._gameWindow);
                     if (loginView.getConnectButton().getGlobalBounds().contains((sf::Vector2f)_mousePos)) {
+                        gGame._client->onConnect();
                         sendData(loginView.getUser(), loginView.getPassword());
                     }
                     break;
@@ -140,6 +141,7 @@ void LobbyState::sendData(std::string u, std::string p) {
     PacketLogin* packet = new PacketLogin();
     packet->checkAccount(u, p);
     gGame._client->send(*packet);
+    delete packet;
 }
 
 void LobbyState::moveLobby(ViewsWrapper* targetView) {

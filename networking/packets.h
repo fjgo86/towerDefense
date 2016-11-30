@@ -2,5 +2,5 @@
 
 
 enum PacketID {
-	PACKET_Login = 1
+	PACKET_Login = 1050
 };

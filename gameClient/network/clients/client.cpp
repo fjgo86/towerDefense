@@ -11,8 +11,6 @@
 Client::Client() {
     setBlocking(false);
     _connType = CT_DISCONNECTED;
-	_lastActivity.restart();
-    onConnect();
 }
 
 Client::~Client() {
@@ -32,13 +30,17 @@ void Client::receivePacket(int id, sf::Packet data) {
 }
 
 void Client::onConnect() {
-	_LOG(Log::LOGLVL_EVENT, "Conectado con el servidor.\n");
-    _connType = CT_CONNECTING;
-    connect(sf::IpAddress(SERVERIP) , 5300);
+    if (_connType == CT_DISCONNECTED) {
+        _LOG(Log::LOGLVL_EVENT, "Conectado con el servidor.\n");
+        _connType = CT_CONNECTING;
+        connect(sf::IpAddress(SERVERIP), 5300);
+        _lastActivity.restart();
+    }
 }
 
 void Client::onDisconnect() {
 	_LOG(Log::LOGLVL_EVENT, "Desconectado del servidor.\n");
+    _connType = CT_DISCONNECTED;
 	close();
 }
 void Client::onTick() {
@@ -52,7 +54,7 @@ void Client::onTick() {
         receivePacket(packetID, packet);
     }
 
-	if (_connType == CT_CONNECTED && (getRemoteAddress() == sf::IpAddress::None || _lastActivity.getElapsedTime().asSeconds() > 600.0f)) {
+	if (_connType != CT_DISCONNECTED && (getRemoteAddress() == sf::IpAddress::None || _lastActivity.getElapsedTime().asSeconds() > 10.0f)) {
 		onDisconnect();
 	}
 }
