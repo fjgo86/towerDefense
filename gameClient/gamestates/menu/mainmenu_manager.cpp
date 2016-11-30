@@ -9,14 +9,14 @@ MainMenuManager::MainMenuManager() {
     this->setCenter((float)gGame._screenWidth * -1.5f, (float)gGame._screenHeight / 2.0f);
     this->setSize((float)gGame._screenWidth, (float)gGame._screenHeight);
 
-    fuente.loadFromFile("../gameClient/media/fonts/big_noodle_titling_oblique.ttf");
+    fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
 
     this->initLobby();
 }
 
 void MainMenuManager::initMusic() {
 
-    if (!backgroundMusic.openFromFile("../gameClient/media/music/mainMenu.flac"))
+    if (!backgroundMusic.openFromFile("media/music/mainMenu.flac"))
         std::cout << "Error cargando la musica de fondo." << std::endl;
     backgroundMusic.setVolume(0.5f);
     backgroundMusic.setLoop(true);

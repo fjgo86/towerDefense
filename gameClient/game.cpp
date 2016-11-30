@@ -3,14 +3,17 @@
 
 #include <SFML/Window/VideoMode.hpp>
 
+#include "../logger/logger.h"
+
 #include "gamestates/menu/mainmenu_manager.h"
 #include "gamestates/game/game_manager.h"
 #include "gamestates/gamestates_manager.h"
 
 void Game::onTick() {
-    
     _statesManager->getEstadoActual()->handleInput();
     _statesManager->getEstadoActual()->onTick();
+    _client->onTick();
+    gLog.onTick();
 }
 
 Game::Game() {
@@ -21,6 +24,7 @@ Game::~Game(){
     delete _spriteManager;
 	delete _statesManager;
     delete _gameWindow;
+    delete _client;
 }
 
 void Game::init() {
@@ -41,4 +45,6 @@ void Game::init() {
     _statesManager = new GameStatesManager();
     _statesManager->initEstados();
     _statesManager->setEstadoActual("lobby");
+
+    _client = new Client();
 }

@@ -1,4 +1,4 @@
-#include "LoginServer.h"
+#include "loginServer.h"
 
 Logger gLog;
 DB gMySQL;
@@ -12,14 +12,14 @@ LoginServer::~LoginServer() {
 }
 
 bool LoginServer::onTick() {
-	if (isActive) {
+	//if (isActive) {
 		gLog.onTick();
 		_network->onTick();
 		return true;
-	}
+	//}
 	return false;
 }
 
 void LoginServer::init() {
-	_network = new Network();
+	_network = new ServerListener();
 }

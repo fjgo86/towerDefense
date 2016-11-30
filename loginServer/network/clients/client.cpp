@@ -5,11 +5,12 @@
 #include "../../../logger/log.h"
 #include "../../loginServer.h"
 
-#include "../../../network/packets/listado_paquetes.h"
+#include "../../../networking/packets.h"
 #include "../packets/login.h"
 
 Client::Client() {
 	_lastActivity.restart();
+    setBlocking(false);
 }
 
 
@@ -35,9 +36,12 @@ void Client::setAccount(Account * cuenta) {
 
 void Client::receivePacket(int id, sf::Packet data) {
 	switch (id) {
+        default:
+            _ERRORLOG("Reciviendo Packet inexistente: " << id << ".\n");
+            break;
 		case PACKET_Login:
 			_LOG(Log::LOGLVL_EVENT, "Recibido packetLogin \n");
-			//new PacketLogin(this, data);
+			new PacketLogin(this, data);
 	}
 	_lastActivity.restart();
 }
@@ -62,6 +66,7 @@ void Client::onTick() {
 
     sf::Packet packet;
     if (receive(packet) == sf::Socket::Status::Done) {
+        _EVENTLOG("Packet recibido\n");
         int packetID;
         packet >> packetID;
         receivePacket(packetID, packet);

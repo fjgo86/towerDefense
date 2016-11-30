@@ -1,11 +1,11 @@
 #pragma once
 
 #include <SFML/Network.hpp>
+#include "packetOut.h"
 
 class Client;
-class Account;
 
-class PacketLogin {
+class PacketLogin : public PacketOut {
 public:
     /*
     * @brief Valor devuelto en el intento de conexión de una cuenta.
@@ -21,22 +21,20 @@ public:
         ACM_QTY
     };
 
-	PacketLogin(Client *client, sf::Packet data);
+	PacketLogin();
 	~PacketLogin();
 
     /*
     * @brief Lee el contenido del Packet
-    * Lee el usuario y la contraseña enviados a través del Packet.
+    * Recibe si el Login fue exitoso o no
     * return false si hay algún tipo de fallo o problema.
     */
-    bool readPacket(sf::Packet data, std::string &user, std::string &pw);
+    bool readPacket(sf::Packet data);
 
     /*
     * @brief Comprueba si existe esa cuenta.
-    * Hace un llamado a la Base de Datos buscando una cuenta que coincida con ese usuario y contraseña
-    * Crea una Account en caso de encontrar algún resultado.
-    * @return AccConnectMsg
+    * Envía la información de la cuenta al servidor para hacer Login
     */
-    AccConnectMsg checkAccount(std::string user, std::string pw, Account *cuenta);
+    void checkAccount(std::string user, std::string pw);
 };
 

@@ -23,7 +23,7 @@ find_package(SFML 2.4 COMPONENTS system window graphics network audio)		# Busca 
 
 # Define sources and executables
 include("logger/CMakeLists.txt")		# Archivos del Logger.
-include("network/CMakeLists.txt")		# Archivos Network y Packets.
+include("networking/CMakeLists.txt")	# Archivos Network y Packets.
 include("db/CMakeLists.txt")			# Archivos de BDs.
 include("loginServer/CMakeLists.txt")	# Archivos para el LoginServer.
 include("gameClient/CMakeLists.txt")	# Archivos para el GameClient.

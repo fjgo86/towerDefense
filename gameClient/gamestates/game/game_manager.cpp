@@ -107,7 +107,7 @@ void GameManager::addTextoFPS() {
     sf::Font font;
 
     // Carga fichero de fuentes.
-    if (!font.loadFromFile("../gameClient/media/fonts/arial.ttf")) {
+    if (!font.loadFromFile("media/fonts/arial.ttf")) {
         std::cout << "Error cargando fuente.\n";
     }
 
@@ -130,7 +130,7 @@ void GameManager::addTextoMousePos() {
     sf::Font font;
 
     // Carga fichero de fuentes.
-    if (!font.loadFromFile("../gameClient/media/fonts/arial.ttf")){
+    if (!font.loadFromFile("media/fonts/arial.ttf")){
         std::cout << "Error cargando fuente.\n";
     }
 

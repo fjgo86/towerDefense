@@ -9,7 +9,7 @@ ConnectionManager::ConnectionManager() {
 
     _networkStatus = Disconnected;
 
-    _fuente.loadFromFile("../gameClient/media/fonts/big_noodle_titling_oblique.ttf");
+    _fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
     
     _statusText.setFont(_fuente);
     _statusText.setString("Conectando al Servidor de Juego");
