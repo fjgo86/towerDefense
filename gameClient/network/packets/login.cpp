@@ -1,17 +1,16 @@
 #include "login.h"
 
-#include "../../../logger/log.h"
+#include <logger\logger.h>
 #include "../../../networking/packets.h"
 #include "../clients/client.h"
 
-PacketLogin::PacketLogin() : PacketOut(PACKET_Login) {
+PacketLogin::PacketLogin() : Packet(PACKET_Login) {
 }
 
 PacketLogin::~PacketLogin() {
 }
 
-bool PacketLogin::readPacket(sf::Packet data) {
-    return false;
+void PacketLogin::readPacket(sf::Packet data) {
 }
 
 void PacketLogin::checkAccount(std::string user, std::string pw) {

@@ -1,5 +1,5 @@
 
-#include "../logger/log.h"
+#include <logger\logger.h>
 
 #include "serverListener.h"
 #include "../networking/packets.h"

@@ -1,8 +1,7 @@
 #include "packetOut.h"
-#include "../logger/log.h"
+#include <logger\logger.h>
 
-PacketOut::PacketOut(PacketID id) {
-    (*this) << id;
+PacketOut::PacketOut(PacketID id) : Packet(id) {
 }
 
 PacketOut::~PacketOut() {

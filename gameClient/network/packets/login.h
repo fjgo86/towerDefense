@@ -1,16 +1,14 @@
 #pragma once
 
 #include <SFML/Network.hpp>
-#include "packetOut.h"
+#include "packet.h"
 
 class Client;
 
-class PacketLogin : public PacketOut {
+class PacketLogin : public Packet {
 public:
     /*
     * @brief Valor devuelto en el intento de conexión de una cuenta.
-    * Valor que se devuelve al intentar conectar una cuenta 'AccountsManager::conecta()'
-    * Cualquier valor diferente a ACM_OK cancela la conexión.
     */
     enum AccConnectMsg {
         ACM_Ok,         // Todo correcto.
@@ -27,9 +25,8 @@ public:
     /*
     * @brief Lee el contenido del Packet
     * Recibe si el Login fue exitoso o no
-    * return false si hay algún tipo de fallo o problema.
     */
-    bool readPacket(sf::Packet data);
+    void readPacket(sf::Packet data);
 
     /*
     * @brief Comprueba si existe esa cuenta.

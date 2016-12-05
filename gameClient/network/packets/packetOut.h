@@ -1,9 +1,14 @@
 #pragma once
-#include <SFML\Network\Packet.hpp>
-#include "../networking/packets.h"
+#include "packet.h"
 
-class PacketOut : public sf::Packet {
+/*
+* @brief Clase Packet que solo puede enviar datos.
+*/
+class PacketOut : public Packet {
+private:
+    int _id;
+    std::vector<char> myBuffer;
 public:
-    PacketOut(PacketID id);
+    PacketOut(PacketID id); // ID del paquete a enviar.
     ~PacketOut();
 };

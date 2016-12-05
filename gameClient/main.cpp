@@ -1,10 +1,6 @@
 #include "Game.h"
-#include "../logger/logger.h"
-
 
 Game gGame;
-Logger gLog;
-
 void main() {
     gGame.init();
     while (gGame._gameWindow->isOpen()) {

@@ -1,13 +1,14 @@
 #include <iostream>
+#include <logger\log_manager.h>
 #include "game.h"
 
 #include <SFML/Window/VideoMode.hpp>
 
-#include "../logger/logger.h"
-
 #include "gamestates/menu/mainmenu_manager.h"
 #include "gamestates/game/game_manager.h"
 #include "gamestates/gamestates_manager.h"
+
+LogManager gLog;
 
 void Game::onTick() {
     _statesManager->getEstadoActual()->handleInput();

@@ -1,6 +1,10 @@
 #include "loginServer.h"
+#include <logger/log_manager.h>
+#include <logger/logger.h>
+#include <GitRevision.h>
 
-Logger gLog;
+
+LogManager gLog;
 DB gMySQL;
 
 LoginServer::LoginServer() {
@@ -21,5 +25,6 @@ bool LoginServer::onTick() {
 }
 
 void LoginServer::init() {
+    _LOG(Log::LOGLVL_EVENT, "Iniciado servidor en la version '" << __GITREVISION__ << "'.\n");
 	_network = new ServerListener();
 }

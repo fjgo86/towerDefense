@@ -1,6 +1,6 @@
 #include "packetIn.h"
 
-PacketIn::PacketIn() {
+PacketIn::PacketIn() : Packet(true) {
 }
 
 PacketIn::~PacketIn() {

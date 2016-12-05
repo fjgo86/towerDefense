@@ -1,10 +1,11 @@
 #pragma once
-#include <SFML\Network\Packet.hpp>
+#include "packet.h"
 
-class PacketIn : public sf::Packet {
+/*
+* @brief Clase Packet que solo recibe datos.
+*/
+class PacketIn : public Packet {
 public:
     PacketIn();
     ~PacketIn();
-
-    virtual void receivePacket() = 0;
 };

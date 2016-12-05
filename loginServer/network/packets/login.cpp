@@ -1,7 +1,7 @@
 #include "login.h"
 #include <string>
 
-#include "../../../logger/log.h"
+#include <logger\logger.h>
 #include "../../accounts/account.h"
 #include "../clients/client.h"
 #include "../../../db/db.h"

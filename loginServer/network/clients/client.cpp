@@ -2,7 +2,7 @@
 
 #include <SFML/System.hpp>
 
-#include "../../../logger/log.h"
+#include <logger\logger.h>
 #include "../../loginServer.h"
 
 #include "../../../networking/packets.h"
