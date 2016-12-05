@@ -11,8 +11,8 @@ LoginBoxFocusedTextBox::~LoginBoxFocusedTextBox(){
 
 LoginBox::LoginBox() {
 
-    _fuente.loadFromFile("media/fonts/big_noodle_titling_oblique.ttf");
-    _arial.loadFromFile("media/fonts/PT_Sans-Narrow-Web-Regular.ttf");
+    _fuente.loadFromFile("../gameClient/media/fonts/big_noodle_titling_oblique.ttf");
+    _arial.loadFromFile("../gameClient/media/fonts/PT_Sans-Narrow-Web-Regular.ttf");
 
     // Inicialización de valores por defecto
     _focusedOutlineThickness = 2.f;

@@ -23,12 +23,12 @@ LobbyState::LobbyState() {
 // Carga las texturas y shaders necesarios.
 void LobbyState::loadBackgroundTextures() {
 
-    gGame._textureManager->loadFromFile("logoMenu", "media/logos/logo.png");
-    gGame._textureManager->loadFromFile("background", "media/background.jpg");
+    gGame._textureManager->loadFromFile("logoMenu", "../gameClient/media/logos/logo.png");
+    gGame._textureManager->loadFromFile("background", "../gameClient/media/background.jpg");
 
     if (sf::Shader::isAvailable()) {
 
-        if (!backgroundShader.loadFromFile("media/shaders/clouds.frag", sf::Shader::Fragment)) {
+        if (!backgroundShader.loadFromFile("../gameClient/media/shaders/clouds.frag", sf::Shader::Fragment)) {
 
             std::cout << "Error cargando el shader de fondo en el menu principal." << std::endl;
         }
