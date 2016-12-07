@@ -1,12 +1,11 @@
 #include "Client.h"
 
 #include <SFML/System.hpp>
+#include <logger/logger.h>
+#include <networking/packets.h>
 
-#include "../../../logger/log.h"
 #include "../../loginServer.h"
-
-#include "../../../networking/packets.h"
-#include "../packets/login.h"
+#include "../packets/loginReq.h"
 
 Client::Client() {
 	_lastActivity.restart();
@@ -39,9 +38,12 @@ void Client::receivePacket(int id, sf::Packet data) {
         default:
             _ERRORLOG("Reciviendo Packet inexistente: " << id << ".\n");
             break;
-		case PACKET_Login:
+		case LoginReq:
 			_LOG(Log::LOGLVL_EVENT, "Recibido packetLogin \n");
-			new PacketLogin(this, data);
+			PacketLoginReq* thePacket = new PacketLoginReq();
+            thePacket->doReceive(this, data);
+            delete thePacket;
+
 	}
 	_lastActivity.restart();
 }
@@ -53,7 +55,7 @@ void Client::onConnect() {
 void Client::onDisconnect() {
 	_LOG(Log::LOGLVL_EVENT, "Client " << getID() << " desconectado" << ".\n");
 	close();
-	gServer._network->deleteClient(this);
+	//gServer._network->deleteClient(this);
 }
 
 void Client::onLogin() {

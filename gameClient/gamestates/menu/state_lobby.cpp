@@ -4,7 +4,7 @@
 #include "state_lobby.h"
 
 #include "../../game.h"
-#include "../../network/packets/login.h"
+#include "../../network/packets/loginReq.h"
 
 LobbyState::LobbyState() {
 
@@ -122,7 +122,7 @@ void LobbyState::handleInput() {
                 case sf::Mouse::Left:
                     _mousePos = sf::Mouse::getPosition(*gGame._gameWindow);
                     if (loginView.getConnectButton().getGlobalBounds().contains((sf::Vector2f)_mousePos)) {
-                        gGame._client->onConnect();
+                        gGame._client->connect();
                         sendData(loginView.getUser(), loginView.getPassword());
                     }
                     break;
@@ -142,11 +142,10 @@ void LobbyState::handleInput() {
     this->update();
 }
 
-void LobbyState::sendData(std::string u, std::string p) {
+void LobbyState::sendData(std::string user, std::string pw) {
 
-    std::cout << "Comprobando en servidor..." << std::endl << "Usuario: " << u << " - Password: " << p << std::endl;
-    PacketLogin* packet = new PacketLogin();
-    packet->checkAccount(u, p);
+    std::cout << "Comprobando en servidor..." << std::endl << "Usuario: " << user << " - Password: " << pw << std::endl;
+    PacketLoginReq* packet = new PacketLoginReq(user, pw);
     gGame._client->send(*packet);
     delete packet;
 }

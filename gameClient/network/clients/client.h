@@ -5,57 +5,50 @@ class Network;
 class Account;
 
 /*
-* @brief Clase que guarda las conexiones TCP
-* Esta clase, que hereda de sf::TcpSocket se encarga de guardar la conexión recibida y de recibir e interpretar futuros datos a través de ella.
+* @brief Clase que guarda la conexión TCP con el Servidor.
+* Esta clase, que hereda de sf::TcpSocket se encarga de guardar la conexión con el servidor y de enviar, recibir e interpretar futuros datos a través de ella.
 */
 class Client : public sf::TcpSocket {
 private:
+    /*
+    * @brief Estado de la conexión del cliente con respecto al servidor.
+    */
     enum CONNECTION_TYPE {
         CT_CONNECTING,
         CT_CONNECTED,
         CT_DISCONNECTED
     };
 
-	int _id; ///< ID que apunta a la posición del Client en el vector Network::_clients<Client*>
-	sf::Clock _lastActivity; ///< Registro de tiempo de la última actividad del cliente (Timeout, control de in/actividad ...).
-    Account *_cuenta;
+	int _id;                    ///< ID que apunta a la posición del Client en el vector Network::_clients<Client*>
+	sf::Clock _lastActivity;    ///< Registro de tiempo de la última actividad del cliente (Timeout, control de in/actividad ...).
     CONNECTION_TYPE _connType;
 public:
 	Client();
 	~Client();
-
-    /*
-    * @brief Devuelve la ID del este Client.
-    * return n ID del Client.
-    */
-    int getID();
-    /*
-    * @brief Asigna una ID a este Client.
-    * Especifica la ID de este Client, puede ser la que se le da al crearse o una modificación por que se haya eliminado algún otro Client previo.
-    * Siempre debe apuntar a la posición del Cliente
-    * @param ID informa de la posición del Client.
-    */
-    void setID(int id);
 	/*
-	* @Brief Se recibe un paquete del cliente.
-	* Se ha recibido un paquete de datos por parte del Client
+	* @Brief Se recibe un paquete del servidor.
+	* Se ha recibido un paquete de datos por parte del Servidor.
 	* param id del paquete.
 	* param data con el Packet recibido.
 	*/
 	void receivePacket(int id, sf::Packet data);
+    /*
+    * @brief Realiza un intento de conexión con el servidor.
+    */
+    void connect();
 	/*
 	* @brief Conexion.
-	* El Client acaba de conectarse.
+	* El Client acaba de conectarse al servidor.
 	*/
 	void onConnect();
 	/*
 	* @brief Desconexión.
-	* El Client se acaba de desconectar.
+	* El Client se acaba de desconectar del servidor.
 	*/
 	void onDisconnect();
 	/*
 	* @brief Ejecuta un Tick.
-	* Ejecuta un Tick en el cliente, actualmente para controlar el _lastActivity.
+	* Ejecuta un Tick en el cliente, renovando el _lastActivity y comprobando la entrada de nuevos Packets por parte del servidor.
 	*/
 	void onTick();
 };

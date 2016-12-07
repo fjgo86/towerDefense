@@ -34,14 +34,10 @@ SOURCE_GROUP (network\\clients FILES ${ls_clients_SOURCES})
 # /network/packets files
 #message("Preparando archivos network/packets")
 set( ls_packets_SOURCES 
-	loginServer/network/packets/packetIn.h 
-	loginServer/network/packets/packetIn.cpp
-	loginServer/network/packets/packetOut.h 
-	loginServer/network/packets/packetOut.cpp
-	loginServer/network/packets/packetIO.h 
-	loginServer/network/packets/packetIO.cpp
-	loginServer/network/packets/login.h 
-	loginServer/network/packets/login.cpp )
+	loginServer/network/packets/loginReq.h 
+	loginServer/network/packets/loginReq.cpp
+	loginServer/network/packets/loginResp.h 
+	loginServer/network/packets/loginResp.cpp )
 SOURCE_GROUP (network\\packets FILES ${ls_packets_SOURCES})
 
 set(loginServer_SOURCES 

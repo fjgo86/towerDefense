@@ -2,8 +2,7 @@
 #include <string>
 #include <windows.h> // WinApi header
 #include <sstream>
-
-#include "Logger.h"
+#include <iostream>
 
 
 
@@ -83,107 +82,109 @@ private:
 
 
 public:
-    Log(LogLevel logLvl, const char* file, int line, const char* method, const char* txt);
-    Log(LogLevel logLvl, const char* txt);
-    ~Log();
+    Log(LogLevel logLvl, const char* file, int line, const char* method, const char* txt) {
+        if (logLvl >= Log::LOGLVL_QTY) {
+            _logLevel = LogLevel(LOGLVL_QTY - 1);   // Comprobando que el LogLevel no exceda a los definidos, se pondrá por defecto al último LogLevel existente (el de más alta importancia).
+        }
+        else {
+            _logLevel = logLvl;
+        }
+        _file = file;
+        _line = line;
+        _method = method;
+        _isDetailed = true;
+        _txt = txt;
+    }
+    Log(LogLevel logLvl, const char* txt) {
+        if (logLvl >= Log::LOGLVL_QTY) {
+            _logLevel = LogLevel(LOGLVL_QTY - 1);   // Comprobando que el LogLevel no exceda a los definidos, se pondrá por defecto al último LogLevel existente (el de más alta importancia).
+        }
+        else {
+            _logLevel = logLvl;
+        }
+        _file = "";
+        _line = 0;
+        _method = "";
+        _isDetailed = false;
+        _txt = txt;
+    }
+    ~Log(){
+    }
 
     /*
     Imprime los datos del Log en la consola del programa.
     */
-    void printText();
+    void printText() {
+        HANDLE consola = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(consola, getLevelColor());          // Asigna el Log Level Color
+        std::cout << getLevelString();                              // Imprime el Log Level Name
+
+        if (isDetailed()) {
+            SetConsoleTextAttribute(consola, LogColorFileDefault);  // Asigna el Log File Color a Default
+            std::cout << getFile() << ":";                          // Imprime separador.
+
+            SetConsoleTextAttribute(consola, LogColorLineDefault);  // Asigna el Log Line Color a Default
+            std::cout << getLine() << ":";                          // Imprime separador.
+
+            SetConsoleTextAttribute(consola, LogColorMethodDefault);// Asigna el Log Method Color a Default
+            std::cout << getMethod() << " = ";                      // Imprime separador.
+        }
+
+        SetConsoleTextAttribute(consola, LogColorTextDefault);      // Asigna el Log Text Color a Default
+        std::cout << getText();
+    }
 
 private:
     /*
         Devuelve el _logLevel.
     */
-    Log::LogLevel getLevel();
+    Log::LogLevel getLevel() {
+        return _logLevel;
+    }
     /*
         Devuelve el texto que corresponde al _logLevel.
     */
-    const char* getLevelString();
+    const char* getLevelString() {
+        return LogLevelStrings[_logLevel];
+    }
     /*
         Devuelve el texto que se pretende mostrar en el Log.
     */
-    std::string getText();
+    std::string getText() {
+        return _txt;
+    }
     /*
         Devuelve el color que corresponde al _logLevel.
     */
-    WORD getLevelColor();
+    WORD getLevelColor() {
+        return LogColor[_logLevel];
+    }
     /*
         Devuelve si el log es detallado (_isDetailed) o no.
     */
-    bool isDetailed();
+    bool isDetailed() {
+        return _isDetailed;
+    }
 
     // Información detallada
     /*
         Devuelve el fichero del Log (_file).
     */
-	const char* getFile();
+	const char* getFile() {
+        return _file;
+    }
     /*
         Devuelve la linea del Log (_line).
     */
-    int getLine();
+    int getLine() {
+        return _line;
+    }
     /*
     * @brief Devuelve el Method del Log.
     * Devuelve el nombre del método desde el que se ejecuta el Log.
     * @return el nombre.
     */
-    const char* getMethod();
+    const char* getMethod() {
+        return _method;
+    }
 };
-
-/*
-    Crea un Log Detallado:
-        x = LogLevel
-        f = __FILE__
-        l = __LINE__
-        m = __func__
-        txt = Texto a mostrar
-*/
-#define _LOGDETAILED(x, f, l, m, txt) { \
-	std::stringstream s; \
-	s << txt; \
-    gLog.addLog(new Log(x, f, l, m, s.str().c_str())); \
- }
-
-/*
-    Crea un Log Simple:
-        x = LogLevel
-        txt = Texto a mostrar
-*/
-#define _LOG(x, txt) { \
-	std::stringstream s; \
-	s << txt; \
-    gLog.addLog(new Log(x, s.str().c_str())); \
- }
-
-/*
-    Crea un _LOGDETAILED del tipo LOGLVL_DEBUG
-*/
-#define _DEBUGLOG(txt) { \
-    _LOGDETAILED(Log::LOGLVL_DEBUG, __FILE__, __LINE__, __func__, txt); \
-}
-/*
-Crea un _LOGDETAILED del tipo LOGLVL_EVENT
-*/
-#define _EVENTLOG(txt) { \
-    _LOGDETAILED(Log::LOGLVL_EVENT, __FILE__, __LINE__, __func__, txt); \
-}
-/*
-Crea un _LOGDETAILED del tipo LOGLVL_WARNING
-*/
-#define _WARNINGLOG(txt) { \
-    _LOGDETAILED(Log::LOGLVL_WARNING, __FILE__, __LINE__, __func__, txt); \
-}
-/*
-Crea un _LOGDETAILED del tipo LOGLVL_ERROR
-*/
-#define _ERRORLOG(txt) { \
-    _LOGDETAILED(Log::LOGLVL_ERROR, __FILE__, __LINE__, __func__, txt); \
-}
-/*
-Crea un _LOGDETAILED del tipo LOGLVL_CRITICAL
-*/
-#define _CRITICALLOG(txt) { \
-    _LOGDETAILED(Log::LOGLVL_CRITICAL, __FILE__, __LINE__, __func__, txt); \
-}
-

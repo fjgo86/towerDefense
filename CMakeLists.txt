@@ -14,17 +14,22 @@ project(TowerDefense)	# (En MSVC): Nombre del archivo .sln.
 include_directories("${PROJECT_BINARY_DIR}")
 
 # Detect and add SFML
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake/cmake_modules" ${CMAKE_MODULE_PATH})	# Ruta para el archivo findSFML.cmake.
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake" ${CMAKE_MODULE_PATH})	# Ruta para el archivo findSFML.cmake.
 
 #Find any version 2.X of SFML.
 #See the FindSFML.cmake file for additional details and instructions.
 set(SFML_STATIC_LIBRARIES TRUE)			# Forzado el uso de librerías estáticas.
 find_package(SFML 2.4 COMPONENTS system window graphics network audio)		# Busca las librerías y headers de SFML y los incluye al proyecto.
 
+# GitVer checker
+include("CMake/CMakeGitStatus.cmake")
+
+# General includes
+include_directories("include")
+
 # Define sources and executables
-include("logger/CMakeLists.txt")		# Archivos del Logger.
-include("networking/CMakeLists.txt")	# Archivos Network y Packets.
-include("db/CMakeLists.txt")			# Archivos de BDs.
+include("include/networking/CMakeLists.txt")	# Archivos Network y Packets.
+include("include/db/CMakeLists.txt")			# Archivos de BDs.
 include("loginServer/CMakeLists.txt")	# Archivos para el LoginServer.
 include("gameClient/CMakeLists.txt")	# Archivos para el GameClient.
 
