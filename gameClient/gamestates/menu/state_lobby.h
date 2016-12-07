@@ -7,6 +7,7 @@
 #include "login_manager.h"
 #include "mainmenu_manager.h"
 #include "connection_manager.h"
+#include "botonsalir.h"
 
 class LobbyState : public GameState {
 
@@ -17,6 +18,8 @@ private:
     MainMenuManager menuView;
 
     sf::Vector2i _mousePos;
+
+    BotonSalir *_botonSalir;
 
     sf::Shader backgroundShader;
     sf::Sprite background, logo;
