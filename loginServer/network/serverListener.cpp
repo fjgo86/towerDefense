@@ -1,15 +1,12 @@
 
-#include <logger\logger.h>
-
+#include <logger/logger.h>
+#include <networking/config.h>
 #include "serverListener.h"
-#include "../networking/packets.h"
-#include "../networking/config.h"
 #include "clients/client.h"
-#include "packets/login.h"
-#include "packets/packetOut.h"
 
 ServerListener::ServerListener() {
-    if (listen(5300) == sf::Socket::Done) {
+    
+    if (listen(SERVERPORT) == sf::Socket::Done) {
         _LOG(Log::LOGLVL_EVENT, "Socket conectado \n");
     }
     else{
@@ -49,11 +46,16 @@ void ServerListener::updateClients() {
 }
 
 void ServerListener::onTick() {
+    sf::TcpSocket sock;
     Client *client = new Client();// Creo un Client
-    if (accept(*client) == sf::Socket::Done) {	// y lo transformo en la nueva conexión recibida
-        client->setID((int)_clients.size());	// Asignación de ID del nuevo client.
+    if (accept(sock) == sf::Socket::Done) {	// y lo transformo en la nueva conexión recibida
+        /*client->setID((int)_clients.size());	// Asignación de ID del nuevo client.
         client->onConnect();
-        addClient(client);
+        addClient(client);*/
+        _EVENTLOG("bla\n");
+    }
+    else {
+        delete client;
     }
 
     if (_clients.size() <= 0) {

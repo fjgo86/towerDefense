@@ -2,11 +2,12 @@
 
 #include <SFML/System.hpp>
 
-#include <logger\logger.h>
+#include <logger/logger.h>
 
-#include "../../../networking/packets.h"
-#include "../../../networking/config.h"
-#include "../packets/login.h"
+#include <networking/packets.h>
+#include <networking/config.h>
+#include "../packets/loginReq.h"
+#include "../packets/loginResp.h"
 
 Client::Client() {
     setBlocking(false);
@@ -17,14 +18,23 @@ Client::~Client() {
 }
 
 void Client::receivePacket(int id, sf::Packet data) {
-
+    switch (id) {
+        default:
+            _ERRORLOG("Client::receivePacket: Paquete '" << id << "' sin registrar.\n");
+            return;
+        case LoginResp:
+            PacketLoginResp* pResp = new PacketLoginResp();
+            pResp->doReceive(this, data);
+            delete pResp;
+            return;
+    }
 }
 
 void Client::connect() {
     if (_connType == CT_DISCONNECTED) { // No se intenta la conexión a menos que el socket esté desconectado.
         _LOG(Log::LOGLVL_EVENT, "Conectando con el servidor.\n");
         _connType = CT_CONNECTING;
-        dynamic_cast<sf::TcpSocket*>(this)->connect(sf::IpAddress(SERVERIP), 5300);
+        dynamic_cast<sf::TcpSocket*>(this)->connect(sf::IpAddress(SERVERIP), SERVERPORT);
         _lastActivity.restart();
     }
 }

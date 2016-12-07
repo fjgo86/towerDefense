@@ -4,7 +4,7 @@
 #include "state_lobby.h"
 
 #include "../../game.h"
-#include "../../network/packets/login.h"
+#include "../../network/packets/loginReq.h"
 
 LobbyState::LobbyState() {
 
@@ -135,11 +135,10 @@ void LobbyState::handleInput() {
     this->update();
 }
 
-void LobbyState::sendData(std::string u, std::string p) {
+void LobbyState::sendData(std::string user, std::string pw) {
 
-    std::cout << "Comprobando en servidor..." << std::endl << "Usuario: " << u << " - Password: " << p << std::endl;
-    PacketLogin* packet = new PacketLogin();
-    packet->checkAccount(u, p);
+    std::cout << "Comprobando en servidor..." << std::endl << "Usuario: " << user << " - Password: " << pw << std::endl;
+    PacketLoginReq* packet = new PacketLoginReq(user, pw);
     gGame._client->send(*packet);
     delete packet;
 }

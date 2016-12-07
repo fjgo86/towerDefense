@@ -1,5 +1,5 @@
 #include <iostream>
-#include <logger\log_manager.h>
+#include <logger/log_manager.h>
 #include "game.h"
 
 #include <SFML/Window/VideoMode.hpp>

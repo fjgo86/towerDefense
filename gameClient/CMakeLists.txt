@@ -100,7 +100,6 @@ set( gc_gs_game_units_torres_SOURCES
 SOURCE_GROUP (client\\gamestates\\game\\units\\torres FILES ${gc_gs_game_units_torres_SOURCES})
 
 #GAME END
-
 # /network/clients files
 #message("Preparando archivos network/clients")
 set( gc_clients_SOURCES 
@@ -111,16 +110,10 @@ SOURCE_GROUP (network\\clients FILES ${gc_clients_SOURCES})
 # /network/packets files
 #message("Preparando archivos network/packets")
 set( gc_packets_SOURCES 
-	gameClient/network/packets/packet.h 
-	gameClient/network/packets/packet.cpp
-	gameClient/network/packets/packet_manager.h 
-	gameClient/network/packets/packet_manager.cpp
-	gameClient/network/packets/packetIn.h 
-	gameClient/network/packets/packetIn.cpp
-	gameClient/network/packets/packetOut.h 
-	gameClient/network/packets/packetOut.cpp
-	gameClient/network/packets/login.h 
-	gameClient/network/packets/login.cpp )
+	gameClient/network/packets/loginReq.h 
+	gameClient/network/packets/loginReq.cpp
+	gameClient/network/packets/loginResp.h 
+	gameClient/network/packets/loginResp.cpp )
 SOURCE_GROUP (network\\packets FILES ${gc_packets_SOURCES})
 
 set(gameClient_SOURCES 

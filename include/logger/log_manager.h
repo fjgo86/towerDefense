@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <logger\log.h>
+#include <logger/log.h>
 
 extern class LogManager : public std::vector<Log*> {
 

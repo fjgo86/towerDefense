@@ -28,8 +28,8 @@ include("CMake/CMakeGitStatus.cmake")
 include_directories("include")
 
 # Define sources and executables
-include("networking/CMakeLists.txt")	# Archivos Network y Packets.
-include("db/CMakeLists.txt")			# Archivos de BDs.
+include("include/networking/CMakeLists.txt")	# Archivos Network y Packets.
+include("include/db/CMakeLists.txt")			# Archivos de BDs.
 include("loginServer/CMakeLists.txt")	# Archivos para el LoginServer.
 include("gameClient/CMakeLists.txt")	# Archivos para el GameClient.
 
