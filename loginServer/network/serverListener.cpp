@@ -46,13 +46,11 @@ void ServerListener::updateClients() {
 }
 
 void ServerListener::onTick() {
-    sf::TcpSocket sock;
     Client *client = new Client();// Creo un Client
-    if (accept(sock) == sf::Socket::Done) {	// y lo transformo en la nueva conexión recibida
-        /*client->setID((int)_clients.size());	// Asignación de ID del nuevo client.
+    if (accept(*client) == sf::Socket::Done) {	// y lo transformo en la nueva conexión recibida
+        client->setID((int)_clients.size());	// Asignación de ID del nuevo client.
         client->onConnect();
-        addClient(client);*/
-        _EVENTLOG("bla\n");
+        addClient(client);
     }
     else {
         delete client;

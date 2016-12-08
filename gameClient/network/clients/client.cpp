@@ -30,11 +30,11 @@ void Client::receivePacket(int id, sf::Packet data) {
     }
 }
 
-void Client::connect() {
+void Client::doConnect() {
     if (_connType == CT_DISCONNECTED) { // No se intenta la conexión a menos que el socket esté desconectado.
         _LOG(Log::LOGLVL_EVENT, "Conectando con el servidor.\n");
         _connType = CT_CONNECTING;
-        dynamic_cast<sf::TcpSocket*>(this)->connect(sf::IpAddress(SERVERIP), SERVERPORT);
+        connect(sf::IpAddress(SERVERIP), SERVERPORT);
         _lastActivity.restart();
     }
 }
@@ -53,7 +53,7 @@ void Client::onDisconnect() {
 
 void Client::onTick() {
     // Comprobación del éxito de la conexión
-    if (_connType == CT_CONNECTING && getRemoteAddress() == sf::IpAddress(SERVERIP)) {
+    if (_connType == CT_CONNECTING && getRemoteAddress() == sf::IpAddress(SERVERIP) && this->getLocalPort() != 0) {
         onConnect();
     }
 

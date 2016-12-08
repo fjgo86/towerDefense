@@ -2,6 +2,9 @@
 #include <networking/packetIn.h>
 #include "../clients/client.h"
 
+/*
+* @brief Respuesta al PacketLoginReq
+*/
 class PacketLoginResp : public PacketIn {
 public:
     /*

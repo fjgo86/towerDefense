@@ -115,7 +115,7 @@ void LobbyState::handleInput() {
                 case sf::Mouse::Left:
                     _mousePos = sf::Mouse::getPosition(*gGame._gameWindow);
                     if (loginView.getConnectButton().getGlobalBounds().contains((sf::Vector2f)_mousePos)) {
-                        gGame._client->connect();
+                        gGame._client->doConnect();
                         sendData(loginView.getUser(), loginView.getPassword());
                     }
                     break;

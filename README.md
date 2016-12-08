@@ -15,7 +15,11 @@ Instrucciones:
 5) Generar proyecto con compilador de 64bits.
 
 
+
 Configuracion CMake:
+
 1) Modificar la ruta de MYSQL_ROOT de ser necesario: set(MYSQL_ROOT "C:/Program Files/MySQL/Connector.C++ 1.1") #Ruta de MySQL.
+
 2) Usar el siguiente comando desde la carpeta del repositorio: git update-index --assume-unchanged include/GitRevision.h
+
 3) En caso de actualizar la librería de SFML, actualizar el nombre del directorio: set(SFML_ROOT "include/SFML-2.4.1") #Ruta de la librería SFML_(x64).
