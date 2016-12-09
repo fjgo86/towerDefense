@@ -35,7 +35,7 @@ public:
     /*
     * @brief Realiza un intento de conexión con el servidor.
     */
-    void connect();
+    void doConnect();
 	/*
 	* @brief Conexion.
 	* El Client acaba de conectarse al servidor.

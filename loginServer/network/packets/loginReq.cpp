@@ -36,6 +36,7 @@ void PacketLoginReq::doReceive(Client *theClient, sf::Packet theData) {
     }
     if (status == ACM_Ok) {
         theClient->setAccount(cuenta);
+		_LOG(Log::LogLevel::LOGLVL_EVENT, "Conexión exitosa de la cuenta '" << nombre << "'\n");
     }
     else {
         _LOG(Log::LogLevel::LOGLVL_EVENT, "Error en el Login: " << (int)status << "\n");
@@ -47,7 +48,7 @@ PacketLoginReq::AccConnectMsg PacketLoginReq::checkAccount(std::string user, std
     std::stringstream sqlQuery;
     _LOG(Log::LOGLVL_EVENT, "Comprobando usuario '" << user << "', contraseña '" << pw << "'\n");
     // Query para la búsqueda de la cuenta y retorno de todos sus datos.
-    sqlQuery << "SELECT * from " << TABLECUENTAS 
+    sqlQuery << "SELECT id from " << TABLECUENTAS 
         << " WHERE " << ROWUSER << " = '" << user 
         << "' AND " << ROWPW << " = '" << pw << "'";
     sql::Statement *stmt;
@@ -57,8 +58,8 @@ PacketLoginReq::AccConnectMsg PacketLoginReq::checkAccount(std::string user, std
         res = stmt->executeQuery(sqlQuery.str());
         if (!res->first())  // Usuario & contraseña no encontrados/coinciden.
             return ACM_UserPw;
-        theAccount = new Account(res->getInt(0),    // Una vez existen datos válidos se procede a la creación de la Account.
-                             res->getString(1).c_str());
+        theAccount = new Account(res->getInt("id"),    // Una vez existen datos válidos se procede a la creación de la Account.
+								 user.c_str());
         return ACM_Ok;
     }
     catch (sql::SQLException &e) {
