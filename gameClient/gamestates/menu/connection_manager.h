@@ -26,6 +26,8 @@ public:
     short getNetworkStatus();
     // Cambia el estado de la conexión. (Solo para debug, el estado más adelante se gestionará desde la propia clase)
     void setNetworkStatus(short status);
+    // Cambia el texto de estado
+    void setStatusText(std::string t);
 
     void onTick();
     void handleInput(sf::Event &event);

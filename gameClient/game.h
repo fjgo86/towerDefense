@@ -11,7 +11,7 @@ public:
     Game();
     ~Game();
 
-    Client *_client;
+    Client*             _client;
     GameStatesManager*	_statesManager;
     TextureManager*		_textureManager;
 	SpriteManager*		_spriteManager;

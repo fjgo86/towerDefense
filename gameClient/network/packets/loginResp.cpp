@@ -13,22 +13,27 @@ PacketLoginResp::~PacketLoginResp() {
 }
 
 void PacketLoginResp::doReceive(Client* theClient, sf::Packet data) {
-    int rawLoginStatus;
-    if (data >> rawLoginStatus) {
-        AccConnectMsg loginStatus = (AccConnectMsg)rawLoginStatus;
-        _EVENTLOG("Login recibido = " << rawLoginStatus << "\n");
+    
+    if (theClient->getConnType() == Client::CT_CONNECTED) {
 
-        LobbyState* lobbyConnection = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
-        if (!lobbyConnection) { return; }
+        int rawLoginStatus;
+        if (data >> rawLoginStatus) {
+            AccConnectMsg loginStatus = (AccConnectMsg)rawLoginStatus;
+            _EVENTLOG("Login recibido = " << rawLoginStatus << "\n");
 
-        if (loginStatus = ACM_Ok) {
+            LobbyState* lobbyConnection = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
+            if (!lobbyConnection) { return; }
 
-            lobbyConnection->getConnection()->setNetworkStatus(ConnectionManager::Connected);
+            if (loginStatus == ACM_Ok) {
+
+                std::cout << "login = ACM_Ok" << std::endl;
+                lobbyConnection->getConnection()->setNetworkStatus(ConnectionManager::Connected);
+            }
+
+
         }
-        
-        
-    }
-    else {
-        _ERRORLOG("Error recibiendo loginStatus.\n");
+        else {
+            _ERRORLOG("Error recibiendo loginStatus.\n");
+        }
     }
 }
