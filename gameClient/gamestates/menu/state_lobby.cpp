@@ -16,11 +16,6 @@ LobbyState::LobbyState() {
     // Inicializamos la vista actual a la del login.
     _vistaActual = &loginView;
 
-    // Inicializamos el boton de "Salir del juego"
-    _botonSalir = new BotonSalir(gGame._globalFont);
-
-    _botonSalir->setPosition(300, 300);
-
     // Inicializamos elementos visuales de la pantalla de login.
     this->initLogin();
 }
@@ -65,7 +60,7 @@ void LobbyState::onTick() {
     gGame._gameWindow->draw(background, &backgroundShader);
     gGame._gameWindow->draw(logo);
 
-    gGame._gameWindow->draw(*_botonSalir);
+    std::cout << "networkStatus: " << connView.getNetworkStatus() << std::endl;
 
     loginView.onTick();
     connView.onTick();
@@ -225,6 +220,11 @@ void LobbyState::update() {
             _moveLobby = false;
         }
     }
+}
+
+ConnectionManager* LobbyState::getConnection() {
+
+    return &connView;
 }
 
 LobbyState::~LobbyState() {

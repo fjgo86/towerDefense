@@ -8,7 +8,7 @@ class ConnectionManager : public ViewsWrapper {
 private:
     sf::Font _fuente;
     sf::Text _statusText;
-    char _networkStatus;
+    short _networkStatus;
 
 public:
     enum NetworkStatus {
@@ -23,9 +23,9 @@ public:
     ~ConnectionManager();
 
     // Devuelve el estado de la conexión.
-    char getNetworkStatus();
+    short getNetworkStatus();
     // Cambia el estado de la conexión. (Solo para debug, el estado más adelante se gestionará desde la propia clase)
-    void setNetworkStatus(char status);
+    void setNetworkStatus(short status);
 
     void onTick();
     void handleInput(sf::Event &event);

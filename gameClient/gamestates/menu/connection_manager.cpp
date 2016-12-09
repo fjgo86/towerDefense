@@ -17,12 +17,12 @@ ConnectionManager::ConnectionManager() {
     _statusText.setPosition(this->getSize().x / 2, this->getSize().y / 2);
 }
 
-char ConnectionManager::getNetworkStatus() {
+short ConnectionManager::getNetworkStatus() {
 
-    return (ConnectionManager::NetworkStatus)_networkStatus;
+    return _networkStatus;
 }
 
-void ConnectionManager::setNetworkStatus(char status) {
+void ConnectionManager::setNetworkStatus(short status) {
 
     _networkStatus = status;
 }

@@ -1,0 +1,2 @@
+#define __GITHASH__ "96a84569e21411e1f5c013184388ee04bdc68c04"
+#define __GITREVISION__ 137
