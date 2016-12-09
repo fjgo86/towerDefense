@@ -1,13 +1,12 @@
 
-
 # /network files
 #message("Preparando archivos network")
 set( network_SOURCES 
-	include/networking/config.h 
-	include/networking/packets.h
-	include/networking/packetIn.h
-	include/networking/packetIn.cpp
-	include/networking/packetOut.h
-	include/networking/packetOut.cpp)
+	${CMAKE_CURRENT_LIST_DIR}/config.h 
+	${CMAKE_CURRENT_LIST_DIR}/packets.h
+	${CMAKE_CURRENT_LIST_DIR}/packetIn.h
+	${CMAKE_CURRENT_LIST_DIR}/packetIn.cpp
+	${CMAKE_CURRENT_LIST_DIR}/packetOut.h
+	${CMAKE_CURRENT_LIST_DIR}/packetOut.cpp)
 SOURCE_GROUP (network FILES ${network_SOURCES})
 
