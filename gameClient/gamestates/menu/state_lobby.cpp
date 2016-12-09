@@ -13,10 +13,10 @@ LobbyState::LobbyState() {
     connView.viewId = ViewsWrapper::ConnectionView;
     menuView.viewId = ViewsWrapper::MenuView;
 
-    // Iniciamos la vista actual a la del login.
+    // Inicializamos la vista actual a la del login.
     _vistaActual = &loginView;
 
-    // Iniciamos elementos visuales de la pantalla de login.
+    // Inicializamos elementos visuales de la pantalla de login.
     this->initLogin();
 }
 
@@ -59,6 +59,8 @@ void LobbyState::onTick() {
     gGame._gameWindow->setView(gGame._gameWindow->getDefaultView());
     gGame._gameWindow->draw(background, &backgroundShader);
     gGame._gameWindow->draw(logo);
+
+    std::cout << "networkStatus: " << connView.getNetworkStatus() << std::endl;
 
     loginView.onTick();
     connView.onTick();
@@ -145,6 +147,7 @@ void LobbyState::sendData(std::string user, std::string pw) {
 
 void LobbyState::moveLobby(ViewsWrapper* targetView) {
 
+    // TODO: Revisar esto, para poder cambiar entre vistas sin tener que esperar a que termine la animacion
     // Comprueba que no haya una animación en curso
     if (_targetDistance == 0) {
 
@@ -217,6 +220,11 @@ void LobbyState::update() {
             _moveLobby = false;
         }
     }
+}
+
+ConnectionManager* LobbyState::getConnection() {
+
+    return &connView;
 }
 
 LobbyState::~LobbyState() {

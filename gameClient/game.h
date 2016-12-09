@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include "gamestates/game/sprite_manager.h"
 #include "gamestates/gamestates_manager.h"
 #include "gamestates/game/game_manager.h"
@@ -10,12 +11,14 @@ public:
     Game();
     ~Game();
 
-    Client *_client;
+    Client*             _client;
     GameStatesManager*	_statesManager;
     TextureManager*		_textureManager;
 	SpriteManager*		_spriteManager;
     sf::RenderWindow*	_gameWindow;	///< Enlace a la pantalla del juego.
     //sf::Event           _event;
+
+    sf::Font _globalFont;
 
     int _screenWidth;		///< Tamaño en pixeles del ancho de la pantalla.
     int _screenHeight;		///< Tamaño en pixeles del alto de la pantalla.

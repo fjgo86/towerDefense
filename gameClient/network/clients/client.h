@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Network.hpp>
 
+#include <../gameClient/gamestates/menu/state_lobby.h>
+
 class Network;
 class Account;
 
@@ -9,7 +11,7 @@ class Account;
 * Esta clase, que hereda de sf::TcpSocket se encarga de guardar la conexión con el servidor y de enviar, recibir e interpretar futuros datos a través de ella.
 */
 class Client : public sf::TcpSocket {
-private:
+public:
     /*
     * @brief Estado de la conexión del cliente con respecto al servidor.
     */
@@ -19,9 +21,13 @@ private:
         CT_DISCONNECTED
     };
 
+private:
 	int _id;                    ///< ID que apunta a la posición del Client en el vector Network::_clients<Client*>
 	sf::Clock _lastActivity;    ///< Registro de tiempo de la última actividad del cliente (Timeout, control de in/actividad ...).
     CONNECTION_TYPE _connType;
+
+    LobbyState* lobbyConnection;
+
 public:
 	Client();
 	~Client();
@@ -51,5 +57,10 @@ public:
 	* Ejecuta un Tick en el cliente, renovando el _lastActivity y comprobando la entrada de nuevos Packets por parte del servidor.
 	*/
 	void onTick();
+    /*
+    * @brief Obtener estado de la conexión.
+    * Obtiene el estado de la conexion, de tipo CONNECTION_TYPE
+    */
+    CONNECTION_TYPE getConnType();
 };
 

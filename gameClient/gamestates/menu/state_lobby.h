@@ -41,6 +41,8 @@ public:
 
     void sendData(std::string u, std::string p);
 
+    ConnectionManager* getConnection();
+
     void onTick();
     void handleInput();
 

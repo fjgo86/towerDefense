@@ -33,6 +33,8 @@ void Game::init() {
     _screenWidth = 1280;
     _screenHeight = 720;
 
+    _globalFont.loadFromFile("../gameClient/media/fonts/big_noodle_titling_oblique.ttf");
+
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 

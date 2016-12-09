@@ -12,19 +12,24 @@ ConnectionManager::ConnectionManager() {
     _fuente.loadFromFile("../gameClient/media/fonts/big_noodle_titling_oblique.ttf");
     
     _statusText.setFont(_fuente);
-    _statusText.setString("Conectando al Servidor de Juego");
+    _statusText.setString("Texto de Estado");
     _statusText.setOrigin(_statusText.getGlobalBounds().width / 2, _statusText.getGlobalBounds().height / 2);
     _statusText.setPosition(this->getSize().x / 2, this->getSize().y / 2);
 }
 
-char ConnectionManager::getNetworkStatus() {
+short ConnectionManager::getNetworkStatus() {
 
-    return (ConnectionManager::NetworkStatus)_networkStatus;
+    return _networkStatus;
 }
 
-void ConnectionManager::setNetworkStatus(char status) {
+void ConnectionManager::setNetworkStatus(short status) {
 
     _networkStatus = status;
+}
+
+void ConnectionManager::setStatusText(std::string t) {
+
+    _statusText.setString(t);
 }
 
 void ConnectionManager::onTick() {

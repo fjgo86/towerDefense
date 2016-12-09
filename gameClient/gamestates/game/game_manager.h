@@ -23,7 +23,7 @@ private:
     void addTextoFPS();             ///< Muestra en pantalla los FPS actuales.
     void addTextoMousePos();        ///< Muestra en pantalla la posición del ratón.
     unsigned int    frameCount,     ///< Contador de frames desde el último segundo.
-                    averageFPS;     ///< Frames ejecutados en el último segundo. //TODO: ahora mismo muestra los frames del último segundo pero no una media (average) de los últimos segundos.
+                    averageFPS;     ///< Frames ejecutados en el último segundo. //TODO: ahora mismo muestra los frames del último segundo pero no una ../gameClient/media (average) de los últimos segundos.
     float timeCount;                ///< Contador de ticks, ya que el reloj se resetea en cada onTick se lleva aquí la cuenta de ticks para saber cuando ha pasado un segundo.
     sf::Clock clock;                ///< Reloj del programa.
 
