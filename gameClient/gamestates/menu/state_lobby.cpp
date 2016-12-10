@@ -60,8 +60,6 @@ void LobbyState::onTick() {
     gGame._gameWindow->draw(background, &backgroundShader);
     gGame._gameWindow->draw(logo);
 
-    std::cout << "networkStatus: " << connView.getNetworkStatus() << std::endl;
-
     loginView.onTick();
     connView.onTick();
     menuView.onTick();
@@ -87,18 +85,13 @@ void LobbyState::handleInput() {
                         gGame._gameWindow->close();
                         break;
                     case sf::Keyboard::Return:
-                        //sendData(loginView.getUser(), loginView.getPassword());
+                        if ((!loginView.getUser().empty()) && (!loginView.getPassword().empty())) {
+
+                            gGame._client->doConnect();
+                            sendData(loginView.getUser(), loginView.getPassword());
+                        }
                         break;
-                    case sf::Keyboard::Left:
-                        loginView.move(50, 0);
-                        connView.move(50, 0);
-                        menuView.move(50, 0);
-                        break;
-                    case sf::Keyboard::Right:
-                        loginView.move(-50, 0);
-                        connView.move(-50, 0);
-                        menuView.move(-50, 0);
-                        break;
+                    // Para testear estados de la conexión
                     case sf::Keyboard::F1:
                         connView.setNetworkStatus(ConnectionManager::Disconnected);
                         break;
@@ -108,6 +101,18 @@ void LobbyState::handleInput() {
                     case sf::Keyboard::F3:
                         connView.setNetworkStatus(ConnectionManager::Connected);
                         break;
+
+                    // Para testear textos de estado
+                    case sf::Keyboard::F4:
+                        connView.setStatusText("Accediendo al servidor");
+                        break;
+                    case sf::Keyboard::F5:
+                        connView.setStatusText("Conexión exitosa!");
+                        break;
+                    case sf::Keyboard::F6:
+                        connView.setStatusText("Login correcto");
+                        break;
+
                     default:
                         break;
                 }

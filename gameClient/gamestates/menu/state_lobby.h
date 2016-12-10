@@ -22,7 +22,7 @@ private:
     sf::Sprite background, logo;
     sf::Uint8 alphaLogo = 0;
     float scaleLogo = 1, _backgroundUniform = 0.f;
-    float _easingQty = 0.05f, _targetDistance = 0;
+    float _easingQty = 0.15f, _targetDistance = 0;
     bool _moveLobby = false;
 
     /*

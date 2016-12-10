@@ -7,8 +7,13 @@
 class ConnectionManager : public ViewsWrapper {
 private:
     sf::Font _fuente;
-    sf::Text _statusText;
+    sf::Text _statusText, _previousText;
     short _networkStatus;
+
+    sf::Color _statusTextColor;
+    float _easingQty = 0.1f, _targetDistance = 0;
+    bool _animating = false;
+    void doAnimate();
 
 public:
     enum NetworkStatus {
