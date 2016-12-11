@@ -1,6 +1,9 @@
 #include <iostream>
 
 #include "animatedsprite.h"
+
+#include <logger/logger.h>
+
 #include "../../game.h"
 
 
@@ -9,7 +12,8 @@ AnimatedSprite::AnimatedSprite(std::string nombre, const char * rutaImagen) {
         sfTexture = gGame._textureManager->loadFromFile(nombre, rutaImagen);    // Si hay cualquier error con la animación, se borra la Unit y se bloquea todo el código.
     }
     catch (...) {
-        std::cout << "Error cargando fichero '" << rutaImagen << "'" << std::endl;
+        //std::cout << "Error cargando fichero '" << rutaImagen << "'" << std::endl;
+        _LOG(Log::LOGLVL_ERROR, "Error cargando fichero '" << rutaImagen << "'\n");
         delete this;
         return;
     }
@@ -116,7 +120,8 @@ void AnimatedSprite::setDireccion(eDir dir) {
 
 void AnimatedSprite::setDireccion(int dir) {
     if (dir < DIR_S || dir > DIR_NE) {
-        std::cout << "setDirection(" << dir << ") fuera de rango" << std::endl;
+        //std::cout << "setDirection(" << dir << ") fuera de rango" << std::endl;
+        _LOG(Log::LOGLVL_DEBUG, "setDirection(" << dir << ") fuera de rango.\n");
         return;
     }
     _dir = (eDir)dir;

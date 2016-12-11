@@ -4,10 +4,13 @@
 
 class LoginBoxFocusedTextBox {
 public:
+    // Puntero al textbox con el foco
 	sf::Text* _textBox;
+    // Puntero al password que se va a enviar
     sf::Text* _pw;
 	// Tipo de TextBox. 0: Usuario, 1: Password
 	bool _type;
+    // Puntero al fondo del textbox
     sf::RectangleShape* _rect;
 
 	LoginBoxFocusedTextBox();

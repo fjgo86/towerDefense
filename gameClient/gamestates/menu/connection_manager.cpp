@@ -8,13 +8,11 @@ ConnectionManager::ConnectionManager() {
     this->setSize((float)gGame._screenWidth, (float)gGame._screenHeight);
 
     _networkStatus = Disconnected;
-
-    _fuente.loadFromFile("../gameClient/media/fonts/big_noodle_titling_oblique.ttf");
-    
+    _fuente = gGame._globalFont;
     _statusTextColor = sf::Color(255, 255, 255);
 
     _statusText.setFont(_fuente);
-    _statusText.setString("Texto de Estado");
+    _statusText.setString("Cargando...");
     _statusText.setOrigin(_statusText.getGlobalBounds().width / 2, _statusText.getGlobalBounds().height / 2);
     _statusText.setPosition(this->getSize().x / 2, this->getSize().y * 0.75f);
 }
@@ -31,8 +29,6 @@ void ConnectionManager::setNetworkStatus(short status) {
 
 void ConnectionManager::setStatusText(std::string t) {
 
-    //_statusText.setString(t);
-
     _previousText = _statusText;
     _statusText.setString(t);
     
@@ -41,7 +37,7 @@ void ConnectionManager::setStatusText(std::string t) {
 
 void ConnectionManager::onTick() {
 
-    doAnimate();
+    if (_animating) { doAnimate(); }
 
     gGame._gameWindow->setView((*this));
     gGame._gameWindow->draw(_statusText);
@@ -52,7 +48,7 @@ void ConnectionManager::doAnimate() {
 
     if (_animating) {
 
-        _targetDistance = ((gGame._screenHeight * 0.25f) - (_previousText.getPosition().y));
+        _targetDistance = ((gGame._screenHeight * 0.4f) - (_previousText.getPosition().y));
 
         if (_targetDistance < -1.f) {
             _previousText.move(0, _targetDistance * _easingQty);
@@ -60,8 +56,6 @@ void ConnectionManager::doAnimate() {
             _previousText.setFillColor(_statusTextColor);
         }
         else {
-
-            //std::cout << "Animacion Finalizada" << std::endl;
             _targetDistance = 0;
             _animating = false;
         }

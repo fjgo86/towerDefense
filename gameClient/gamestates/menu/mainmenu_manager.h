@@ -17,7 +17,7 @@ public:
     enum Menu : short {
         Nueva_Partida,
         Opciones,
-        Salir,
+        Desconectar,
         Menu_QTY
     };
 
@@ -30,14 +30,20 @@ public:
     MainMenuManager();
     ~MainMenuManager();
 
+    // onTick del menu principal
     void onTick();
+    // handleInput del menu principal
     void handleInput(sf::Event &event);
 
 private:
+    // Fuente de los textos del menu principal
     sf::Font fuente;
+    // Musica de fondo en el menu principal
     sf::Music backgroundMusic;
 
+    // Array con los botones del menu principal
     BotonMenu botonesMenu[Menu_QTY];
+    // Textos de los botones del menu principal
     std::string Menu_Strings[Menu_QTY] = {
         "Nueva Partida",
         "Opciones",

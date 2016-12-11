@@ -104,8 +104,14 @@ void LoginManager::handleLoginBoxEvents(sf::Vector2i pos, char type, sf::Uint32 
 				switch (c) {
 
 					case 8:		// Tecla BACKSPACE, para borrar el ultimo caracter
-                        _loginBox._focusedTextBox._pw->setString(_loginBox._focusedTextBox._pw->getString().substring(0, _loginBox._focusedTextBox._pw->getString().getSize() - 1));
-						_loginBox._focusedTextBox._textBox->setString(_loginBox._focusedTextBox._textBox->getString().substring(0, _loginBox._focusedTextBox._textBox->getString().getSize() - 1));
+
+                        if (!_loginBox._focusedTextBox._textBox->getString().isEmpty()) {
+                            _loginBox._focusedTextBox._textBox->setString(_loginBox._focusedTextBox._textBox->getString().substring(0, _loginBox._focusedTextBox._textBox->getString().getSize() - 1));
+                        }
+
+                        if (_loginBox._focusedTextBox._type && !_loginBox._focusedTextBox._pw->getString().isEmpty()) {
+                            _loginBox._focusedTextBox._pw->setString(_loginBox._focusedTextBox._pw->getString().substring(0, _loginBox._focusedTextBox._pw->getString().getSize() - 1));
+                        }
 						break;
 					case 27:	// Tecla ESCAPE, lo capturo para que no pinte un simbolo extraño
 						break;
@@ -115,7 +121,6 @@ void LoginManager::handleLoginBoxEvents(sf::Vector2i pos, char type, sf::Uint32 
                         if (_loginBox._focusedTextBox._type) {
 
                             _loginBox.setFocusedComponent(LoginBox::MainComponents::TextBoxUser);
-
                         }
                         else {
 

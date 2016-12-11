@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Tile.h"
+#include <logger/logger.h>
 #include "../../../game.h"
 #include "../sprite_manager.h"
 #include "Grid.h"
@@ -11,7 +12,7 @@ Tile::Tile() {
 		sfSprite.setTexture(*sfTexture);
 	}
 	catch (...) {
-		std::cout << "Error cargando Textura 'tile'" << std::endl;
+        _LOG(Log::LOGLVL_ERROR, "Error cargando Textura 'tile'\n");
 		delete this;
 		return;
 	}

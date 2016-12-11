@@ -1,29 +1,32 @@
-#include <iostream>
-
 #include "mainmenu_manager.h"
 
+#include <logger/logger.h>
+
 #include "../../game.h"
+#include "../gameClient/gamestates/menu/state_lobby.h"
 
 MainMenuManager::MainMenuManager() {
 
     this->setCenter((float)gGame._screenWidth * -1.5f, (float)gGame._screenHeight / 2.0f);
     this->setSize((float)gGame._screenWidth, (float)gGame._screenHeight);
 
-    fuente.loadFromFile("../gameClient/media/fonts/big_noodle_titling_oblique.ttf");
+    fuente = gGame._globalFont;
 
     this->initLobby();
 }
 
 void MainMenuManager::initMusic() {
 
-    if (!backgroundMusic.openFromFile("../gameClient/media/music/mainMenu.flac"))
-        std::cout << "Error cargando la musica de fondo." << std::endl;
+    if (!backgroundMusic.openFromFile("../gameClient/media/music/mainMenu.flac")) {
+
+        _LOG(Log::LOGLVL_ERROR, "Error cargando la musica de fondo.");
+    }
+        
     backgroundMusic.setVolume(0.5f);
     backgroundMusic.setLoop(true);
 
     if (backgroundMusic.getStatus() == backgroundMusic.Stopped)
         backgroundMusic.play();
-    //std::cout << "Reproduciendo musica" << std::endl;
 }
 
 void MainMenuManager::initLobby() {
@@ -68,7 +71,7 @@ void MainMenuManager::handleInput(sf::Event &event) {
             case sf::Event::MouseButtonPressed:
                 switch (event.mouseButton.button) {
 					case sf::Mouse::Left:
-                        std::cout << "mouse left at MainMenuManager" << std::endl;
+                        _LOG(Log::LOGLVL_DEBUG, "mouse left at MainMenuManager.\n");
 						break;
 					default:
 						break;
@@ -87,12 +90,11 @@ void MainMenuManager::onTick() {
 
     // Vista con los botones del menu
     gGame._gameWindow->setView((*this));
-
+    // Añadimos todos los botones a ESTA vista (menuView)
     for (int i = 0; i < Menu_QTY; i++) {
         gGame._gameWindow->draw(botonesMenu[i]);
     }
 }
-
 
 void MainMenuManager::update(sf::Event &event) {
 
@@ -112,10 +114,12 @@ void MainMenuManager::update(sf::Event &event) {
                     gGame._statesManager->newGame();
                     break;
                 case Opciones:
-                    std::cout << "TODO: Pasar a pantalla de opciones" << std::endl;
+                    // TODO: Pasar a pantalla de opciones
+                    _LOG(Log::LOGLVL_DEBUG, "TODO: Pasar a pantalla de opciones")
                     break;
-                case Salir:
-                    gGame._gameWindow->close();
+                case Desconectar:
+                    // TODO: Cerrar la sesión
+                    //lobbyConnection->getConnection()->setNetworkStatus(ConnectionManager::Disconnected);
                     break;
                 default:
                     break;
