@@ -11,7 +11,7 @@ private:
     short _networkStatus;
 
     sf::Color _statusTextColor;
-    float _easingQty = 0.1f, _targetDistance = 0;
+    float _easingQty = 0.05f, _targetDistance = 0;
     bool _animating = false;
     void doAnimate();
 

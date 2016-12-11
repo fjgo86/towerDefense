@@ -3,6 +3,8 @@
 
 #include "state_lobby.h"
 
+#include <logger/logger.h>
+
 #include "../../game.h"
 #include "../../network/packets/loginReq.h"
 
@@ -30,7 +32,7 @@ void LobbyState::loadBackgroundTextures() {
 
         if (!backgroundShader.loadFromFile("../gameClient/media/shaders/clouds.frag", sf::Shader::Fragment)) {
 
-            std::cout << "Error cargando el shader de fondo en el menu principal." << std::endl;
+            _LOG(Log::LOGLVL_ERROR, "Error cargando el shader de fondo en el menu principal.\n")
         }
         else {
 
@@ -122,8 +124,11 @@ void LobbyState::handleInput() {
                 case sf::Mouse::Left:
                     _mousePos = sf::Mouse::getPosition(*gGame._gameWindow);
                     if (loginView.getConnectButton().getGlobalBounds().contains((sf::Vector2f)_mousePos)) {
-                        gGame._client->doConnect();
-                        sendData(loginView.getUser(), loginView.getPassword());
+                        if ((!loginView.getUser().empty()) && (!loginView.getPassword().empty())) {
+
+                            gGame._client->doConnect();
+                            sendData(loginView.getUser(), loginView.getPassword());
+                        }
                     }
                     break;
                 default:

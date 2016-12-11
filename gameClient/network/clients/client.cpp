@@ -47,10 +47,10 @@ void Client::doConnect() {
 }
 
 void Client::onConnect() {
-    _LOG(Log::LOGLVL_EVENT, "Conectado con el servidor.\n");
+    _LOG(Log::LOGLVL_EVENT, "Conectado al servidor.\n");
 
-    lobbyConnection->getConnection()->setStatusText("Conectado con el servidor");
-    lobbyConnection->getConnection()->setNetworkStatus(ConnectionManager::Connecting);
+    lobbyConnection->getConnection()->setStatusText("Conectado al servidor");
+    lobbyConnection->getConnection()->setNetworkStatus(ConnectionManager::Connected);
 
     _connType = CT_CONNECTED;
     _lastActivity.restart();
@@ -59,7 +59,7 @@ void Client::onConnect() {
 void Client::onDisconnect() {
 	_LOG(Log::LOGLVL_EVENT, "Desconectado del servidor.\n");
 
-    lobbyConnection->getConnection()->setStatusText("Conectado con el servidor");
+    lobbyConnection->getConnection()->setStatusText("Desconectado del servidor");
     lobbyConnection->getConnection()->setNetworkStatus(ConnectionManager::Disconnected);
 
     _connType = CT_DISCONNECTED;

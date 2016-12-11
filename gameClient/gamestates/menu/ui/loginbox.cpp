@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "loginbox.h"
+#include <logger/logger.h>
 #include "../../../Game.h"
 
 LoginBoxFocusedTextBox::LoginBoxFocusedTextBox() {
@@ -11,7 +12,7 @@ LoginBoxFocusedTextBox::~LoginBoxFocusedTextBox(){
 
 LoginBox::LoginBox() {
 
-    _fuente.loadFromFile("../gameClient/media/fonts/big_noodle_titling_oblique.ttf");
+    _fuente = gGame._globalFont;
     _arial.loadFromFile("../gameClient/media/fonts/PT_Sans-Narrow-Web-Regular.ttf");
 
     // Inicialización de valores por defecto
@@ -198,7 +199,7 @@ void LoginBox::setHoveredComponent(unsigned short int component) {
         break;
         */
         case MainComponents::BotonConectar:
-            std::cout << "hover BotonConectar" << std::endl;
+            _LOG(Log::LOGLVL_DEBUG, "hover BotonConectar\n");
             _botonConectarBackground.setOutlineThickness(_focusedOutlineThickness);
             break;
 
