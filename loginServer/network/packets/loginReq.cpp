@@ -2,7 +2,7 @@
 #include <string>
 
 #include <logger/logger.h>
-#include <db/db.h>
+//#include <db/db.h>
 #include <networking/packets.h>
 #include "../../accounts/account.h"
 #include "../clients/client.h"
@@ -31,22 +31,22 @@ void PacketLoginReq::doReceive(Client *theClient, sf::Packet theData) {
         status = checkAccount(nombre, password, cuenta);
     }
     else {
-        _ERRORLOG("PacketLogin: Error recibiendo datos.\n");
+        _ERRORLOG("PacketLogin: Error recibiendo datos.");
         status = ACM_MISC;
     }
     if (status == ACM_Ok) {
         theClient->setAccount(cuenta);
-		_LOG(Log::LogLevel::LOGLVL_EVENT, "Conexión exitosa de la cuenta '" << nombre << "'\n");
+		_LOG(Log::LogLevel::LOGLVL_EVENT, "Conexión exitosa de la cuenta '" << nombre << "'");
     }
     else {
-        _LOG(Log::LogLevel::LOGLVL_EVENT, "Error en el Login: " << (int)status << "\n");
+        _LOG(Log::LogLevel::LOGLVL_EVENT, "Error en el Login: " << (int)status);
     }
     reply(theClient, status);
 }
 
 PacketLoginReq::AccConnectMsg PacketLoginReq::checkAccount(std::string user, std::string pw, Account *theAccount) {
-    std::stringstream sqlQuery;
-    _LOG(Log::LOGLVL_EVENT, "Comprobando usuario '" << user << "', contraseña '" << pw << "'\n");
+    /*std::stringstream sqlQuery;
+    _LOG(Log::LOGLVL_EVENT, "Comprobando usuario '" << user << "', contraseña '" << pw << "'");
     // Query para la búsqueda de la cuenta y retorno de todos sus datos.
     sqlQuery << "SELECT id from " << TABLECUENTAS 
         << " WHERE " << ROWUSER << " = '" << user 
@@ -63,9 +63,9 @@ PacketLoginReq::AccConnectMsg PacketLoginReq::checkAccount(std::string user, std
         return ACM_Ok;
     }
     catch (sql::SQLException &e) {
-        _ERRORLOG("MySQL Error: " << e.getErrorCode() << "\n'" << e.what() << "'\n");
+        _ERRORLOG("MySQL Error: " << e.getErrorCode() << "\n'" << e.what() << "'");
         return ACM_BD;
-    }
+    }*/
     return ACM_QTY;
 }
 

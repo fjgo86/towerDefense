@@ -7,10 +7,10 @@
 ServerListener::ServerListener() {
     
     if (listen(SERVERPORT) == sf::Socket::Done) {
-        _LOG(Log::LOGLVL_EVENT, "Socket conectado \n");
+        _LOG(Log::LOGLVL_EVENT, "Socket conectado.");
     }
     else{
-        _ERRORLOG("No se puede conectar al socket \n");
+        _ERRORLOG("No se puede conectar al socket.");
     }
     setBlocking(false);
 }
@@ -40,7 +40,7 @@ void ServerListener::updateClients() {
             _clients[i]->setID(i);
         else {
             // Error: no debería de darse este caso.
-            _ERRORLOG("Borrando client inexistente '" << i << "'.\n");
+            _ERRORLOG("Borrando client inexistente " << i);
         }
     }
 }

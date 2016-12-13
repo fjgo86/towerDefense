@@ -32,7 +32,7 @@ void LobbyState::loadBackgroundTextures() {
 
         if (!backgroundShader.loadFromFile("../gameClient/media/shaders/clouds.frag", sf::Shader::Fragment)) {
 
-            _LOG(Log::LOGLVL_ERROR, "Error cargando el shader de fondo en el menu principal.\n")
+            _LOG(Log::LOGLVL_ERROR, "Error cargando el shader de fondo en el menu principal.")
         }
         else {
 

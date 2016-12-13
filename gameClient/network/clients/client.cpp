@@ -23,7 +23,7 @@ Client::~Client() {
 void Client::receivePacket(int id, sf::Packet data) {
     switch (id) {
         default:
-            _ERRORLOG("Client::receivePacket: Paquete '" << id << "' sin registrar.\n");
+            _ERRORLOG("Client::receivePacket: Paquete '" << id << "' sin registrar.");
             return;
         case LoginResp:
             PacketLoginResp* pResp = new PacketLoginResp();
@@ -35,7 +35,7 @@ void Client::receivePacket(int id, sf::Packet data) {
 
 void Client::doConnect() {
     if (_connType == CT_DISCONNECTED) { // No se intenta la conexión a menos que el socket esté desconectado.
-        _LOG(Log::LOGLVL_EVENT, "Conectando con el servidor.\n");
+        _LOG(Log::LOGLVL_EVENT, "Conectando con el servidor.");
 
         lobbyConnection->getConnection()->setStatusText("Conectando con el servidor");
         lobbyConnection->getConnection()->setNetworkStatus(ConnectionManager::Connecting);
@@ -47,7 +47,7 @@ void Client::doConnect() {
 }
 
 void Client::onConnect() {
-    _LOG(Log::LOGLVL_EVENT, "Conectado al servidor.\n");
+    _LOG(Log::LOGLVL_EVENT, "Conectado al servidor.");
 
     lobbyConnection->getConnection()->setStatusText("Conectado al servidor");
     lobbyConnection->getConnection()->setNetworkStatus(ConnectionManager::Connected);
@@ -57,7 +57,7 @@ void Client::onConnect() {
 }
 
 void Client::onDisconnect() {
-	_LOG(Log::LOGLVL_EVENT, "Desconectado del servidor.\n");
+	_LOG(Log::LOGLVL_EVENT, "Desconectado del servidor.");
 
     lobbyConnection->getConnection()->setStatusText("Desconectado del servidor");
     lobbyConnection->getConnection()->setNetworkStatus(ConnectionManager::Disconnected);

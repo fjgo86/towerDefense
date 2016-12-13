@@ -2,10 +2,10 @@
 #include <GitRevision.h>
 #include <logger/log_manager.h>
 #include <logger/logger.h>
-#include <db/db.h>
+//#include <db/db.h>
 
 LogManager gLog;
-DB gMySQL;
+//DB gMySQL;
 
 LoginServer::LoginServer() {
 	isActive = true;
@@ -22,7 +22,7 @@ bool LoginServer::onTick() {
 }
 
 void LoginServer::init() {
-    _LOG(Log::LOGLVL_EVENT, "Iniciado servidor en la version '" << __GITREVISION__ << "'.\n");
+    _LOG(Log::LOGLVL_EVENT, "Iniciado servidor en la version " << __GITREVISION__);
 	_network = new ServerListener();
     while (isActive) {
         isActive = onTick();

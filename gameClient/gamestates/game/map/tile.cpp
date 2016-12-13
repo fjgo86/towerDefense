@@ -12,7 +12,7 @@ Tile::Tile() {
 		sfSprite.setTexture(*sfTexture);
 	}
 	catch (...) {
-        _LOG(Log::LOGLVL_ERROR, "Error cargando Textura 'tile'\n");
+        _LOG(Log::LOGLVL_ERROR, "Error cargando Textura 'tile'.");
 		delete this;
 		return;
 	}

@@ -19,7 +19,7 @@ void PacketLoginResp::doReceive(Client* theClient, sf::Packet data) {
         int rawLoginStatus;
         if (data >> rawLoginStatus) {
             AccConnectMsg loginStatus = (AccConnectMsg)rawLoginStatus;
-            _EVENTLOG("Login recibido = " << rawLoginStatus << "\n");
+            _EVENTLOG("Login recibido = " << rawLoginStatus);
 
             LobbyState* lobbyConnection = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
             if (!lobbyConnection) { return; }
@@ -55,7 +55,7 @@ void PacketLoginResp::doReceive(Client* theClient, sf::Packet data) {
 
         }
         else {
-            _ERRORLOG("Error recibiendo loginStatus.\n");
+            _ERRORLOG("Error recibiendo loginStatus.");
         }
     }
 }
