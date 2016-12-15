@@ -7,6 +7,8 @@
 #include "login_manager.h"
 #include "mainmenu_manager.h"
 #include "connection_manager.h"
+#include "play_game_view.h"
+#include "settings_view.h"
 
 class LobbyState : public GameState {
 
@@ -15,6 +17,18 @@ private:
     LoginManager loginView;
     ConnectionManager connView;
     MainMenuManager menuView;
+    PlayGameView menuPlayView;
+    SettingsView menuSettingsView;
+
+    enum MoveDirection {
+        Right,
+        Left,
+        Up,
+        Down,
+        MoveDirectionQTY
+    };
+
+    MoveDirection moveDir;
 
     sf::Vector2i _mousePos;
 
@@ -35,11 +49,13 @@ private:
     Método que mueve el Lobby para cambiar entre vistas
     */
     void moveLobby(ViewsWrapper* targetView);
-    bool _moveLobbyToRight = true;
+    bool _moveLobbyToRight = true, _moveLobbyUpOrDown = false;
 
 public:
 
     void sendData(std::string u, std::string p);
+    void moveToPlay();
+    void moveToSettings();
 
     ConnectionManager* getConnection();
 

@@ -14,6 +14,13 @@ LobbyState::LobbyState() {
     loginView.viewId = ViewsWrapper::LoginView;
     connView.viewId = ViewsWrapper::ConnectionView;
     menuView.viewId = ViewsWrapper::MenuView;
+    menuPlayView.viewId = ViewsWrapper::MenuPlay;
+    menuSettingsView.viewId = ViewsWrapper::MenuSettings;
+
+    _targetDistance = 0;
+
+    // Inicializamos hacia la unica direccion a la que puede ir al iniciar el juego
+    moveDir = Left;
 
     // Inicializamos la vista actual a la del login.
     _vistaActual = &loginView;
@@ -32,7 +39,7 @@ void LobbyState::loadBackgroundTextures() {
 
         if (!backgroundShader.loadFromFile("../gameClient/media/shaders/clouds.frag", sf::Shader::Fragment)) {
 
-            _LOG(Log::LOGLVL_ERROR, "Error cargando el shader de fondo en el menu principal.\n")
+            _LOG(Log::LOGLVL_ERROR, "Error cargando el shader de fondo en el menu principal.\n");
         }
         else {
 
@@ -60,11 +67,17 @@ void LobbyState::onTick() {
     // Recupera la vista por defecto (la de esta clase) y "incrusta" los elementos en ella
     gGame._gameWindow->setView(gGame._gameWindow->getDefaultView());
     gGame._gameWindow->draw(background, &backgroundShader);
-    gGame._gameWindow->draw(logo);
+
+    if (_vistaActual->viewId <= ViewsWrapper::MenuView) {
+
+        gGame._gameWindow->draw(logo);
+    }
 
     loginView.onTick();
     connView.onTick();
     menuView.onTick();
+    menuPlayView.onTick();
+    menuSettingsView.onTick();
     //_vistaActual->onTick();
 }
 
@@ -79,7 +92,41 @@ void LobbyState::handleInput() {
             case sf::Event::Closed:
                 gGame._gameWindow->close();
                 break;
-               
+            case sf::Event::KeyPressed:
+                switch (event.key.code) {
+                    case sf::Keyboard::I: // Up
+                        loginView.move(0, -50);
+                        connView.move(0, -50);
+                        menuView.move(0, -50);
+                        menuPlayView.move(0, -50);
+                        menuSettingsView.move(0, -50);
+                        break;
+                    case sf::Keyboard::J: // Left
+                        loginView.move(50, 0);
+                        connView.move(50, 0);
+                        menuView.move(50, 0);
+                        menuPlayView.move(50, 0);
+                        menuSettingsView.move(50, 0);
+                        break;
+                    case sf::Keyboard::K: // Down
+                        loginView.move(0, 50);
+                        connView.move(0, 50);
+                        menuView.move(0, 50);
+                        menuPlayView.move(0, 50);
+                        menuSettingsView.move(0, 50);
+                        break;
+                    case sf::Keyboard::L: // Right
+                        loginView.move(-50, 0);
+                        connView.move(-50, 0);
+                        menuView.move(-50, 0);
+                        menuPlayView.move(-50, 0);
+                        menuSettingsView.move(-50, 0);
+                        break;
+
+                    default:
+                        break;
+                }
+            break;
             case sf::Event::KeyReleased:
                 switch (event.key.code) {
             
@@ -95,15 +142,31 @@ void LobbyState::handleInput() {
                         break;
                     // Para testear estados de la conexión
                     case sf::Keyboard::F1:
-                        connView.setNetworkStatus(ConnectionManager::Disconnected);
+                        //connView.setNetworkStatus(ConnectionManager::Disconnected);
+                        moveLobby(&loginView);
                         break;
                     case sf::Keyboard::F2:
-                        connView.setNetworkStatus(ConnectionManager::Connecting);
+                        //connView.setNetworkStatus(ConnectionManager::Connecting);
+                        moveLobby(&connView);
                         break;
                     case sf::Keyboard::F3:
-                        connView.setNetworkStatus(ConnectionManager::Connected);
+                        //connView.setNetworkStatus(ConnectionManager::Connected);
+                        moveLobby(&menuView);
                         break;
+                    case sf::Keyboard::Up:
+                        if (_vistaActual->viewId >= ViewsWrapper::MenuView && _vistaActual->viewId != ViewsWrapper::MenuPlay) {
 
+                            std::cout << "es menuuuu" << std::endl;
+                            moveLobby(&menuPlayView);
+                        }
+                        break;
+                    case sf::Keyboard::Down:
+                        if (_vistaActual->viewId >= ViewsWrapper::MenuView && _vistaActual->viewId != ViewsWrapper::MenuSettings) {
+
+                            std::cout << "es settings" << std::endl;
+                            moveLobby(&menuSettingsView);
+                        }
+                        break;
                     // Para testear textos de estado
                     case sf::Keyboard::F4:
                         connView.setStatusText("Accediendo al servidor");
@@ -163,10 +226,29 @@ void LobbyState::moveLobby(ViewsWrapper* targetView) {
 
         // Comprueba que no se realice una animación hacia la misma vista.
         if (_vistaActual->viewId != targetView->viewId) _moveLobby = true;
-        // Determina si es un movimiento hacia la derecha o a la izquierda
-        _moveLobbyToRight = (_vistaActual->viewId > targetView->viewId) ? true : false;
+
+        // Determina si es un movimiento hacia arriba o hacia abajo
+        if (targetView->viewId == ViewsWrapper::MenuPlay) {
+            moveDir = Up;
+        }
+        else if (targetView->viewId == ViewsWrapper::MenuSettings) {
+            moveDir = Down;
+        }
+        else if (targetView->viewId > ViewsWrapper::MenuView) {
+
+            moveDir = (_vistaActual->viewId > targetView->viewId) ? Up : Down;
+        }
+        else if ((targetView->viewId <= ViewsWrapper::MenuView) && (_vistaActual->viewId <= ViewsWrapper::MenuView)) {
+            // Determina si es un movimiento hacia la derecha o a la izquierda
+            moveDir = (_vistaActual->viewId > targetView->viewId) ? Right : Left;
+        }
+
+        std::cout << "vistaActual = " << _vistaActual->viewId << std::endl;
+
         // Indica cual va a ser la nueva vista
         _vistaActual = targetView;
+
+        std::cout << "targetView = " << _vistaActual->viewId << std::endl;
     }
 }
 
@@ -186,50 +268,89 @@ void LobbyState::update() {
 
     // Coloca la vista dependiendo del estado de la conexión.
     // De esta manera, el movimiento entre vistas se realiza automáticamente
-    switch (connView.getNetworkStatus()) {
-        case ConnectionManager::Disconnected:
-            moveLobby(&loginView);
-            break;
-        case ConnectionManager::Connecting:
-            moveLobby(&connView);
-            break;
-        case ConnectionManager::Connected:
-            moveLobby(&menuView);
-            break;
-        default:
-            break;
-    }
+    //switch (connView.getNetworkStatus()) {
+    //    case ConnectionManager::Disconnected:
+    //        moveLobby(&loginView);
+    //        break;
+    //    case ConnectionManager::Connecting:
+    //        moveLobby(&connView);
+    //        break;
+    //    case ConnectionManager::Connected:
+    //        moveLobby(&menuView);
+    //        break;
+    //    default:
+    //        break;
+    //}
 
     // Mueve la vista
     if (_moveLobby) {
 
-        if (_moveLobbyToRight) {
+        if (moveDir == Right) {
 
             _targetDistance = (_vistaActual->getCenter().x - gGame._screenWidth / 2);
         }
-        else {
+        else if (moveDir == Left) {
 
             _targetDistance = gGame._screenWidth - (_vistaActual->getCenter().x + gGame._screenWidth / 2);
         }
+        else if (moveDir == Up) {
+            
+            _targetDistance = (_vistaActual->getCenter().y - gGame._screenHeight / 2);
+        }
+        else if (moveDir == Down) {
+        
+            _targetDistance = gGame._screenHeight - (_vistaActual->getCenter().y + gGame._screenHeight / 2);
+        }
 
-        if (_targetDistance > 0.01f && !_moveLobbyToRight) {
+        if (_targetDistance > 0.01f && moveDir == Left) {
+
             loginView.move(_targetDistance * _easingQty, 0);
             connView.move(_targetDistance * _easingQty, 0);
             menuView.move(_targetDistance * _easingQty, 0);
+            menuPlayView.move(_targetDistance * _easingQty, 0);
+            menuSettingsView.move(_targetDistance * _easingQty, 0);
         }
-        else if (_targetDistance > 0.01f && _moveLobbyToRight) {
+        else if (_targetDistance > 0.01f && moveDir == Right) {
 
             loginView.move(-_targetDistance * _easingQty, 0);
             connView.move(-_targetDistance * _easingQty, 0);
             menuView.move(-_targetDistance * _easingQty, 0);
+            menuPlayView.move(-_targetDistance * _easingQty, 0);
+            menuSettingsView.move(-_targetDistance * _easingQty, 0);
+        }
+        else if (_targetDistance > 0.01f && moveDir == Up) {
+
+            loginView.move(0, -_targetDistance * _easingQty);
+            connView.move(0, -_targetDistance * _easingQty);
+            menuView.move(0, -_targetDistance * _easingQty);
+            menuPlayView.move(0, -_targetDistance * _easingQty);
+            menuSettingsView.move(0, -_targetDistance * _easingQty);
+        }
+        else if (_targetDistance > 0.01f && moveDir == Down) {
+
+            loginView.move(0, _targetDistance * _easingQty);
+            connView.move(0, _targetDistance * _easingQty);
+            menuView.move(0, _targetDistance * _easingQty);
+            menuPlayView.move(0, _targetDistance * _easingQty);
+            menuSettingsView.move(0, _targetDistance * _easingQty);
         }
         else {
 
-            std::cout << "Animacion Finalizada" << std::endl;
+            _DEBUGLOG("Animacion Finalizada");
             _targetDistance = 0;
             _moveLobby = false;
         }
     }
+}
+
+void LobbyState::moveToPlay() {
+
+    moveLobby(&menuPlayView);
+}
+
+void LobbyState::moveToSettings() {
+
+    moveLobby(&menuSettingsView);
 }
 
 ConnectionManager* LobbyState::getConnection() {

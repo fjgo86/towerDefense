@@ -8,6 +8,8 @@ public:
         LoginView,
         ConnectionView,
         MenuView,
+        MenuPlay,
+        MenuSettings,
         ViewsQTY
     };
 

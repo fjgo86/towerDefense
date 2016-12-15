@@ -3,12 +3,21 @@
 #include <logger/logger.h>
 
 #include "../../game.h"
+
 #include "../gameClient/gamestates/menu/state_lobby.h"
 
 MainMenuManager::MainMenuManager() {
 
     this->setCenter((float)gGame._screenWidth * -1.5f, (float)gGame._screenHeight / 2.0f);
     this->setSize((float)gGame._screenWidth, (float)gGame._screenHeight);
+
+    
+    if (lobbyState == nullptr) {
+
+        lobbyState = new LobbyState();
+        lobbyState = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
+    }
+    
 
     fuente = gGame._globalFont;
 
@@ -109,20 +118,38 @@ void MainMenuManager::update(sf::Event &event) {
             botonesMenu[i].setState(BotonMenu::state::normal);
 
             switch (botonesMenu[i].getType()) {
-                case Nueva_Partida:
-                    this->manageBackgroundMusic(0);
-                    gGame._statesManager->newGame();
-                    break;
+                case Jugar:
+                    //this->manageBackgroundMusic(0);
+                    //gGame._statesManager->newGame();
+                    {
+                    //LobbyState* lobbyState = new LobbyState();
+                    //lobbyState = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
+                    if (lobbyState != nullptr) {
+                        _DEBUGLOG("funcionaaaa");
+                        lobbyState->moveToPlay();
+                    }
+                    //lobbyState->moveToPlay();
+                    }
+                break;
+
                 case Opciones:
                     // TODO: Pasar a pantalla de opciones
-                    _LOG(Log::LOGLVL_DEBUG, "TODO: Pasar a pantalla de opciones")
-                    break;
+                    _LOG(Log::LOGLVL_DEBUG, "TODO: Pasar a pantalla de opciones")                         
+                    {
+                    //LobbyState* lobbyState = new LobbyState();
+                    //lobbyState = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
+                    lobbyState->moveToSettings();
+                    }
+                break;
+
                 case Desconectar:
                     // TODO: Cerrar la sesión
-                    //lobbyConnection->getConnection()->setNetworkStatus(ConnectionManager::Disconnected);
-                    break;
-                default:
-                    break;
+                    {
+                    //LobbyState* lobbyState = new LobbyState();
+                    //lobbyState = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
+                    lobbyState->getConnection()->setNetworkStatus(ConnectionManager::Disconnected);
+                    }
+                break;
             }
         }
     }
@@ -154,4 +181,6 @@ void MainMenuManager::manageBackgroundMusic(short action) {
 
 MainMenuManager::~MainMenuManager() {
     backgroundMusic.stop();
+
+    //delete lobbyState;
 }

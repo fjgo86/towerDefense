@@ -9,13 +9,17 @@
 
 #include "../gamestate.h"
 
+#include "../gameClient/gamestates/menu/ui/big_button.h"
+
+class LobbyState;
+
 /*
     Clase que se encarga del menú principal de la aplicación
 */
 class MainMenuManager : public ViewsWrapper {
 public:
     enum Menu : short {
-        Nueva_Partida,
+        Jugar,
         Opciones,
         Desconectar,
         Menu_QTY
@@ -45,10 +49,12 @@ private:
     BotonMenu botonesMenu[Menu_QTY];
     // Textos de los botones del menu principal
     std::string Menu_Strings[Menu_QTY] = {
-        "Nueva Partida",
+        "Jugar",
         "Opciones",
-        "Salir"
+        "Desconectar"
     };
+
+    LobbyState* lobbyState;
 
     /*
     Método para actualizar elementos antes de dibujarlos

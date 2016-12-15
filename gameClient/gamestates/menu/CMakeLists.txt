@@ -4,8 +4,12 @@
 set( gc_gs_menu_SOURCES 
 	${CMAKE_CURRENT_LIST_DIR}/mainmenu_manager.cpp 
 	${CMAKE_CURRENT_LIST_DIR}/mainmenu_manager.h
-	${CMAKE_CURRENT_LIST_DIR}/connection_manager.cpp 
+	${CMAKE_CURRENT_LIST_DIR}/connection_manager.cpp
 	${CMAKE_CURRENT_LIST_DIR}/connection_manager.h
+	${CMAKE_CURRENT_LIST_DIR}/settings_view.cpp
+	${CMAKE_CURRENT_LIST_DIR}/settings_view.h
+	${CMAKE_CURRENT_LIST_DIR}/play_game_view.cpp 
+	${CMAKE_CURRENT_LIST_DIR}/play_game_view.h
 	${CMAKE_CURRENT_LIST_DIR}/state_lobby.cpp 
 	${CMAKE_CURRENT_LIST_DIR}/state_lobby.h
 	${CMAKE_CURRENT_LIST_DIR}/viewsWrapper.cpp 

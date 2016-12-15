@@ -52,7 +52,7 @@ void ConnectionManager::doAnimate() {
 
         if (_targetDistance < -1.f) {
             _previousText.move(0, _targetDistance * _easingQty);
-            _statusTextColor.a = -_targetDistance;
+            _statusTextColor.a = (sf::Uint8)-_targetDistance;
             _previousText.setFillColor(_statusTextColor);
         }
         else {
