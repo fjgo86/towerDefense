@@ -80,7 +80,7 @@ void MainMenuManager::handleInput(sf::Event &event) {
             case sf::Event::MouseButtonPressed:
                 switch (event.mouseButton.button) {
 					case sf::Mouse::Left:
-                        _LOG(Log::LOGLVL_DEBUG, "mouse left at MainMenuManager.\n");
+                        _LOG(Log::LOGLVL_DEBUG, "mouse left at MainMenuManager.");
 						break;
 					default:
 						break;

@@ -13,7 +13,7 @@ AnimatedSprite::AnimatedSprite(std::string nombre, const char * rutaImagen) {
     }
     catch (...) {
         //std::cout << "Error cargando fichero '" << rutaImagen << "'" << std::endl;
-        _LOG(Log::LOGLVL_ERROR, "Error cargando fichero '" << rutaImagen << "'\n");
+        _LOG(Log::LOGLVL_ERROR, "Error cargando fichero '" << rutaImagen << "'");
         delete this;
         return;
     }
@@ -121,7 +121,7 @@ void AnimatedSprite::setDireccion(eDir dir) {
 void AnimatedSprite::setDireccion(int dir) {
     if (dir < DIR_S || dir > DIR_NE) {
         //std::cout << "setDirection(" << dir << ") fuera de rango" << std::endl;
-        _LOG(Log::LOGLVL_DEBUG, "setDirection(" << dir << ") fuera de rango.\n");
+        _LOG(Log::LOGLVL_DEBUG, "setDirection(" << dir << ") fuera de rango.");
         return;
     }
     _dir = (eDir)dir;

@@ -199,7 +199,7 @@ void LoginBox::setHoveredComponent(unsigned short int component) {
         break;
         */
         case MainComponents::BotonConectar:
-            _LOG(Log::LOGLVL_DEBUG, "hover BotonConectar\n");
+            _LOG(Log::LOGLVL_DEBUG, "hover BotonConectar");
             _botonConectarBackground.setOutlineThickness(_focusedOutlineThickness);
             break;
 
