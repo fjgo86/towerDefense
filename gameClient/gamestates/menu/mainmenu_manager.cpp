@@ -13,8 +13,6 @@ MainMenuManager::MainMenuManager() {
 
     
     if (lobbyState == nullptr) {
-
-        lobbyState = new LobbyState();
         lobbyState = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
     }
     

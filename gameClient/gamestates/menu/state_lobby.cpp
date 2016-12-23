@@ -156,14 +156,12 @@ void LobbyState::handleInput() {
                     case sf::Keyboard::Up:
                         if (_vistaActual->viewId >= ViewsWrapper::MenuView && _vistaActual->viewId != ViewsWrapper::MenuPlay) {
 
-                            std::cout << "es menuuuu" << std::endl;
                             moveLobby(&menuPlayView);
                         }
                         break;
                     case sf::Keyboard::Down:
                         if (_vistaActual->viewId >= ViewsWrapper::MenuView && _vistaActual->viewId != ViewsWrapper::MenuSettings) {
 
-                            std::cout << "es settings" << std::endl;
                             moveLobby(&menuSettingsView);
                         }
                         break;
@@ -294,7 +292,7 @@ void LobbyState::update() {
             _targetDistance = gGame._screenWidth - (_vistaActual->getCenter().x + gGame._screenWidth / 2);
         }
         else if (moveDir == Up) {
-            
+
             _targetDistance = (_vistaActual->getCenter().y - gGame._screenHeight / 2);
         }
         else if (moveDir == Down) {

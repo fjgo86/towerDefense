@@ -9,6 +9,7 @@ BigButton::BigButton(std::string texturePath, std::string texto) {
     buttonFont = gGame._globalFont;
     buttonBackground = sf::RectangleShape(sf::Vector2f(256, gGame._screenHeight * 0.6f));
     buttonBackground.setFillColor(sf::Color::Red);
+    buttonBackground.setOutlineThickness(2.f);
 
     buttonText = sf::Text(texto, buttonFont);
     buttonText.setOrigin(buttonText.getGlobalBounds().width / 2, buttonText.getGlobalBounds().height * 2);
@@ -29,6 +30,22 @@ void BigButton::draw(sf::RenderTarget &target, sf::RenderStates states) const {
     target.draw(buttonBackground, states);
     target.draw(buttonSprite, states);
     target.draw(buttonText, states);
+}
+
+void BigButton::setColor(sf::Color color) {
+
+    buttonBackground.setFillColor(color);
+}
+
+void BigButton::setOutlineThickness(float thickness) {
+
+    buttonBackground.setOutlineThickness(thickness);
+}
+
+sf::FloatRect BigButton::getGlobalBounds() {
+
+    //return buttonBackground.getGlobalBounds();
+    return buttonBackground.getTransform();
 }
 
 BigButton::~BigButton() {

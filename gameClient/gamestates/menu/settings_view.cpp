@@ -8,7 +8,7 @@ SettingsView::SettingsView() {
     this->setSize((float)gGame._screenWidth, (float)gGame._screenHeight);
 
     pedo = new BigButton("", "settings");
-    pedo->setPosition(gGame._screenWidth / 2, 0);
+    pedo->setPosition(gGame._screenWidth / 2, gGame._screenHeight * 0.1f);
 }
 
 void SettingsView::onTick() {

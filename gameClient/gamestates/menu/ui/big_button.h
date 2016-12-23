@@ -13,6 +13,12 @@ private:
     virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 public:
+
+    void setColor(sf::Color color);
+    void setOutlineThickness(float thickness);
+
+    sf::FloatRect getGlobalBounds();
+
     BigButton(std::string texturePath, std::string texto);
     ~BigButton();
 };
