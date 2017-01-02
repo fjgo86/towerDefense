@@ -343,12 +343,38 @@ void LobbyState::update() {
 
 void LobbyState::moveToPlay() {
 
-    moveLobby(&menuPlayView);
+    if (_vistaActual->viewId != ViewsWrapper::MenuPlay) {
+
+        moveLobby(&menuPlayView);
+    }
+    else {
+
+        _DEBUGLOG("MenuPlayView YA es la vista actual.");
+    }
 }
 
 void LobbyState::moveToSettings() {
 
-    moveLobby(&menuSettingsView);
+    if (_vistaActual->viewId != ViewsWrapper::MenuSettings) {
+
+        moveLobby(&menuSettingsView);
+    }
+    else {
+
+        _DEBUGLOG("SettingsView YA es la vista actual.");
+    }
+}
+
+void LobbyState::moveToMenu() {
+
+    if (_vistaActual->viewId != ViewsWrapper::MenuView) {
+
+        moveLobby(&menuView);
+    }
+    else {
+
+        _DEBUGLOG("MenuView YA es la vista actual.");
+    }
 }
 
 ConnectionManager* LobbyState::getConnection() {

@@ -11,29 +11,14 @@ MainMenuManager::MainMenuManager() {
     this->setCenter((float)gGame._screenWidth * -1.5f, (float)gGame._screenHeight / 2.0f);
     this->setSize((float)gGame._screenWidth, (float)gGame._screenHeight);
 
-    
-    if (lobbyState == nullptr) {
-        lobbyState = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
-    }
-    
-
     fuente = gGame._globalFont;
 
-    this->initLobby();
-}
-
-void MainMenuManager::initMusic() {
-
-    if (!backgroundMusic.openFromFile("../gameClient/media/music/mainMenu.flac")) {
-
-        _LOG(Log::LOGLVL_ERROR, "Error cargando la musica de fondo.");
+    if (lobbyState == nullptr) {
+        _DEBUGLOG("estado Actual: " << gGame._statesManager->getEstadoActual());
+        lobbyState = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
     }
-        
-    backgroundMusic.setVolume(0.5f);
-    backgroundMusic.setLoop(true);
 
-    if (backgroundMusic.getStatus() == backgroundMusic.Stopped)
-        backgroundMusic.play();
+    this->initLobby();
 }
 
 void MainMenuManager::initLobby() {
@@ -145,12 +130,30 @@ void MainMenuManager::update(sf::Event &event) {
                     {
                     //LobbyState* lobbyState = new LobbyState();
                     //lobbyState = static_cast<LobbyState*>(gGame._statesManager->getEstadoActual());
+
+                    _DEBUGLOG("dir estado actual: " << gGame._statesManager->getEstadoActual());
+                    _DEBUGLOG("dir puntero: " << lobbyState);
+
                     lobbyState->getConnection()->setNetworkStatus(ConnectionManager::Disconnected);
                     }
                 break;
             }
         }
     }
+}
+
+void MainMenuManager::initMusic() {
+
+    if (!backgroundMusic.openFromFile("../gameClient/media/music/mainMenu.flac")) {
+
+        _LOG(Log::LOGLVL_ERROR, "Error cargando la musica de fondo.");
+    }
+
+    backgroundMusic.setVolume(0.5f);
+    backgroundMusic.setLoop(true);
+
+    if (backgroundMusic.getStatus() == backgroundMusic.Stopped)
+        backgroundMusic.play();
 }
 
 /*

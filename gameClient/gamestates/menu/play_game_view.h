@@ -5,6 +5,7 @@
 #include "../gameClient/gamestates/menu/viewsWrapper.h"
 
 #include "../gameClient/gamestates/menu/ui/big_button.h"
+#include "../gameClient/gamestates/menu/ui/little_button.h"
 
 class PlayGameView : public ViewsWrapper {
 private:
@@ -12,9 +13,11 @@ private:
     BigButton* rankedGame;
     BigButton* versusIaGame;
 
-    BigButton* focusedButton;
+    LittleButton* goBackButton;
 
-    sf::FloatRect quickGameBounds, rankedGameBounds, versusIaGameBounds;
+    sf::RectangleShape* focusedButton;
+
+    sf::FloatRect quickGameBounds, rankedGameBounds, versusIaGameBounds, goBackBounds;
 
     //std::unique_ptr<BigButton*> focusedButton;
 

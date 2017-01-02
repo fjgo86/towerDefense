@@ -56,6 +56,7 @@ public:
     void sendData(std::string u, std::string p);
     void moveToPlay();
     void moveToSettings();
+    void moveToMenu();
 
     ConnectionManager* getConnection();
 

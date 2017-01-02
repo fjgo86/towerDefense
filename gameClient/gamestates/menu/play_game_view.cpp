@@ -8,42 +8,46 @@ PlayGameView::PlayGameView() {
     this->setSize((float)gGame._screenWidth, (float)gGame._screenHeight);
 
     quickGame = new BigButton("", "Partida Rapida");
-    quickGame->setColor(sf::Color::Green);
-    quickGame->setOrigin(quickGame->getGlobalBounds().width / 2, 0.f);
-    quickGame->setPosition((float)gGame._screenWidth * 0.25f, gGame._screenHeight * 0.1f);
+    quickGame->setFillColor(sf::Color::Black);
+    quickGame->setPosition(gGame._screenWidth * 0.25f, gGame._screenHeight * 0.2f);
 
-    //quickGameBounds = quickGame->getGlobalBounds();
+    rankedGame = new BigButton("", "Partida Competitiva");
+    rankedGame->setFillColor(sf::Color::Magenta);
+    rankedGame->setPosition(gGame._screenWidth * 0.5f, gGame._screenHeight * 0.2f);
 
-    rankedGame = new BigButton("", "Partida Clasificatoria");
-    rankedGame->setColor(sf::Color::Cyan);
-    rankedGame->setOrigin(rankedGame->getGlobalBounds().width / 2, 0.f);
-    rankedGame->setPosition((float)gGame._screenWidth * 0.5f, gGame._screenHeight * 0.1f);
+    versusIaGame = new BigButton("", "Partida Competitiva");
+    versusIaGame->setFillColor(sf::Color::Blue);
+    versusIaGame->setPosition(gGame._screenWidth * 0.75f, gGame._screenHeight * 0.2f);
 
-    //rankedGameBounds = rankedGame->getGlobalBounds();
+    goBackButton = new LittleButton("Atras");
+    goBackButton->setFillColor(sf::Color::Green);
+    goBackButton->setPosition(gGame._screenWidth * 0.99f, gGame._screenHeight * 0.99f);
 
-    versusIaGame = new BigButton("", "Partida VS I.A.");
-    versusIaGame->setColor(sf::Color::Magenta);
-    versusIaGame->setOrigin(versusIaGame->getGlobalBounds().width / 2, 0.f);
-    versusIaGame->setPosition((float)gGame._screenWidth * 0.75f, gGame._screenHeight * 0.1f);
-
-    //versusIaGameBounds = versusIaGame->getGlobalBounds();
+    quickGame->setOutlineThickness(2.f);
+    rankedGame->setOutlineThickness(2.f);
+    versusIaGame->setOutlineThickness(2.f);
+    goBackButton->setOutlineThickness(2.f);
 }
 
 void PlayGameView::onTick() {
 
     gGame._gameWindow->setView((*this));
+
     gGame._gameWindow->draw(*quickGame);
     gGame._gameWindow->draw(*rankedGame);
     gGame._gameWindow->draw(*versusIaGame);
+
+    gGame._gameWindow->draw(*goBackButton);
 }
 
 void PlayGameView::handleInput(sf::Event &event) {
-
+    
     if (event.MouseMoved) {
 
         quickGameBounds = quickGame->getGlobalBounds();
         rankedGameBounds = rankedGame->getGlobalBounds();
         versusIaGameBounds = versusIaGame->getGlobalBounds();
+        goBackBounds = goBackButton->getGlobalBounds();
 
         sf::Vector2i mousePos = sf::Mouse::getPosition(*gGame._gameWindow);
 
@@ -59,17 +63,21 @@ void PlayGameView::handleInput(sf::Event &event) {
 
             focusedButton = versusIaGame;
         }
+        else if (goBackBounds.contains((sf::Vector2f)mousePos)) {
+
+            focusedButton = goBackButton;
+        }
         else {
 
             focusedButton = nullptr;
             quickGame->setOutlineThickness(2.f);
             rankedGame->setOutlineThickness(2.f);
             versusIaGame->setOutlineThickness(2.f);
+            goBackButton->setOutlineThickness(2.f);
         }
 
         if (focusedButton != nullptr) {
 
-            std::cout << "no es null" << std::endl;
             focusedButton->setOutlineThickness(5.f);
         }
     }
